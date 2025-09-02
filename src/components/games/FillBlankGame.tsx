@@ -15,40 +15,39 @@ interface FillBlankGameProps {
 
 export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGameProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [showFeedback, setShowFeedback] = useState(false);
   const [score, setScore] = useState(0);
   const [answeredCorrectly, setAnsweredCorrectly] = useState(false);
-  const [disabledOptions, setDisabledOptions] = useState<string[]>([]);
+  const [wrongOptions, setWrongOptions] = useState<string[]>([]);
+  const [correctOptions, setCorrectOptions] = useState<string[]>([]);
 
   const currentQuestion = game.questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / game.questions.length) * 100;
 
   useEffect(() => {
     // Reset state when question changes
-    setSelectedAnswer(null);
+    setSelectedAnswers([]);
     setShowFeedback(false);
     setAnsweredCorrectly(false);
-    setDisabledOptions([]);
+    setWrongOptions([]);
+    setCorrectOptions([]);
   }, [currentQuestionIndex]);
 
   const handleOptionClick = (option: string) => {
-    if (disabledOptions.includes(option) || answeredCorrectly) return;
+    if (wrongOptions.includes(option) || correctOptions.includes(option)) return;
 
     const isCorrect = currentQuestion.blank.correctAnswers.includes(option);
     
     if (isCorrect) {
-      setSelectedAnswer(option);
+      setSelectedAnswers(prev => [...prev, option]);
+      setCorrectOptions(prev => [...prev, option]);
       setShowFeedback(true);
       setAnsweredCorrectly(true);
       setScore(prev => prev + 1);
-      setDisabledOptions(prev => [...prev, option]);
     } else {
-      // Wrong answer - add shake effect and disable temporarily
-      setDisabledOptions(prev => [...prev, option]);
-      setTimeout(() => {
-        setDisabledOptions(prev => prev.filter(opt => opt !== option));
-      }, 600);
+      // Wrong answer - mark as permanently wrong
+      setWrongOptions(prev => [...prev, option]);
     }
   };
 
@@ -63,10 +62,11 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
   const handleRestart = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
-    setSelectedAnswer(null);
+    setSelectedAnswers([]);
     setShowFeedback(false);
     setAnsweredCorrectly(false);
-    setDisabledOptions([]);
+    setWrongOptions([]);
+    setCorrectOptions([]);
   };
 
   return (
@@ -115,50 +115,63 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
           </CardHeader>
           <CardContent className="space-y-8">
             {/* Options */}
-            <div className="flex flex-wrap justify-center gap-3 p-6 bg-muted rounded-lg">
+            <div className="flex flex-wrap justify-center gap-4 p-6 bg-muted rounded-xl">
               {currentQuestion.options.map((option, index) => {
-                const isDisabled = disabledOptions.includes(option);
-                const isWrong = disabledOptions.includes(option) && !currentQuestion.blank.correctAnswers.includes(option);
+                const isWrong = wrongOptions.includes(option);
+                const isCorrect = correctOptions.includes(option);
                 
                 return (
                   <button
                     key={index}
                     onClick={() => handleOptionClick(option)}
-                    disabled={isDisabled && !isWrong}
+                    disabled={isWrong || isCorrect}
                     className={`
-                      px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-200
-                      ${isDisabled 
-                        ? isWrong 
-                          ? 'bg-destructive/20 text-destructive border-2 border-destructive animate-pulse'
-                          : 'bg-success/20 text-success border-2 border-success cursor-not-allowed'
-                        : 'bg-white border-2 border-border hover:border-primary hover:scale-105 hover:shadow-md cursor-pointer'
+                      px-8 py-4 rounded-xl font-bold text-xl transition-all duration-200 min-w-[120px]
+                      ${isWrong 
+                        ? 'bg-destructive/20 text-destructive border-3 border-destructive cursor-not-allowed opacity-60' 
+                        : isCorrect
+                          ? 'bg-success/20 text-success border-3 border-success cursor-not-allowed'
+                          : 'bg-white border-3 border-border hover:border-primary hover:scale-110 hover:shadow-lg cursor-pointer transform'
                       }
                       ${isWrong ? 'animate-shake' : ''}
                     `}
                   >
                     {option}
+                    {isWrong && <span className="ml-2">❌</span>}
+                    {isCorrect && <span className="ml-2">✅</span>}
                   </button>
                 );
               })}
             </div>
 
             {/* Sentence */}
-            <div className="text-center p-8 bg-card rounded-lg border">
-              <div className="text-2xl leading-relaxed space-x-2 flex flex-wrap justify-center items-center gap-2">
+            <div className="text-center p-8 bg-card rounded-xl border-2">
+              <div className="text-3xl leading-relaxed space-x-2 flex flex-wrap justify-center items-center gap-3">
                 {currentQuestion.sentence.map((word, index) => (
-                  <span key={index} className="font-semibold">
+                  <span key={index} className="font-bold text-foreground">
                     {word}
                   </span>
                 ))}
-                {/* Blank space */}
-                <div className={`
-                  inline-flex items-center justify-center min-w-32 h-12 mx-2 rounded-lg border-2 transition-all duration-300
-                  ${selectedAnswer 
-                    ? 'bg-success/20 border-success text-success font-bold px-4' 
-                    : 'border-dashed border-primary bg-primary/5'
-                  }
-                `}>
-                  {selectedAnswer || '_____'}
+                {/* Blank space with answers above the line */}
+                <div className="flex flex-col items-center mx-4">
+                  {/* Selected answers displayed above the line */}
+                  {selectedAnswers.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {selectedAnswers.map((answer, idx) => (
+                        <div 
+                          key={idx}
+                          className="bg-success/20 border-2 border-success text-success font-bold px-4 py-2 rounded-lg text-lg animate-bounce-in"
+                        >
+                          {answer} ✅
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {/* The blank line */}
+                  <div className="w-40 h-1 bg-primary border-2 border-primary rounded-full"></div>
+                  {selectedAnswers.length === 0 && (
+                    <div className="text-muted-foreground text-lg mt-1">Click an answer above!</div>
+                  )}
                 </div>
               </div>
             </div>
