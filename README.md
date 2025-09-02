@@ -3,6 +3,7 @@
 ## Project info
 
 **URL**: https://lovable.dev/projects/cc9dbbb0-08b2-49eb-8fed-d15a4041b703
+**Hosted Link**: https://region-quest-games.vercel.app/
 
 ## How can I edit this code?
 
