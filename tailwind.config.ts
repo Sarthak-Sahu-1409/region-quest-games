@@ -26,11 +26,16 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -52,16 +57,47 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				region: {
+					1: 'hsl(var(--region-1))',
+					2: 'hsl(var(--region-2))',
+					3: 'hsl(var(--region-3))',
+					4: 'hsl(var(--region-4))'
+				},
+				game: {
+					'fill-blank': 'hsl(var(--game-fill-blank))',
+					'multiple-choice': 'hsl(var(--game-multiple-choice))',
+					'matching': 'hsl(var(--game-matching))'
+				},
+				option: {
+					correct: 'hsl(var(--option-correct))',
+					incorrect: 'hsl(var(--option-incorrect))',
+					neutral: 'hsl(var(--option-neutral))',
+					hover: 'hsl(var(--option-hover))'
 				}
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-success': 'var(--gradient-success)',
+				'gradient-secondary': 'var(--gradient-secondary)',
+				'gradient-region-1': 'var(--gradient-region-1)',
+				'gradient-region-2': 'var(--gradient-region-2)',
+				'gradient-region-3': 'var(--gradient-region-3)',
+				'gradient-region-4': 'var(--gradient-region-4)'
+			},
+			boxShadow: {
+				'gentle': 'var(--shadow-gentle)',
+				'medium': 'var(--shadow-medium)',
+				'large': 'var(--shadow-large)',
+				'success': 'var(--shadow-success)',
+				'error': 'var(--shadow-error)'
+			},
+			fontFamily: {
+				'heading': 'var(--font-heading)',
+				'body': 'var(--font-body)'
+			},
+			transitionTimingFunction: {
+				'smooth': 'var(--transition-smooth)',
+				'bounce': 'var(--transition-bounce)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +120,17 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'shake': {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'20%, 60%': { transform: 'translateX(-6px)' },
+					'40%, 80%': { transform: 'translateX(6px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'shake': 'shake 0.5s ease-in-out'
 			}
 		}
 	},
