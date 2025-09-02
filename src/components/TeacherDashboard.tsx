@@ -156,51 +156,6 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           })}
         </div>
 
-        {/* Quick Actions */}
-        <Card className="shadow-medium">
-          <CardHeader>
-            <CardTitle className="text-2xl font-heading flex items-center">
-              <Settings className="w-6 h-6 mr-2" />
-              Quick Actions
-            </CardTitle>
-            <CardDescription>
-              Common teacher tasks and management options
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              <Button 
-                variant="outline" 
-                className="h-auto p-6 flex flex-col items-center space-y-2"
-                disabled
-              >
-                <BarChart3 className="w-8 h-8" />
-                <span>View Analytics</span>
-                <span className="text-xs text-muted-foreground">Coming Soon</span>
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="h-auto p-6 flex flex-col items-center space-y-2"
-                disabled
-              >
-                <Users className="w-8 h-8" />
-                <span>Manage Students</span>
-                <span className="text-xs text-muted-foreground">Coming Soon</span>
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="h-auto p-6 flex flex-col items-center space-y-2"
-                disabled
-              >
-                <BookOpen className="w-8 h-8" />
-                <span>Add Content</span>
-                <span className="text-xs text-muted-foreground">Coming Soon</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

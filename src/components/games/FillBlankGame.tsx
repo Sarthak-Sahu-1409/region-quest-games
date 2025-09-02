@@ -147,11 +147,11 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
             {/* Sentence */}
             <div className="text-center p-8 bg-card rounded-xl border-2">
               <div className="text-3xl leading-relaxed space-x-2 flex flex-wrap justify-center items-center gap-3">
-                {currentQuestion.sentence.map((word, index) => (
-                  <span key={index} className="font-bold text-foreground">
-                    {word}
-                  </span>
-                ))}
+                {/* First part of sentence */}
+                <span className="font-bold text-foreground">
+                  {currentQuestion.sentence[0]}
+                </span>
+                
                 {/* Blank space with answers above the line */}
                 <div className="flex flex-col items-center mx-4">
                   {/* Selected answers displayed above the line */}
@@ -173,6 +173,13 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
                     <div className="text-muted-foreground text-lg mt-1">Click an answer above!</div>
                   )}
                 </div>
+
+                {/* Second part of sentence (if exists) */}
+                {currentQuestion.sentence[1] && (
+                  <span className="font-bold text-foreground">
+                    {currentQuestion.sentence[1]}
+                  </span>
+                )}
               </div>
             </div>
 
