@@ -105,8 +105,6 @@ const Index = () => {
     case 'game-complete':
       return (
         <CompletionScreen 
-          score={gameScore}
-          totalQuestions={selectedGame?.questions.length || 0}
           gameName={selectedGame?.name || ''}
           onPlayAgain={handlePlayAgain}
           onBackToGames={handleBackToGames}

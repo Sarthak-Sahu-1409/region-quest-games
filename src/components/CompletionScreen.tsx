@@ -4,8 +4,6 @@ import { Badge } from '@/components/ui/badge';
 import { Trophy, Star, RotateCcw, Home } from 'lucide-react';
 
 interface CompletionScreenProps {
-  score: number;
-  totalQuestions: number;
   gameName: string;
   onPlayAgain: () => void;
   onBackToGames: () => void;
@@ -13,30 +11,20 @@ interface CompletionScreenProps {
 }
 
 export const CompletionScreen = ({ 
-  score, 
-  totalQuestions, 
   gameName, 
   onPlayAgain, 
   onBackToGames, 
   onBackToHome 
 }: CompletionScreenProps) => {
-  const percentage = Math.round((score / totalQuestions) * 100);
+  const celebrationMessages = [
+    "Awesome work! 🎉",
+    "You're a star! ⭐",
+    "Fantastic job! 🌟",
+    "Well done! 👏",
+    "Great effort! 💪"
+  ];
   
-  const getPerformanceMessage = () => {
-    if (percentage === 100) return "Perfect! Outstanding work! 🌟";
-    if (percentage >= 80) return "Excellent job! Well done! 🎉";
-    if (percentage >= 60) return "Good work! Keep practicing! 👍";
-    return "Nice try! Practice makes perfect! 💪";
-  };
-
-  const getStarRating = () => {
-    if (percentage === 100) return 3;
-    if (percentage >= 80) return 2;
-    if (percentage >= 60) return 1;
-    return 0;
-  };
-
-  const stars = getStarRating();
+  const randomMessage = celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
@@ -56,31 +44,21 @@ export const CompletionScreen = ({
         </CardHeader>
         
         <CardContent className="space-y-8">
-          {/* Score Display */}
-          <div className="text-center space-y-4">
-            <div className="text-6xl font-bold text-primary">
-              {score}/{totalQuestions}
+          {/* Celebration Display */}
+          <div className="text-center space-y-6">
+            <div className="text-8xl animate-bounce-slow">
+              🎉
             </div>
-            <Badge variant="outline" className="text-2xl px-6 py-2">
-              {percentage}% Correct
-            </Badge>
-            
-            {/* Star Rating */}
-            <div className="flex justify-center space-x-2">
-              {Array.from({ length: 3 }, (_, i) => (
-                <Star
-                  key={i}
-                  className={`w-8 h-8 ${
-                    i < stars 
-                      ? 'text-yellow-400 fill-yellow-400' 
-                      : 'text-gray-300'
-                  }`}
-                />
-              ))}
+            <div className="text-6xl font-bold text-primary animate-pulse">
+              {randomMessage}
             </div>
-            
-            <p className="text-xl font-semibold text-success">
-              {getPerformanceMessage()}
+            <div className="flex justify-center space-x-3">
+              <span className="text-4xl animate-bounce" style={{animationDelay: '0.1s'}}>🌟</span>
+              <span className="text-4xl animate-bounce" style={{animationDelay: '0.2s'}}>⭐</span>
+              <span className="text-4xl animate-bounce" style={{animationDelay: '0.3s'}}>🌟</span>
+            </div>
+            <p className="text-2xl font-semibold text-success">
+              You completed the {gameName}!
             </p>
           </div>
           
@@ -114,12 +92,12 @@ export const CompletionScreen = ({
           </div>
           
           {/* Encouragement Message */}
-          <div className="text-center p-6 bg-muted rounded-lg">
-            <p className="text-lg text-muted-foreground">
-              {percentage >= 80 
-                ? "You're doing amazingly! Try other games to continue learning!" 
-                : "Every attempt makes you stronger! Keep practicing and you'll improve!"
-              }
+          <div className="text-center p-6 bg-gradient-subtle rounded-lg border-2 border-primary/20">
+            <p className="text-xl text-primary font-semibold">
+              🎈 Keep exploring and learning! You're doing great! 🎈
+            </p>
+            <p className="text-lg text-muted-foreground mt-2">
+              Try more games to continue your adventure!
             </p>
           </div>
         </CardContent>
