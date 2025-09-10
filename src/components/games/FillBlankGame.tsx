@@ -199,36 +199,36 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
               </div>
             )}
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons - Fixed Layout */}
             <div className="text-center">
-              <div className="grid grid-cols-3 gap-4 items-center max-w-2xl mx-auto">
-                {/* Previous Button - Fixed Position */}
+              <div className="grid grid-cols-3 gap-4 items-center max-w-2xl mx-auto min-h-[60px]">
+                {/* Previous Button - Always Present Container */}
                 <div className="flex justify-start">
-                  {currentQuestionIndex > 0 && (
-                    <Button 
-                      onClick={handlePrevious}
-                      variant="outline"
-                      className="font-semibold py-3 px-6 text-lg"
-                    >
-                      <ChevronLeft className="w-5 h-5 mr-2" />
-                      Previous
-                    </Button>
-                  )}
+                  <Button 
+                    onClick={handlePrevious}
+                    variant="outline"
+                    className={`font-semibold py-3 px-6 text-lg transition-opacity ${
+                      currentQuestionIndex > 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    }`}
+                  >
+                    <ChevronLeft className="w-5 h-5 mr-2" />
+                    Previous
+                  </Button>
                 </div>
 
                 {/* Center Space */}
                 <div></div>
 
-                {/* Next Button - Fixed Position */}
+                {/* Next Button - Always Present Container */}
                 <div className="flex justify-end">
-                  {showFeedback && (
-                    <Button 
-                      onClick={handleNext}
-                      className="bg-gradient-success hover:opacity-90 text-white font-semibold py-3 px-8 text-lg"
-                    >
-                      {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
-                    </Button>
-                  )}
+                  <Button 
+                    onClick={handleNext}
+                    className={`bg-gradient-success hover:opacity-90 text-white font-semibold py-3 px-8 text-lg transition-opacity ${
+                      showFeedback ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    }`}
+                  >
+                    {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
+                  </Button>
                 </div>
               </div>
             </div>
