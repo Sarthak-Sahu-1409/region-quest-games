@@ -196,6 +196,12 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
                   <CheckCircle className="w-8 h-8" />
                   <span>Excellent! 🎉</span>
                 </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="text-center space-y-4">
+              {showFeedback ? (
                 <div className="flex justify-center gap-4">
                   {currentQuestionIndex > 0 && (
                     <Button 
@@ -214,8 +220,19 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
                     {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
                   </Button>
                 </div>
-              </div>
-            )}
+              ) : (
+                currentQuestionIndex > 0 && (
+                  <Button 
+                    onClick={handlePrevious}
+                    variant="outline"
+                    className="font-semibold py-3 px-6 text-lg"
+                  >
+                    <ChevronLeft className="w-5 h-5 mr-2" />
+                    Previous Question
+                  </Button>
+                )
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
