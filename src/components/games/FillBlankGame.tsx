@@ -200,9 +200,10 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
             )}
 
             {/* Navigation Buttons */}
-            <div className="text-center space-y-4">
-              {showFeedback ? (
-                <div className="flex justify-center gap-4">
+            <div className="text-center">
+              <div className="grid grid-cols-3 gap-4 items-center max-w-2xl mx-auto">
+                {/* Previous Button - Fixed Position */}
+                <div className="flex justify-start">
                   {currentQuestionIndex > 0 && (
                     <Button 
                       onClick={handlePrevious}
@@ -213,25 +214,23 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
                       Previous
                     </Button>
                   )}
-                  <Button 
-                    onClick={handleNext}
-                    className="bg-gradient-success hover:opacity-90 text-white font-semibold py-3 px-8 text-lg"
-                  >
-                    {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
-                  </Button>
                 </div>
-              ) : (
-                currentQuestionIndex > 0 && (
-                  <Button 
-                    onClick={handlePrevious}
-                    variant="outline"
-                    className="font-semibold py-3 px-6 text-lg"
-                  >
-                    <ChevronLeft className="w-5 h-5 mr-2" />
-                    Previous Question
-                  </Button>
-                )
-              )}
+
+                {/* Center Space */}
+                <div></div>
+
+                {/* Next Button - Fixed Position */}
+                <div className="flex justify-end">
+                  {showFeedback && (
+                    <Button 
+                      onClick={handleNext}
+                      className="bg-gradient-success hover:opacity-90 text-white font-semibold py-3 px-8 text-lg"
+                    >
+                      {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
+                    </Button>
+                  )}
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
