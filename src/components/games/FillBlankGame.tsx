@@ -44,7 +44,6 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
       setCorrectOptions(prev => [...prev, option]);
       setShowFeedback(true);
       setAnsweredCorrectly(true);
-      setScore(prev => prev + 1);
     } else {
       // Wrong answer - mark as permanently wrong
       setWrongOptions(prev => [...prev, option]);
@@ -67,7 +66,6 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
 
   const handleRestart = () => {
     setCurrentQuestionIndex(0);
-    setScore(0);
     setSelectedAnswers([]);
     setShowFeedback(false);
     setAnsweredCorrectly(false);
@@ -100,16 +98,19 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
               Restart
             </Button>
           </div>
-          <Progress 
-            value={progress} 
-            className="w-full max-w-md mx-auto mb-4 h-3"
-          />
+          <div className="w-full max-w-md mx-auto mb-6">
+            <Progress 
+              value={progress} 
+              className="h-4 bg-white/20 rounded-full overflow-hidden shadow-lg progress-indicator"
+            />
+            <div className="flex justify-between text-sm text-white/80 mt-2">
+              <span>Progress</span>
+              <span className="font-semibold">{currentQuestionIndex + 1} of {game.questions.length}</span>
+            </div>
+          </div>
           <h1 className="text-4xl font-heading text-white mb-2">
             {game.name}
           </h1>
-          <p className="text-white/90">
-            Score: {score} / {game.questions.length}
-          </p>
         </div>
 
         {/* Game Card */}

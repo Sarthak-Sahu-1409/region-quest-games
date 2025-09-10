@@ -187,6 +187,11 @@ All colors MUST be HSL.
   animation: float 3s ease-in-out infinite;
 }
 
+/* Progress bar smooth transition */
+.progress-indicator [data-state="loading"] {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Border width utilities */
 .border-3 {
   border-width: 3px;
