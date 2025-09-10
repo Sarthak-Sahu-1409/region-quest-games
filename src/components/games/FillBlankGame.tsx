@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region } from '@/types';
-import { CheckCircle, XCircle, RotateCcw } from 'lucide-react';
+import { CheckCircle, XCircle, RotateCcw, ChevronLeft } from 'lucide-react';
 
 interface FillBlankGameProps {
   game: GameData;
@@ -56,6 +56,12 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
       onComplete(score);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1);
     }
   };
 
@@ -190,12 +196,24 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
                   <CheckCircle className="w-8 h-8" />
                   <span>Excellent! 🎉</span>
                 </div>
-                <Button 
-                  onClick={handleNext}
-                  className="bg-gradient-success hover:opacity-90 text-white font-semibold py-3 px-8 text-lg"
-                >
-                  {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
-                </Button>
+                <div className="flex justify-center gap-4">
+                  {currentQuestionIndex > 0 && (
+                    <Button 
+                      onClick={handlePrevious}
+                      variant="outline"
+                      className="font-semibold py-3 px-6 text-lg"
+                    >
+                      <ChevronLeft className="w-5 h-5 mr-2" />
+                      Previous
+                    </Button>
+                  )}
+                  <Button 
+                    onClick={handleNext}
+                    className="bg-gradient-success hover:opacity-90 text-white font-semibold py-3 px-8 text-lg"
+                  >
+                    {currentQuestionIndex < game.questions.length - 1 ? 'Next Question' : 'Finish Game'}
+                  </Button>
+                </div>
               </div>
             )}
           </CardContent>
