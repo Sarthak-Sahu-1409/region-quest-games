@@ -5,10 +5,11 @@ import { eastGame1Questions } from './questions/east/game1';
 import { westGame1Questions } from './questions/west/game1';
 
 export const regionsData: RegionData[] = [
+  // Northern Bengal regions (1-6)
   {
-    id: 'north',
-    name: 'north',
-    displayName: 'Northern Region',
+    id: 'northern-bengal-1',
+    name: 'northern-bengal-1',
+    displayName: 'Northern Bengal 1',
     color: 'region-1',
     games: [
       {
@@ -35,38 +36,38 @@ export const regionsData: RegionData[] = [
     ]
   },
   {
-    id: 'south',
-    name: 'south',
-    displayName: 'Southern Region',
+    id: 'northern-bengal-2',
+    name: 'northern-bengal-2',
+    displayName: 'Northern Bengal 2',
     color: 'region-2',
     games: [
       {
         id: 'fill-blank-1',
-        name: 'Summer Word Fill',
+        name: 'Forest Word Fill',
         type: 'fill-blank',
-        description: 'Fill in the blanks with summer-themed words',
-        questions: southGame1Questions
+        description: 'Fill in the blanks with forest-themed words',
+        questions: eastGame1Questions
       },
       {
         id: 'multiple-choice-1',
-        name: 'Beach Quiz',
+        name: 'Forest Quiz',
         type: 'multiple-choice',
-        description: 'Multiple choice questions about summer',
+        description: 'Multiple choice questions about forests',
         questions: [] // To be implemented
       },
       {
         id: 'matching-1',
-        name: 'Summer Match',
+        name: 'Forest Match',
         type: 'matching',
-        description: 'Match summer items with their uses',
+        description: 'Match forest items with their uses',
         questions: [] // To be implemented
       }
     ]
   },
   {
-    id: 'east',
-    name: 'east',
-    displayName: 'Eastern Region',
+    id: 'northern-bengal-3',
+    name: 'northern-bengal-3',
+    displayName: 'Northern Bengal 3',
     color: 'region-3',
     games: [
       {
@@ -74,7 +75,7 @@ export const regionsData: RegionData[] = [
         name: 'Mountain Word Fill',
         type: 'fill-blank',
         description: 'Fill in the blanks with mountain-themed words',
-        questions: eastGame1Questions
+        questions: westGame1Questions
       },
       {
         id: 'multiple-choice-1',
@@ -93,30 +94,234 @@ export const regionsData: RegionData[] = [
     ]
   },
   {
-    id: 'west',
-    name: 'west',
-    displayName: 'Western Region',
+    id: 'northern-bengal-4',
+    name: 'northern-bengal-4',
+    displayName: 'Northern Bengal 4',
     color: 'region-4',
     games: [
       {
         id: 'fill-blank-1',
-        name: 'Desert Word Fill',
+        name: 'River Word Fill',
         type: 'fill-blank',
-        description: 'Fill in the blanks with desert-themed words',
-        questions: westGame1Questions
+        description: 'Fill in the blanks with river-themed words',
+        questions: northGame1Questions
       },
       {
         id: 'multiple-choice-1',
-        name: 'Desert Quiz',
+        name: 'River Quiz',
         type: 'multiple-choice',
-        description: 'Multiple choice questions about deserts',
+        description: 'Multiple choice questions about rivers',
         questions: [] // To be implemented
       },
       {
         id: 'matching-1',
-        name: 'Desert Match',
+        name: 'River Match',
         type: 'matching',
-        description: 'Match desert items with their uses',
+        description: 'Match river items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  {
+    id: 'northern-bengal-5',
+    name: 'northern-bengal-5',
+    displayName: 'Northern Bengal 5',
+    color: 'region-1',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Village Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with village-themed words',
+        questions: eastGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Village Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about villages',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Village Match',
+        type: 'matching',
+        description: 'Match village items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  {
+    id: 'northern-bengal-6',
+    name: 'northern-bengal-6',
+    displayName: 'Northern Bengal 6',
+    color: 'region-2',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Cultural Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with cultural-themed words',
+        questions: westGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Cultural Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about culture',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Cultural Match',
+        type: 'matching',
+        description: 'Match cultural items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  // Southern Bengal regions (1-5)
+  {
+    id: 'southern-bengal-1',
+    name: 'southern-bengal-1',
+    displayName: 'Southern Bengal 1',
+    color: 'region-3',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Coastal Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with coastal-themed words',
+        questions: southGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Coastal Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about coastal areas',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Coastal Match',
+        type: 'matching',
+        description: 'Match coastal items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  {
+    id: 'southern-bengal-2',
+    name: 'southern-bengal-2',
+    displayName: 'Southern Bengal 2',
+    color: 'region-4',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Delta Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with delta-themed words',
+        questions: northGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Delta Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about deltas',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Delta Match',
+        type: 'matching',
+        description: 'Match delta items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  {
+    id: 'southern-bengal-3',
+    name: 'southern-bengal-3',
+    displayName: 'Southern Bengal 3',
+    color: 'region-1',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Mangrove Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with mangrove-themed words',
+        questions: eastGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Mangrove Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about mangroves',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Mangrove Match',
+        type: 'matching',
+        description: 'Match mangrove items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  {
+    id: 'southern-bengal-4',
+    name: 'southern-bengal-4',
+    displayName: 'Southern Bengal 4',
+    color: 'region-2',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Urban Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with urban-themed words',
+        questions: westGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Urban Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about urban areas',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Urban Match',
+        type: 'matching',
+        description: 'Match urban items with their uses',
+        questions: [] // To be implemented
+      }
+    ]
+  },
+  {
+    id: 'southern-bengal-5',
+    name: 'southern-bengal-5',
+    displayName: 'Southern Bengal 5',
+    color: 'region-3',
+    games: [
+      {
+        id: 'fill-blank-1',
+        name: 'Heritage Word Fill',
+        type: 'fill-blank',
+        description: 'Fill in the blanks with heritage-themed words',
+        questions: southGame1Questions
+      },
+      {
+        id: 'multiple-choice-1',
+        name: 'Heritage Quiz',
+        type: 'multiple-choice',
+        description: 'Multiple choice questions about heritage',
+        questions: [] // To be implemented
+      },
+      {
+        id: 'matching-1',
+        name: 'Heritage Match',
+        type: 'matching',
+        description: 'Match heritage items with their uses',
         questions: [] // To be implemented
       }
     ]

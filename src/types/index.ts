@@ -1,4 +1,4 @@
-export type Region = 'north' | 'south' | 'east' | 'west';
+export type Region = 'northern-bengal-1' | 'northern-bengal-2' | 'northern-bengal-3' | 'northern-bengal-4' | 'northern-bengal-5' | 'northern-bengal-6' | 'southern-bengal-1' | 'southern-bengal-2' | 'southern-bengal-3' | 'southern-bengal-4' | 'southern-bengal-5';
 
 export type GameType = 'fill-blank' | 'multiple-choice' | 'matching';
 
