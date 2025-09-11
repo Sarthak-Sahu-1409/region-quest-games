@@ -10,17 +10,31 @@ interface RegionSelectorProps {
 }
 
 const regionIcons = {
-  north: Snowflake,
-  south: Sun,
-  east: Mountain,
-  west: TreePine,
+  'northern-bengal-1': Snowflake,
+  'northern-bengal-2': TreePine,
+  'northern-bengal-3': Mountain,
+  'northern-bengal-4': Sun,
+  'northern-bengal-5': Snowflake,
+  'northern-bengal-6': TreePine,
+  'southern-bengal-1': Sun,
+  'southern-bengal-2': Mountain,
+  'southern-bengal-3': TreePine,
+  'southern-bengal-4': Sun,
+  'southern-bengal-5': Mountain,
 };
 
 const regionGradients = {
-  north: 'bg-gradient-region-1',
-  south: 'bg-gradient-region-2',
-  east: 'bg-gradient-region-3',
-  west: 'bg-gradient-region-4',
+  'northern-bengal-1': 'bg-gradient-region-1',
+  'northern-bengal-2': 'bg-gradient-region-2',
+  'northern-bengal-3': 'bg-gradient-region-3',
+  'northern-bengal-4': 'bg-gradient-region-4',
+  'northern-bengal-5': 'bg-gradient-region-1',
+  'northern-bengal-6': 'bg-gradient-region-2',
+  'southern-bengal-1': 'bg-gradient-region-3',
+  'southern-bengal-2': 'bg-gradient-region-4',
+  'southern-bengal-3': 'bg-gradient-region-1',
+  'southern-bengal-4': 'bg-gradient-region-2',
+  'southern-bengal-5': 'bg-gradient-region-3',
 };
 
 export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) => {
@@ -60,7 +74,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
                   </div>
                   <CardTitle className="text-2xl font-heading">{region.displayName}</CardTitle>
                   <CardDescription>
-                    Discover learning adventures in the {region.name}ern culture
+                    Explore learning adventures in {region.displayName}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
