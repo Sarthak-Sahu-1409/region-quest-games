@@ -10,31 +10,17 @@ interface RegionSelectorProps {
 }
 
 const regionIcons = {
-  'northern-bengal-1': Snowflake,
-  'northern-bengal-2': TreePine,
-  'northern-bengal-3': Mountain,
-  'northern-bengal-4': Sun,
-  'northern-bengal-5': Snowflake,
-  'northern-bengal-6': TreePine,
-  'southern-bengal-1': Sun,
-  'southern-bengal-2': Mountain,
-  'southern-bengal-3': TreePine,
-  'southern-bengal-4': Sun,
-  'southern-bengal-5': Mountain,
+  'south-west-bengal-1': Sun,
+  'south-west-bengal-2': Sun,
+  'north-bengal-1': Snowflake,
+  'north-bengal-2': TreePine,
 };
 
 const regionGradients = {
-  'northern-bengal-1': 'bg-gradient-region-1',
-  'northern-bengal-2': 'bg-gradient-region-2',
-  'northern-bengal-3': 'bg-gradient-region-3',
-  'northern-bengal-4': 'bg-gradient-region-4',
-  'northern-bengal-5': 'bg-gradient-region-1',
-  'northern-bengal-6': 'bg-gradient-region-2',
-  'southern-bengal-1': 'bg-gradient-region-3',
-  'southern-bengal-2': 'bg-gradient-region-4',
-  'southern-bengal-3': 'bg-gradient-region-1',
-  'southern-bengal-4': 'bg-gradient-region-2',
-  'southern-bengal-5': 'bg-gradient-region-3',
+  'south-west-bengal-1': 'bg-gradient-region-1',
+  'south-west-bengal-2': 'bg-gradient-region-2',
+  'north-bengal-1': 'bg-gradient-region-3',
+  'north-bengal-2': 'bg-gradient-region-4',
 };
 
 export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) => {
@@ -74,7 +60,10 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
                   </div>
                   <CardTitle className="text-2xl font-heading">{region.displayName}</CardTitle>
                   <CardDescription>
-                    Explore learning adventures in {region.displayName}
+                    <div className="text-sm font-medium mb-2">Locations:</div>
+                    <div className="text-xs">
+                      ({region.locations.join(', ')})
+                    </div>
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

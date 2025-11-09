@@ -1,34 +1,34 @@
 import { Question } from '@/types';
 
-export const northGame1Questions: Question[] = [
+export const southWestBengal2Questions: Question[] = [
   {
-    id: 'north-game1-q1',
-    options: ['quickly', 'ate', 'ran', 'happily', 'sprinted'],
-    sentence: ['The boy', 'to the snowy park.'],
-    blank: { correctAnswers: ['ran', 'sprinted'] }
+    id: 'swb2-q1',
+    options: ["khānu", "khālām", "khābē", "khābāk", "khāci", "khātnu", "khātu", "khāisa", "khāsa", "khāu", "khānāi", "khānāk", "khālō", "khānāik"],
+    sentence: ["Āgura saptāi mu'i/hām āma", "."],
+    blank: { correctAnswers: ["khānu", "khālām"] }
   },
   {
-    id: 'north-game1-q2',
-    options: ['cold', 'warm', 'delicious', 'tasty', 'hot'],
-    sentence: ['The winter soup was', '.'],
-    blank: { correctAnswers: ['warm', 'hot'] }
+    id: 'swb2-q2',
+    options: ["khānu", "khālām", "khābē", "khābāk", "khāci", "khātnu", "khātu", "khāisa", "khāsa", "khāu", "khānāi", "khānāk", "khālō", "khānāik"],
+    sentence: ["Kā'ina igiẏā chāuṭā bhāʈ̪", "."],
+    blank: { correctAnswers: ["khābē", "khābāk"] }
   },
   {
-    id: 'north-game1-q3',
-    options: ['play', 'sing', 'jump', 'dance', 'skip'],
-    sentence: ['Children like to', 'in the snowy playground.'],
-    blank: { correctAnswers: ['jump', 'skip', 'dance'] }
+    id: 'swb2-q3',
+    options: ["khānu", "khālām", "khābē", "khābāk", "khāci", "khātnu", "khātu", "khāisa", "khāsa", "khāu", "khānāi", "khānāk", "khālō", "khānāik"],
+    sentence: ["Ekhan hāma sabāi biskuṭ", "."],
+    blank: { correctAnswers: ["khāci", "khātnu", "khātu"] }
   },
   {
-    id: 'north-game1-q4',
-    options: ['mittens', 'gloves', 'hat', 'scarf', 'boots'],
-    sentence: ['In winter, we wear', 'to keep warm.'],
-    blank: { correctAnswers: ['mittens', 'gloves', 'hat', 'scarf'] }
+    id: 'swb2-q4',
+    options: ["khānu", "khālām", "khābē", "khābāk", "khāci", "khātnu", "khātu", "khāisa", "khāsa", "khāu", "khānāi", "khānāk", "khālō", "khānāik"],
+    sentence: ["Tui/ tũi/ tum ḍēli/ dainik bhāʈ̪", "."],
+    blank: { correctAnswers: ["khāisa", "khāsa", "khāu"] }
   },
   {
-    id: 'north-game1-q5',
-    options: ['snowman', 'sandcastle', 'igloo', 'fort', 'castle'],
-    sentence: ['We built a', 'in the snow.'],
-    blank: { correctAnswers: ['snowman', 'igloo', 'fort'] }
+    id: 'swb2-q5',
+    options: ["khānu", "khālām", "khābē", "khābāk", "khāci", "khātnu", "khātu", "khāisa", "khāsa", "khāu", "khānāi", "khānāk", "khālō", "khānāik"],
+    sentence: ["Gaʈ̪a bachar october ē ugā/uguẏā sabāi cɒklēṭ", "."],
+    blank: { correctAnswers: ["khānāi", "khānāk", "khālō", "khānāik"] }
   }
 ];

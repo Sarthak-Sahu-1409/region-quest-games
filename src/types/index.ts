@@ -1,4 +1,4 @@
-export type Region = 'northern-bengal-1' | 'northern-bengal-2' | 'northern-bengal-3' | 'northern-bengal-4' | 'northern-bengal-5' | 'northern-bengal-6' | 'southern-bengal-1' | 'southern-bengal-2' | 'southern-bengal-3' | 'southern-bengal-4' | 'southern-bengal-5';
+export type Region = 'south-west-bengal-1' | 'south-west-bengal-2' | 'north-bengal-1' | 'north-bengal-2';
 
 export type GameType = 'fill-blank' | 'multiple-choice' | 'matching';
 
@@ -24,6 +24,7 @@ export interface RegionData {
   name: string;
   displayName: string;
   color: string;
+  locations: string[];
   games: GameData[];
 }
 

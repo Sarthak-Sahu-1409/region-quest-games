@@ -1,34 +1,34 @@
 import { Question } from '@/types';
 
-export const southGame1Questions: Question[] = [
+export const southWestBengal1Questions: Question[] = [
   {
-    id: 'south-game1-q1',
-    options: ['quickly', 'ate', 'walked', 'strolled', 'jogged'],
-    sentence: ['The boy', 'to the sunny park.'],
-    blank: { correctAnswers: ['walked', 'strolled', 'jogged'] }
+    id: 'swb1-q1',
+    options: ["khālē", "khālāhē", "khāli", "khālō", "khābē", "khāihan", "khāci", "khā'isa", "khāsa", "khālathing", "khālēthing", "khārēthing", "khā'ilō", "khālēn"],
+    sentence: ["Gaʈ̪a sapʈ̪āhē hāmi/ āmi/ maẏ ām", "."],
+    blank: { correctAnswers: ["khālē", "khālāhē", "khāli", "khālō"] }
   },
   {
-    id: 'south-game1-q2',
-    options: ['cold', 'cool', 'refreshing', 'iced', 'chilled'],
-    sentence: ['The summer drink was', '.'],
-    blank: { correctAnswers: ['cool', 'refreshing', 'iced', 'chilled'] }
+    id: 'swb1-q2',
+    options: ["khālē", "khālāhē", "khāli", "khālō", "khābē", "khāihan", "khāci", "khā'isa", "khāsa", "khālathing", "khālēthing", "khārēthing", "khā'ilō", "khālēn"],
+    sentence: ["Kālikē ē'i chāliʝ̃āṭā bhāʈ̪", "."],
+    blank: { correctAnswers: ["khābē"] }
   },
   {
-    id: 'south-game1-q3',
-    options: ['swim', 'splash', 'dive', 'float', 'surf'],
-    sentence: ['Children like to', 'in the pool.'],
-    blank: { correctAnswers: ['swim', 'splash', 'dive', 'float'] }
+    id: 'swb1-q3',
+    options: ["khālē", "khālāhē", "khāli", "khālō", "khābē", "khāihan", "khāci", "khā'isa", "khāsa", "khālathing", "khālēthing", "khārēthing", "khā'ilō", "khālēn"],
+    sentence: ["Ēkhana hāmrā bisakuṭ", "."],
+    blank: { correctAnswers: ["khāihan", "khāci"] }
   },
   {
-    id: 'south-game1-q4',
-    options: ['sunhat', 'cap', 'sunglasses', 'shorts', 'sandals'],
-    sentence: ['In summer, we wear', 'to stay cool.'],
-    blank: { correctAnswers: ['sunhat', 'cap', 'sunglasses', 'shorts'] }
+    id: 'swb1-q4',
+    options: ["khālē", "khālāhē", "khāli", "khālō", "khābē", "khāihan", "khāci", "khā'isa", "khāsa", "khālathing", "khālēthing", "khārēthing", "khā'ilō", "khālēn"],
+    sentence: ["Tũi/ tui/ tō'i rōjē bhāt", "."],
+    blank: { correctAnswers: ["khā'isa", "khāsa"] }
   },
   {
-    id: 'south-game1-q5',
-    options: ['sandcastle', 'seashells', 'beach fort', 'palm tree', 'lighthouse'],
-    sentence: ['We built a', 'on the beach.'],
-    blank: { correctAnswers: ['sandcastle', 'beach fort'] }
+    id: 'swb1-q5',
+    options: ["khālē", "khālāhē", "khāli", "khālō", "khābē", "khāihan", "khāci", "khā'isa", "khāsa", "khālathing", "khālēthing", "khārēthing", "khā'ilō", "khālēn"],
+    sentence: ["Gaʈ̪a bachar ḍecember māsē ōrā/tārā/ arā cɒklēṭ", "."],
+    blank: { correctAnswers: ["khālathing", "khālēthing", "khārēthing", "khā'ilō", "khālēn"] }
   }
 ];

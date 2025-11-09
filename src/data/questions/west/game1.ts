@@ -1,34 +1,34 @@
 import { Question } from '@/types';
 
-export const westGame1Questions: Question[] = [
+export const northBengal2Questions: Question[] = [
   {
-    id: 'west-game1-q1',
-    options: ['slowly', 'walked', 'ambled', 'strolled', 'wandered'],
-    sentence: ['The boy', 'to the desert park.'],
-    blank: { correctAnswers: ['walked', 'ambled', 'strolled'] }
+    id: 'nb2-q1',
+    options: ["khāicu", "khānu", "khālō", "kāhirahō", "khāẏāthā", "khābē", "khāi", "khāñca", "kāci", "khāothin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khāñci", "khālāk", "khā'irahān", "khāẏō"],
+    sentence: ["Āgēr haptā mō'i/ma'i/ mu'i/hāma/ mam̐i/hāmi āma", "."],
+    blank: { correctAnswers: ["khāicu", "khānu", "khālō", "kāhirahō", "khāẏāthā"] }
   },
   {
-    id: 'west-game1-q2',
-    options: ['dry', 'arid', 'dusty', 'sandy', 'parched'],
-    sentence: ['The desert wind was', '.'],
-    blank: { correctAnswers: ['dry', 'arid', 'dusty', 'sandy'] }
+    id: 'nb2-q2',
+    options: ["khāicu", "khānu", "khālō", "kāhirahō", "khāẏāthā", "khābē", "khāi", "khāñca", "kāci", "khāothin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khāñci", "khālāk", "khā'irahān", "khāẏō"],
+    sentence: ["Kāli/kāl/kal u/a/ō aẏ chōṛāṭu bhāʈ̪", "."],
+    blank: { correctAnswers: ["khābē", "khāi", "khāñca"] }
   },
   {
-    id: 'west-game1-q3',
-    options: ['explore', 'search', 'hunt', 'discover', 'find'],
-    sentence: ['Children like to', 'for cacti in the desert.'],
-    blank: { correctAnswers: ['explore', 'search', 'hunt', 'discover'] }
+    id: 'nb2-q3',
+    options: ["khāicu", "khānu", "khālō", "kāhirahō", "khāẏāthā", "khābē", "khāi", "khāñca", "kāci", "khāothin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khāñci", "khālāk", "khā'irahān", "khāẏō"],
+    sentence: ["Ayālā/ ayākhanē hāmin sabē/hāmā/hāmalōg/ hāmin sabējhān biskuṭ", "."],
+    blank: { correctAnswers: ["kāci", "khāothin", "khāthin", "khāhāthin"] }
   },
   {
-    id: 'west-game1-q4',
-    options: ['hat', 'sunscreen', 'water bottle', 'light clothes', 'boots'],
-    sentence: ['In the desert, we need', 'for protection.'],
-    blank: { correctAnswers: ['hat', 'sunscreen', 'water bottle', 'light clothes'] }
+    id: 'nb2-q4',
+    options: ["khāicu", "khānu", "khālō", "kāhirahō", "khāẏāthā", "khābē", "khāi", "khāñca", "kāci", "khāothin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khāñci", "khālāk", "khā'irahān", "khāẏō"],
+    sentence: ["Tui/taẏ/timi/tumhā rōjē bhāʈ̪", "."],
+    blank: { correctAnswers: ["khā'isa", "khātēhō", "khā'isalā", "khāñci"] }
   },
   {
-    id: 'west-game1-q5',
-    options: ['oasis', 'shelter', 'shade', 'cactus garden', 'rest area'],
-    sentence: ['We found an', 'in the desert.'],
-    blank: { correctAnswers: ['oasis', 'shelter', 'shade'] }
+    id: 'nb2-q5',
+    options: ["khāicu", "khānu", "khālō", "kāhirahō", "khāẏāthā", "khābē", "khāi", "khāñca", "kāci", "khāothin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khāñci", "khālāk", "khā'irahān", "khāẏō"],
+    sentence: ["Āgēr bachara/sāl october mās mē/māsē umā/umin saba/umān/umarā cɒklēṭ", "."],
+    blank: { correctAnswers: ["khāñci", "khālāk", "khā'irahān", "khāẏāthā"] }
   }
 ];
