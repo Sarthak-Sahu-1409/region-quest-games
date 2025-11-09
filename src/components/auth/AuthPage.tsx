@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { BookOpen, GraduationCap, Users, School, Star, Sparkles } from 'lucide-react';
 import { User } from '@/types';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
@@ -32,6 +33,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
   if (showTeacherLogin) {
     return (
       <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-3 sm:p-4 md:p-6 relative overflow-hidden">
+        <AnimatedBackground />
         <ThemeToggle />
         {/* Background decoration */}
         <div className="absolute top-10 left-10 opacity-20">
@@ -44,7 +46,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
           <School className="w-12 h-12 text-white animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
         
-        <div className="w-full max-w-lg">
+        <div className="w-full max-w-lg relative z-20">
           {/* Professional Header */}
           <div className="text-center mb-6 sm:mb-8">
             <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-card/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 sm:mb-6 border-2 border-border/30">
@@ -58,7 +60,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             </p>
           </div>
 
-          <Card className="shadow-2xl border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/80 dark:bg-card/80">
+          <Card className="shadow-2xl border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75 relative z-20">
             <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 p-4 sm:p-6">
               <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-lg">
                 <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
@@ -139,6 +141,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-3 sm:p-4 md:p-6 relative overflow-hidden">
+      <AnimatedBackground />
       <ThemeToggle />
       {/* Background decoration */}
       <div className="absolute top-20 left-20 opacity-10 hidden md:block">
@@ -151,7 +154,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-primary animate-pulse" style={{ animationDelay: '3s' }} />
       </div>
       
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-6xl relative z-20">
         {/* Professional Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-card/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-4 sm:mb-6 md:mb-8 border-2 border-border/30">
@@ -172,7 +175,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         
         <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
           {/* Student Card */}
-          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/80 dark:bg-card/80 group">
+          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75 group">
             <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 p-4 sm:p-6">
               <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-gradient-success rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <Users className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
@@ -210,7 +213,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
           </Card>
 
           {/* Teacher Card */}
-          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/80 dark:bg-card/80 group">
+          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75 group">
             <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 p-4 sm:p-6">
               <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-gradient-secondary rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
