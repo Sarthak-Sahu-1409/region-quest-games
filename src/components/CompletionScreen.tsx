@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Star, RotateCcw, Home } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface CompletionScreenProps {
   gameName: string;
@@ -28,6 +29,7 @@ export const CompletionScreen = ({
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+      <ThemeToggle />
       <Card className="w-full max-w-2xl shadow-large border-2 border-border">{/* Add border */}
         <CardHeader className="text-center space-y-6">
           <div className="mx-auto w-20 h-20 bg-gradient-success rounded-full flex items-center justify-center">

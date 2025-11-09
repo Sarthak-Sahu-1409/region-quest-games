@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Region } from '@/types';
 import { regionsData } from '@/data/regions';
 import { Mountain, Snowflake, Sun, TreePine } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface RegionSelectorProps {
   onSelectRegion: (region: Region) => void;
@@ -26,6 +27,7 @@ const regionGradients = {
 export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) => {
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+      <ThemeToggle />
       <div className="w-full max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-heading text-foreground mb-4">

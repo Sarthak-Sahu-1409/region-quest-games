@@ -5,6 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region } from '@/types';
 import { CheckCircle, XCircle, RotateCcw, ChevronLeft } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface FillBlankGameProps {
   game: GameData;
@@ -75,6 +76,7 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-2 sm:p-4">
+      <ThemeToggle />
       <div className="w-full max-w-4xl">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-8">

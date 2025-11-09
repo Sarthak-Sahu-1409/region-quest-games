@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Region, GameData } from '@/types';
 import { regionsData } from '@/data/regions';
 import { FileText, HelpCircle, Shuffle } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface GameSelectorProps {
   region: Region;
@@ -30,6 +31,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+      <ThemeToggle />
       <div className="w-full max-w-5xl">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-heading text-foreground mb-4">
