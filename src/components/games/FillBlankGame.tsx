@@ -82,17 +82,17 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
             <Button 
               variant="outline" 
               onClick={onBack}
-              className="bg-white/20 border-white/30 text-white hover:bg-white/30 text-xs sm:text-sm px-3 py-2"
+              className="bg-card/80 border-2 border-border hover:bg-accent/20 text-xs sm:text-sm px-3 py-2"
             >
               ← Back
             </Button>
-            <Badge variant="outline" className="bg-white/20 border-white/30 text-white text-xs sm:text-sm">
+            <Badge variant="outline" className="bg-card/80 border-2 border-border text-xs sm:text-sm">
               {currentQuestionIndex + 1} of {game.questions.length}
             </Badge>
             <Button 
               variant="outline" 
               onClick={handleRestart}
-              className="bg-white/20 border-white/30 text-white hover:bg-white/30 text-xs sm:text-sm px-3 py-2"
+              className="bg-card/80 border-2 border-border hover:bg-accent/20 text-xs sm:text-sm px-3 py-2"
             >
               <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Restart
@@ -101,20 +101,20 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
           <div className="w-full max-w-xs sm:max-w-md mx-auto mb-3 sm:mb-6">
             <Progress 
               value={progress} 
-              className="h-2 sm:h-4 bg-white/20 rounded-full overflow-hidden shadow-lg progress-indicator"
+              className="h-2 sm:h-4 bg-muted rounded-full overflow-hidden shadow-lg progress-indicator"
             />
-            <div className="flex justify-between text-xs sm:text-sm text-white/80 mt-1 sm:mt-2">
+            <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mt-1 sm:mt-2">
               <span>Progress</span>
               <span className="font-semibold">{currentQuestionIndex + 1} of {game.questions.length}</span>
             </div>
           </div>
-          <h1 className="text-xl sm:text-2xl md:text-4xl font-heading text-white mb-2">
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-heading text-foreground mb-2">
             {game.name}
           </h1>
         </div>
 
         {/* Game Card */}
-        <Card className="shadow-large">
+        <Card className="shadow-large border-2 border-border">{/* border already in Card component, but ensuring it's visible */}
           <CardHeader className="pb-3 sm:pb-6">
             <CardTitle className="text-lg sm:text-xl md:text-2xl font-heading text-center">
               Fill in the Blank
@@ -138,7 +138,7 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
                         ? 'bg-destructive/20 text-destructive border-2 sm:border-3 border-destructive cursor-not-allowed opacity-60' 
                         : isCorrect
                           ? 'bg-success/20 text-success border-2 sm:border-3 border-success cursor-not-allowed'
-                          : 'bg-white border-2 sm:border-3 border-border hover:border-primary hover:scale-105 sm:hover:scale-110 hover:shadow-lg cursor-pointer transform'
+                          : 'bg-card text-card-foreground border-2 sm:border-3 border-border hover:border-primary hover:scale-105 sm:hover:scale-110 hover:shadow-lg cursor-pointer transform hover:bg-accent/20'
                       }
                       ${isWrong ? 'animate-shake' : ''}
                     `}

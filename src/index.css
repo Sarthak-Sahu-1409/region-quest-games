@@ -105,30 +105,30 @@ All colors MUST be HSL.
 
     /* Vibrant Primary - Bright Blue for Dark Mode */
     --primary: 210 95% 65%;
-    --primary-foreground: 220 20% 10%;
+    --primary-foreground: 0 0% 100%;
     --primary-glow: 210 100% 75%;
 
     /* Warm Secondary for Dark Mode */
     --secondary: 35 90% 60%;
-    --secondary-foreground: 220 20% 10%;
+    --secondary-foreground: 0 0% 100%;
 
     /* Success Green */
     --success: 142 75% 55%;
-    --success-foreground: 220 20% 10%;
+    --success-foreground: 0 0% 100%;
 
     /* Accent Purple */
     --accent: 260 90% 68%;
-    --accent-foreground: 220 20% 10%;
+    --accent-foreground: 0 0% 100%;
 
     /* Muted Elements */
     --muted: 220 15% 20%;
-    --muted-foreground: 215 15% 65%;
+    --muted-foreground: 215 15% 70%;
 
     /* Destructive */
     --destructive: 0 75% 60%;
-    --destructive-foreground: 210 30% 96%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 22%;
+    --border: 220 15% 30%;
     --input: 220 15% 18%;
     --ring: 210 95% 65%;
 
@@ -146,8 +146,8 @@ All colors MUST be HSL.
     /* Interactive Elements */
     --option-correct: 142 90% 55%;
     --option-incorrect: 0 80% 65%;
-    --option-neutral: 220 15% 25%;
-    --option-hover: 220 30% 30%;
+    --option-neutral: 220 18% 30%;
+    --option-hover: 220 25% 35%;
 
     /* Gradients for Dark Mode */
     --gradient-primary: linear-gradient(135deg, hsl(210 95% 45%), hsl(210 100% 60%));

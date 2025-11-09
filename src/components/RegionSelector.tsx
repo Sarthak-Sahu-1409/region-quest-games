@@ -28,16 +28,16 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
       <div className="w-full max-w-6xl">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-heading text-white mb-4">
+          <h1 className="text-5xl font-heading text-foreground mb-4">
             Choose Your Region
           </h1>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Each region has unique learning experiences tailored to local culture and environment
           </p>
           <Button 
             variant="outline" 
             onClick={onBack}
-            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+            className="hover:bg-accent/20 border-2"
           >
             ← Back to Login
           </Button>
@@ -51,7 +51,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
             return (
               <Card 
                 key={region.id}
-                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-border"
                 onClick={() => onSelectRegion(region.id)}
               >
                 <CardHeader className="text-center space-y-4">

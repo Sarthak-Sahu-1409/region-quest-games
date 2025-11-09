@@ -28,7 +28,7 @@ export const CompletionScreen = ({
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl shadow-large">
+      <Card className="w-full max-w-2xl shadow-large border-2 border-border">{/* Add border */}
         <CardHeader className="text-center space-y-6">
           <div className="mx-auto w-20 h-20 bg-gradient-success rounded-full flex items-center justify-center">
             <Trophy className="w-10 h-10 text-white" />

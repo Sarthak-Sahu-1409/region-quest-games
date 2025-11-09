@@ -32,16 +32,16 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
       <div className="w-full max-w-5xl">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-heading text-white mb-4">
+          <h1 className="text-5xl font-heading text-foreground mb-4">
             {regionData.displayName} Games
           </h1>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Choose a game to start your learning adventure
           </p>
           <Button 
             variant="outline" 
             onClick={onBack}
-            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+            className="hover:bg-accent/20 border-2"
           >
             ← Back to Regions
           </Button>
@@ -55,7 +55,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
             return (
               <Card 
                 key={game.id}
-                className={`shadow-large transition-all duration-300 ${
+                className={`shadow-large transition-all duration-300 border-2 border-border ${
                   isAvailable 
                     ? 'hover:shadow-xl hover:scale-105 cursor-pointer' 
                     : 'opacity-60 cursor-not-allowed'
