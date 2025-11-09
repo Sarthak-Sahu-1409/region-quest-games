@@ -8,19 +8,30 @@ import {
   Settings, 
   LogOut,
   PlayCircle,
-  MapPin
+  MapPin,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { regionsData } from '@/data/regions';
+import { useState } from 'react';
 
 interface TeacherDashboardProps {
   onLogout: () => void;
 }
 
 export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
+  const [expandedRegions, setExpandedRegions] = useState<Record<string, boolean>>({});
   const totalGames = regionsData.reduce((total, region) => total + region.games.length, 0);
   const availableGames = regionsData.reduce((total, region) => 
     total + region.games.filter(game => game.questions.length > 0).length, 0
   );
+
+  const toggleRegion = (regionId: string) => {
+    setExpandedRegions(prev => ({
+      ...prev,
+      [regionId]: !prev[regionId]
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-primary p-4">
@@ -100,53 +111,101 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           </Card>
         </div>
 
-        {/* Regions Overview */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        {/* Regions Overview with Questions */}
+        <div className="space-y-6 mb-8">
           {regionsData.map((region) => {
+            const isExpanded = expandedRegions[region.id];
             const availableInRegion = region.games.filter(game => game.questions.length > 0).length;
             
             return (
               <Card key={region.id} className="shadow-medium">
                 <CardHeader>
                   <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-2xl font-heading">
+                    <div className="flex-1">
+                      <CardTitle className="text-2xl font-heading mb-2">
                         {region.displayName}
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-base">
+                        <span className="font-medium">Locations:</span> ({region.locations.join(', ')})
+                      </CardDescription>
+                      <CardDescription className="mt-1">
                         {region.games.length} games configured
                       </CardDescription>
                     </div>
-                    <Badge 
-                      variant={availableInRegion > 0 ? "default" : "secondary"}
-                      className={availableInRegion > 0 ? "bg-success" : ""}
-                    >
-                      {availableInRegion} Available
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge 
+                        variant={availableInRegion > 0 ? "default" : "secondary"}
+                        className={availableInRegion > 0 ? "bg-success" : ""}
+                      >
+                        {availableInRegion} Available
+                      </Badge>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleRegion(region.id)}
+                        className="ml-2"
+                      >
+                        {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                      </Button>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     {region.games.map((game) => (
-                      <div 
-                        key={game.id}
-                        className="flex justify-between items-center p-3 bg-muted rounded-lg"
-                      >
-                        <div>
-                          <div className="font-semibold">{game.name}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {game.description}
+                      <div key={game.id}>
+                        <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
+                          <div>
+                            <div className="font-semibold">{game.name}</div>
+                            <div className="text-sm text-muted-foreground">
+                              {game.description}
+                            </div>
                           </div>
+                          <Badge 
+                            variant={game.questions.length > 0 ? "default" : "secondary"}
+                            className={game.questions.length > 0 ? "bg-success" : ""}
+                          >
+                            {game.questions.length > 0 
+                              ? `${game.questions.length} Questions` 
+                              : 'In Development'
+                            }
+                          </Badge>
                         </div>
-                        <Badge 
-                          variant={game.questions.length > 0 ? "default" : "secondary"}
-                          className={game.questions.length > 0 ? "bg-success" : ""}
-                        >
-                          {game.questions.length > 0 
-                            ? `${game.questions.length} Questions` 
-                            : 'In Development'
-                          }
-                        </Badge>
+                        
+                        {/* Show questions with answers when expanded */}
+                        {isExpanded && game.questions.length > 0 && (
+                          <div className="mt-4 p-4 bg-white rounded-lg border border-gray-200">
+                            <h4 className="font-semibold text-lg mb-4 text-primary">
+                              Questions with Correct Answers:
+                            </h4>
+                            <div className="space-y-6">
+                              {game.questions.map((question, index) => (
+                                <div key={question.id} className="border-b pb-4 last:border-b-0">
+                                  <div className="flex items-start gap-2 mb-3">
+                                    <span className="font-bold text-primary min-w-[2rem]">
+                                      {index + 1}.
+                                    </span>
+                                    <div className="flex-1">
+                                      <div className="text-base mb-2">
+                                        {question.sentence[0]}
+                                        <span className="mx-2 px-3 py-1 bg-green-100 text-green-800 font-semibold rounded border-2 border-green-300">
+                                          {question.blank.correctAnswers.join(' / ')}
+                                        </span>
+                                        {question.sentence[1]}
+                                      </div>
+                                      <div className="mt-2">
+                                        <span className="text-sm font-medium text-gray-600">All options: </span>
+                                        <span className="text-sm text-gray-500">
+                                          {question.options.join(', ')}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
