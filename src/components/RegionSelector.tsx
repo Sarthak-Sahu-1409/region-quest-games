@@ -4,6 +4,7 @@ import { Region } from '@/types';
 import { regionsData } from '@/data/regions';
 import { Mountain, Snowflake, Sun, TreePine } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface RegionSelectorProps {
   onSelectRegion: (region: Region) => void;
@@ -26,9 +27,10 @@ const regionGradients = {
 
 export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) => {
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
+      <AnimatedBackground />
       <ThemeToggle />
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-6xl relative z-20">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-heading text-foreground mb-4">
             Choose Your Region
@@ -53,7 +55,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
             return (
               <Card 
                 key={region.id}
-                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-border"
+                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75"
                 onClick={() => onSelectRegion(region.id)}
               >
                 <CardHeader className="text-center space-y-4">

@@ -5,6 +5,7 @@ import { Region, GameData } from '@/types';
 import { regionsData } from '@/data/regions';
 import { FileText, HelpCircle, Shuffle } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface GameSelectorProps {
   region: Region;
@@ -30,9 +31,10 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
   if (!regionData) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
+      <AnimatedBackground />
       <ThemeToggle />
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-5xl relative z-20">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-heading text-foreground mb-4">
             {regionData.displayName} Games
@@ -57,7 +59,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
             return (
               <Card 
                 key={game.id}
-                className={`shadow-large transition-all duration-300 border-2 border-border ${
+                className={`shadow-large transition-all duration-300 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75 ${
                   isAvailable 
                     ? 'hover:shadow-xl hover:scale-105 cursor-pointer' 
                     : 'opacity-60 cursor-not-allowed'

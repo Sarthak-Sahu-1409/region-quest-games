@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { GameData, Region } from '@/types';
 import { CheckCircle, XCircle, RotateCcw, ChevronLeft } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface FillBlankGameProps {
   game: GameData;
@@ -75,9 +76,10 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
   };
 
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-2 sm:p-4">
+    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
+      <AnimatedBackground />
       <ThemeToggle />
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-4xl relative z-20">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-8">
           <div className="flex flex-col sm:flex-row items-center justify-between mb-2 sm:mb-4 gap-2">
@@ -116,7 +118,7 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
         </div>
 
         {/* Game Card */}
-        <Card className="shadow-large border-2 border-border">{/* border already in Card component, but ensuring it's visible */}
+        <Card className="shadow-large border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
           <CardHeader className="pb-3 sm:pb-6">
             <CardTitle className="text-lg sm:text-xl md:text-2xl font-heading text-center">
               Fill in the Blank

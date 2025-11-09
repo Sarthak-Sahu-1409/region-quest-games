@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Star, RotateCcw, Home } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface CompletionScreenProps {
   gameName: string;
@@ -28,9 +29,10 @@ export const CompletionScreen = ({
   const randomMessage = celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
 
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
+      <AnimatedBackground />
       <ThemeToggle />
-      <Card className="w-full max-w-2xl shadow-large border-2 border-border">{/* Add border */}
+      <Card className="w-full max-w-2xl shadow-large border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75 relative z-20">
         <CardHeader className="text-center space-y-6">
           <div className="mx-auto w-20 h-20 bg-gradient-success rounded-full flex items-center justify-center">
             <Trophy className="w-10 h-10 text-white" />
