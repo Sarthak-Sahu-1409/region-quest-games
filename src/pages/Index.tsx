@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AuthPage } from '@/components/auth/AuthPage';
 import { RegionSelector } from '@/components/RegionSelector';
 import { GameSelector } from '@/components/GameSelector';
@@ -22,41 +22,65 @@ const Index = () => {
   const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
   const [gameScore, setGameScore] = useState<number>(0);
 
+  // Navigate to a new state and push to history
+  const navigateTo = (newState: AppState) => {
+    setAppState(newState);
+    window.history.pushState({ state: newState }, '');
+  };
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state?.state) {
+        setAppState(event.state.state);
+      } else {
+        // If no state, go back to auth
+        setAppState('auth');
+      }
+    };
+
+    // Set initial state
+    window.history.replaceState({ state: 'auth' }, '');
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const handleLogin = (loggedInUser: User) => {
     setUser(loggedInUser);
     if (loggedInUser.type === 'teacher') {
-      setAppState('teacher-dashboard');
+      navigateTo('teacher-dashboard');
     } else {
-      setAppState('region-selection');
+      navigateTo('region-selection');
     }
   };
 
   const handleRegionSelect = (region: Region) => {
     setSelectedRegion(region);
-    setAppState('game-selection');
+    navigateTo('game-selection');
   };
 
   const handleGameSelect = (game: GameData) => {
     setSelectedGame(game);
-    setAppState('playing-game');
+    navigateTo('playing-game');
   };
 
   const handleGameComplete = (score: number) => {
     setGameScore(score);
-    setAppState('game-complete');
+    navigateTo('game-complete');
   };
 
   const handlePlayAgain = () => {
-    setAppState('playing-game');
+    navigateTo('playing-game');
   };
 
   const handleBackToGames = () => {
-    setAppState('game-selection');
+    window.history.back();
   };
 
   const handleBackToRegions = () => {
     setSelectedRegion(null);
-    setAppState('region-selection');
+    window.history.back();
   };
 
   const handleBackToHome = () => {
@@ -64,7 +88,7 @@ const Index = () => {
     setSelectedRegion(null);
     setSelectedGame(null);
     setGameScore(0);
-    setAppState('auth');
+    window.history.back();
   };
 
   const handleLogout = () => {
@@ -73,6 +97,8 @@ const Index = () => {
     setSelectedGame(null);
     setGameScore(0);
     setAppState('auth');
+    // Clear history and reset to auth
+    window.history.pushState({ state: 'auth' }, '');
   };
 
   // Render the appropriate component based on app state
