@@ -6,7 +6,6 @@ import { Label } from '@/components/ui/label';
 import { BookOpen, GraduationCap, Users, School, Star, Sparkles } from 'lucide-react';
 import { User } from '@/types';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
