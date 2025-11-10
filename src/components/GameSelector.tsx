@@ -68,9 +68,9 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
             return (
               <Card 
                 key={game.id}
-                className={`shadow-large transition-all duration-300 border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  flex flex-col ${
+                className={`shadow-large transition-all duration-300 border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 flex flex-col  ${
                   isAvailable 
-                    ? 'hover:shadow-xl hover:scale-105 cursor-pointer' 
+                    ? 'hover:shadow-xl hover:scale-105 cursor-pointer card-glossy-hover' 
                     : 'opacity-60 cursor-not-allowed'
                 }`}
                 onClick={() => isAvailable && onSelectGame(game)}

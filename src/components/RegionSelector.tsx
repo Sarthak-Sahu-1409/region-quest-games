@@ -64,7 +64,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
             return (
               <Card 
                 key={region.id}
-                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  flex flex-col"
+                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 flex flex-col card-glossy card-glossy-hover"
                 onClick={() => onSelectRegion(region.id)}
               >
                 <CardHeader className="text-center space-y-4">

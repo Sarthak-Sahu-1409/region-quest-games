@@ -15,6 +15,14 @@ type AppState =
   | 'game-complete'
   | 'teacher-dashboard';
 
+interface HistoryState {
+  state: AppState;
+  user?: User | null;
+  selectedRegion?: Region | null;
+  selectedGame?: GameData | null;
+  gameScore?: number;
+}
+
 const Index = () => {
   const [appState, setAppState] = useState<AppState>('auth');
   const [user, setUser] = useState<User | null>(null);
@@ -22,25 +30,50 @@ const Index = () => {
   const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
   const [gameScore, setGameScore] = useState<number>(0);
 
-  // Navigate to a new state and push to history
-  const navigateTo = (newState: AppState) => {
+  // Navigate to a new state and push to history with full context
+  const navigateTo = (newState: AppState, context?: Partial<HistoryState>) => {
+    const historyState: HistoryState = {
+      state: newState,
+      user: context?.user !== undefined ? context.user : user,
+      selectedRegion: context?.selectedRegion !== undefined ? context.selectedRegion : selectedRegion,
+      selectedGame: context?.selectedGame !== undefined ? context.selectedGame : selectedGame,
+      gameScore: context?.gameScore !== undefined ? context.gameScore : gameScore,
+    };
+    
     setAppState(newState);
-    window.history.pushState({ state: newState }, '');
+    window.history.pushState(historyState, '');
   };
 
-  // Handle browser back/forward buttons
+  // Handle browser back/forward buttons - restore full state
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
-      if (event.state?.state) {
-        setAppState(event.state.state);
+      const historyState = event.state as HistoryState | null;
+      
+      if (historyState) {
+        setAppState(historyState.state);
+        setUser(historyState.user || null);
+        setSelectedRegion(historyState.selectedRegion || null);
+        setSelectedGame(historyState.selectedGame || null);
+        setGameScore(historyState.gameScore || 0);
       } else {
-        // If no state, go back to auth
+        // If no state, reset to auth
         setAppState('auth');
+        setUser(null);
+        setSelectedRegion(null);
+        setSelectedGame(null);
+        setGameScore(0);
       }
     };
 
-    // Set initial state
-    window.history.replaceState({ state: 'auth' }, '');
+    // Set initial state with full context
+    const initialState: HistoryState = {
+      state: 'auth',
+      user: null,
+      selectedRegion: null,
+      selectedGame: null,
+      gameScore: 0,
+    };
+    window.history.replaceState(initialState, '');
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -49,56 +82,60 @@ const Index = () => {
   const handleLogin = (loggedInUser: User) => {
     setUser(loggedInUser);
     if (loggedInUser.type === 'teacher') {
-      navigateTo('teacher-dashboard');
+      navigateTo('teacher-dashboard', { user: loggedInUser });
     } else {
-      navigateTo('region-selection');
+      navigateTo('region-selection', { user: loggedInUser });
     }
   };
 
   const handleRegionSelect = (region: Region) => {
     setSelectedRegion(region);
-    navigateTo('game-selection');
+    navigateTo('game-selection', { selectedRegion: region });
   };
 
   const handleGameSelect = (game: GameData) => {
     setSelectedGame(game);
-    navigateTo('playing-game');
+    navigateTo('playing-game', { selectedGame: game });
   };
 
   const handleGameComplete = (score: number) => {
     setGameScore(score);
-    navigateTo('game-complete');
+    navigateTo('game-complete', { gameScore: score });
   };
 
   const handlePlayAgain = () => {
-    navigateTo('playing-game');
+    setGameScore(0);
+    navigateTo('playing-game', { gameScore: 0 });
   };
 
   const handleBackToGames = () => {
-    window.history.back();
+    // From completion screen or playing game, go back to game selection
+    navigateTo('game-selection');
   };
 
   const handleBackToRegions = () => {
+    // From game selection, go back to region selection
     setSelectedRegion(null);
-    window.history.back();
+    setSelectedGame(null);
+    navigateTo('region-selection', { selectedRegion: null, selectedGame: null });
   };
 
   const handleBackToHome = () => {
+    // From completion screen, reset everything and go to auth
     setUser(null);
     setSelectedRegion(null);
     setSelectedGame(null);
     setGameScore(0);
-    window.history.back();
+    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, gameScore: 0 });
   };
 
   const handleLogout = () => {
+    // From teacher dashboard, reset and go to auth
     setUser(null);
     setSelectedRegion(null);
     setSelectedGame(null);
     setGameScore(0);
-    setAppState('auth');
-    // Clear history and reset to auth
-    window.history.pushState({ state: 'auth' }, '');
+    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, gameScore: 0 });
   };
 
   // Render the appropriate component based on app state

@@ -46,6 +46,10 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
       setCorrectOptions(prev => [...prev, option]);
       setShowFeedback(true);
       setAnsweredCorrectly(true);
+      // Increment score only once per question when first correct answer is selected
+      if (!answeredCorrectly) {
+        setScore(prev => prev + 1);
+      }
     } else {
       // Wrong answer - mark as permanently wrong
       setWrongOptions(prev => [...prev, option]);
@@ -127,7 +131,7 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
         </div>
 
         {/* Game Card */}
-        <Card className="shadow-large border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50">
+        <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
           <CardHeader className="pb-2 sm:pb-3">
             <CardTitle className="text-base sm:text-lg font-heading text-center">
               Fill in the Blank

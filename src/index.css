@@ -10,78 +10,86 @@ All colors MUST be HSL.
   :root {
     /* Educational Learning Platform Design System */
     --background: 210 25% 98%;
-    --foreground: 215 25% 15%;
+    --foreground: 215 35% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 215 35% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 215 35% 12%;
 
     /* Educational Primary - Vibrant Learning Blue */
-    --primary: 210 90% 58%;
+    --primary: 210 95% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 210 100% 70%;
+    --primary-glow: 210 100% 60%;
 
     /* Teaching Secondary - Warm Orange */
-    --secondary: 35 85% 65%;
-    --secondary-foreground: 215 25% 15%;
+    --secondary: 25 90% 55%;
+    --secondary-foreground: 0 0% 100%;
 
     /* Success - Cheerful Green */
-    --success: 142 70% 50%;
+    --success: 142 75% 45%;
     --success-foreground: 0 0% 100%;
 
     /* Learning Accent - Playful Purple */
-    --accent: 260 85% 70%;
+    --accent: 260 70% 55%;
     --accent-foreground: 0 0% 100%;
 
     /* Muted - Soft Learning Environment */
-    --muted: 210 20% 95%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 210 20% 92%;
+    --muted-foreground: 215 25% 30%;
 
     /* Error - Gentle Red */
-    --destructive: 0 70% 60%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 90%;
-    --input: 210 25% 95%;
-    --ring: 210 90% 58%;
+    --border: 210 20% 85%;
+    --input: 210 20% 90%;
+    --ring: 210 95% 50%;
 
     --radius: 0.75rem;
 
-    /* Regional Theme Colors */
-    --region-1: 195 85% 60%; /* Ocean Blue */
-    --region-2: 120 70% 55%; /* Forest Green */
-    --region-3: 45 85% 65%;  /* Desert Gold */
-    --region-4: 300 75% 65%; /* Mountain Purple */
+    /* Regional Theme Colors - Removed Cyan, Better Contrast */
+    --region-1: 220 85% 55%; /* Deep Royal Blue */
+    --region-2: 142 70% 45%; /* Forest Green */
+    --region-3: 40 90% 50%;  /* Golden Yellow */
+    --region-4: 280 70% 55%; /* Rich Purple */
 
-    /* Game Specific Colors */
-    --game-fill-blank: 180 85% 60%;
-    --game-multiple-choice: 270 75% 65%;
-    --game-matching: 45 80% 60%;
+    /* Game Specific Colors - Replaced Cyan */
+    --game-fill-blank: 210 85% 52%;
+    --game-multiple-choice: 270 70% 55%;
+    --game-matching: 40 85% 50%;
 
     /* Interactive Elements */
-    --option-correct: 142 85% 50%;
-    --option-incorrect: 0 75% 65%;
-    --option-neutral: 210 15% 90%;
-    --option-hover: 210 50% 85%;
+    --option-correct: 142 80% 45%;
+    --option-incorrect: 0 80% 60%;
+    --option-neutral: 210 15% 88%;
+    --option-hover: 210 40% 80%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(142 85% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(35 90% 70%));
+    --gradient-primary: linear-gradient(135deg, hsl(210 95% 45%), hsl(210 100% 60%));
+    --gradient-success: linear-gradient(135deg, hsl(142 75% 40%), hsl(142 85% 55%));
+    --gradient-secondary: linear-gradient(135deg, hsl(25 90% 50%), hsl(25 95% 65%));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--muted)), hsl(var(--background)));
-    --gradient-region-1: linear-gradient(135deg, hsl(var(--region-1)), hsl(195 90% 70%));
-    --gradient-region-2: linear-gradient(135deg, hsl(var(--region-2)), hsl(120 80% 65%));
-    --gradient-region-3: linear-gradient(135deg, hsl(var(--region-3)), hsl(45 90% 75%));
-    --gradient-region-4: linear-gradient(135deg, hsl(var(--region-4)), hsl(300 80% 75%));
+    --gradient-region-1: linear-gradient(135deg, hsl(220 85% 50%), hsl(220 90% 65%));
+    --gradient-region-2: linear-gradient(135deg, hsl(142 70% 40%), hsl(142 80% 55%));
+    --gradient-region-3: linear-gradient(135deg, hsl(40 90% 45%), hsl(40 95% 60%));
+    --gradient-region-4: linear-gradient(135deg, hsl(280 70% 50%), hsl(280 80% 65%));
 
-    /* Shadows */
-    --shadow-gentle: 0 4px 6px -1px hsl(215 25% 15% / 0.1), 0 2px 4px -1px hsl(215 25% 15% / 0.06);
-    --shadow-medium: 0 10px 15px -3px hsl(215 25% 15% / 0.1), 0 4px 6px -2px hsl(215 25% 15% / 0.05);
-    --shadow-large: 0 25px 50px -12px hsl(215 25% 15% / 0.25);
-    --shadow-success: 0 0 20px hsl(var(--success) / 0.3);
-    --shadow-error: 0 0 20px hsl(var(--destructive) / 0.2);
+    /* Shadows - Enhanced 3D glossy effect for light mode */
+    --shadow-gentle: 0 2px 4px -1px hsl(215 35% 12% / 0.12), 
+                     0 4px 8px -2px hsl(215 35% 12% / 0.08),
+                     0 1px 0px 0px hsl(0 0% 100% / 0.8) inset;
+    --shadow-medium: 0 4px 8px -2px hsl(215 35% 12% / 0.15), 
+                     0 10px 20px -5px hsl(215 35% 12% / 0.12),
+                     0 1px 0px 0px hsl(0 0% 100% / 0.9) inset;
+    --shadow-large: 0 10px 25px -5px hsl(215 35% 12% / 0.20), 
+                    0 20px 40px -10px hsl(215 35% 12% / 0.15),
+                    0 2px 0px 0px hsl(0 0% 100% / 0.95) inset;
+    --shadow-success: 0 0 25px hsl(var(--success) / 0.5),
+                      0 4px 12px hsl(var(--success) / 0.3);
+    --shadow-error: 0 0 25px hsl(var(--destructive) / 0.4),
+                    0 4px 12px hsl(var(--destructive) / 0.3);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -133,15 +141,15 @@ All colors MUST be HSL.
     --ring: 210 95% 65%;
 
     /* Regional Theme Colors - Adjusted for Dark Mode */
-    --region-1: 195 90% 65%;
-    --region-2: 120 75% 60%;
-    --region-3: 45 90% 68%;
-    --region-4: 300 80% 68%;
+    --region-1: 220 90% 65%; /* Deep Royal Blue */
+    --region-2: 142 75% 60%; /* Forest Green */
+    --region-3: 40 90% 65%;  /* Golden Yellow */
+    --region-4: 280 75% 65%; /* Rich Purple */
 
     /* Game Specific Colors */
-    --game-fill-blank: 180 90% 65%;
-    --game-multiple-choice: 270 80% 68%;
-    --game-matching: 45 85% 65%;
+    --game-fill-blank: 210 90% 65%;
+    --game-multiple-choice: 270 75% 65%;
+    --game-matching: 40 90% 65%;
 
     /* Interactive Elements */
     --option-correct: 142 90% 55%;
@@ -152,11 +160,11 @@ All colors MUST be HSL.
     /* Gradients for Dark Mode */
     --gradient-primary: linear-gradient(135deg, hsl(210 95% 45%), hsl(210 100% 60%));
     --gradient-success: linear-gradient(135deg, hsl(142 75% 45%), hsl(142 85% 55%));
-    --gradient-secondary: linear-gradient(135deg, hsl(35 90% 50%), hsl(35 95% 65%));
-    --gradient-region-1: linear-gradient(135deg, hsl(195 90% 50%), hsl(195 95% 65%));
-    --gradient-region-2: linear-gradient(135deg, hsl(120 75% 45%), hsl(120 85% 60%));
-    --gradient-region-3: linear-gradient(135deg, hsl(45 90% 55%), hsl(45 95% 70%));
-    --gradient-region-4: linear-gradient(135deg, hsl(300 80% 55%), hsl(300 85% 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(25 90% 50%), hsl(25 95% 65%));
+    --gradient-region-1: linear-gradient(135deg, hsl(220 90% 50%), hsl(220 95% 65%));
+    --gradient-region-2: linear-gradient(135deg, hsl(142 75% 45%), hsl(142 85% 60%));
+    --gradient-region-3: linear-gradient(135deg, hsl(40 90% 55%), hsl(40 95% 70%));
+    --gradient-region-4: linear-gradient(135deg, hsl(280 75% 50%), hsl(280 85% 65%));
   }
 }
 
@@ -339,5 +347,53 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Glossy 3D Card Effects - Dark Glass with High Translucency */
+@layer components {
+  .card-glossy {
+    position: relative;
+    background: linear-gradient(
+      145deg,
+      rgba(30, 30, 40, 0.35) 0%,
+      rgba(20, 20, 30, 0.25) 50%,
+      rgba(25, 25, 35, 0.3) 100%
+    );
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .card-glossy-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-glossy-hover:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(
+      145deg,
+      rgba(35, 35, 45, 0.4) 0%,
+      rgba(25, 25, 35, 0.3) 50%,
+      rgba(30, 30, 40, 0.35) 100%
+    );
+    box-shadow: 
+      0 12px 40px 0 rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.35);
+  }
+
+  /* Enhanced text contrast for light mode */
+  .text-strong {
+    color: hsl(215 35% 12%);
+    font-weight: 600;
+  }
+
+  .text-description {
+    color: hsl(215 25% 30%);
   }
 }

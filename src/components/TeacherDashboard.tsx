@@ -38,7 +38,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       <ThemeToggle />
       <div className="w-full max-w-7xl mx-auto relative z-20">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8 p-4 sm:p-6 bg-card/80 dark:bg-card/60 rounded-lg backdrop-blur-sm border-2 border-border/50">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8 p-4 sm:p-6 bg-gray-900/25 rounded-lg backdrop-blur-md border-2 border-white/20 card-glossy">
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading text-foreground mb-1 sm:mb-2">
               Teacher Dashboard
@@ -59,7 +59,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
-          <Card className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
+          <Card className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy card-glossy-hover">
             <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-6">
               <CardTitle className="text-base sm:text-lg flex items-center">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-primary" />
@@ -72,7 +72,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
+          <Card className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy card-glossy-hover">
             <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-6">
               <CardTitle className="text-base sm:text-lg flex items-center">
                 <PlayCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-success" />
@@ -85,7 +85,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
+          <Card className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy card-glossy-hover">
             <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-6">
               <CardTitle className="text-base sm:text-lg flex items-center">
                 <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-secondary" />
@@ -106,7 +106,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
             const availableInRegion = region.games.filter(game => game.questions.length > 0).length;
             
             return (
-              <Card key={region.id} className="shadow-medium hover:shadow-large transition-all border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
+              <Card key={region.id} className="shadow-medium hover:shadow-large transition-all border-2 border-white/30 dark:border-white/10 backdrop-blur-xl bg-white/50 dark:bg-card/20 card-glossy card-glossy-hover">
                 <CardHeader className="p-3 sm:p-6">
                   <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-4">
                     <div className="flex-1 w-full">

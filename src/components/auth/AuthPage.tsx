@@ -58,7 +58,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             </p>
           </div>
 
-          <Card className="shadow-2xl border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  relative z-20">
+          <Card className="shadow-2xl border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 relative z-20 card-glossy">
             <CardHeader className="text-center space-y-2 pb-3 p-3">
               <div className="mx-auto w-12 h-12 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-lg">
                 <GraduationCap className="w-6 h-6 text-white" />
@@ -172,7 +172,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         
         <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {/* Student Card */}
-          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  group">
+          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 group card-glossy card-glossy-hover">
             <CardHeader className="text-center space-y-3 pb-4 p-4">
               <div className="mx-auto w-14 h-14 bg-gradient-success rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <Users className="w-7 h-7 text-white" />
@@ -210,7 +210,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
           </Card>
 
           {/* Teacher Card */}
-          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  group">
+          <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 group card-glossy card-glossy-hover">
             <CardHeader className="text-center space-y-3 pb-4 p-4">
               <div className="mx-auto w-14 h-14 bg-gradient-secondary rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <GraduationCap className="w-7 h-7 text-white" />
