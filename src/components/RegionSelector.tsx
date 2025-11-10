@@ -27,8 +27,17 @@ const regionGradients = {
 
 export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) => {
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
-      <AnimatedBackground />
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <ThemeToggle />
       <div className="w-full max-w-6xl relative z-20">
         <div className="text-center mb-12">
@@ -55,7 +64,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
             return (
               <Card 
                 key={region.id}
-                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75"
+                className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  flex flex-col"
                 onClick={() => onSelectRegion(region.id)}
               >
                 <CardHeader className="text-center space-y-4">
@@ -70,13 +79,13 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
                     </div>
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="text-sm text-muted-foreground">
+                <CardContent className="px-6 pb-6 mt-auto">
+                  <div className="flex flex-col">
+                    <div className="text-sm text-muted-foreground mb-6">
                       Available Games: {region.games.length}
                     </div>
                     <Button 
-                      className={`w-full ${gradientClass} hover:opacity-90 text-white font-semibold py-4`}
+                      className={`w-full h-12 ${gradientClass} hover:opacity-90 text-white font-semibold`}
                     >
                       Explore {region.displayName}
                     </Button>

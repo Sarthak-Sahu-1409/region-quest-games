@@ -8,7 +8,7 @@ export const regionsData: RegionData[] = [
   {
     id: 'south-west-bengal-1',
     name: 'south-west-bengal-1',
-    displayName: 'South West Bengal:1',
+    displayName: 'South Bengal 1',
     color: 'region-1',
     locations: ['Tulin', 'Tunturi', 'Baghmundi'],
     games: [
@@ -24,7 +24,7 @@ export const regionsData: RegionData[] = [
   {
     id: 'south-west-bengal-2',
     name: 'south-west-bengal-2',
-    displayName: 'South West Bengal:2',
+    displayName: 'South Bengal 2',
     color: 'region-2',
     locations: ['Bandoyan', 'Manbazar', 'Holudboni'],
     games: [

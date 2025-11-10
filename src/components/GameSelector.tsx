@@ -31,8 +31,17 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
   if (!regionData) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
-      <AnimatedBackground />
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <ThemeToggle />
       <div className="w-full max-w-5xl relative z-20">
         <div className="text-center mb-12">
@@ -59,7 +68,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
             return (
               <Card 
                 key={game.id}
-                className={`shadow-large transition-all duration-300 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75 ${
+                className={`shadow-large transition-all duration-300 border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  flex flex-col ${
                   isAvailable 
                     ? 'hover:shadow-xl hover:scale-105 cursor-pointer' 
                     : 'opacity-60 cursor-not-allowed'
@@ -88,13 +97,13 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
                     {game.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="text-sm text-muted-foreground text-center">
+                <CardContent className="px-6 pb-6 mt-auto">
+                  <div className="flex flex-col">
+                    <div className="text-sm text-muted-foreground text-center mb-6">
                       {isAvailable ? `${game.questions.length} Questions` : 'Under Development'}
                     </div>
                     <Button 
-                      className={`w-full font-semibold py-4 ${gameColors[game.type]} hover:opacity-90 text-white`}
+                      className={`w-full h-12 font-semibold ${gameColors[game.type]} hover:opacity-90 text-white`}
                       disabled={!isAvailable}
                     >
                       {isAvailable ? 'Start Game' : 'Coming Soon'}
