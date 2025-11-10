@@ -2,11 +2,18 @@ export type Region = 'south-west-bengal-1' | 'south-west-bengal-2' | 'north-beng
 
 export type GameType = 'fill-blank' | 'multiple-choice' | 'matching';
 
+export type Language = 'roman' | 'bengali';
+
 export interface Question {
   id: string;
   options: string[];
+  optionsBengali?: string[];
   sentence: string[];
+  sentenceBengali?: string[];
   blank: {
+    correctAnswers: string[];
+  };
+  blankBengali?: {
     correctAnswers: string[];
   };
 }

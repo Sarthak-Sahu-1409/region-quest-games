@@ -1,15 +1,17 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Region, GameData } from '@/types';
+import { Region, GameData, Language } from '@/types';
 import { regionsData } from '@/data/regions';
 import { FileText, HelpCircle, Shuffle } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { useState } from 'react';
+import { LanguageSelector } from '@/components/LanguageSelector';
 
 interface GameSelectorProps {
   region: Region;
-  onSelectGame: (game: GameData) => void;
+  onSelectGame: (game: GameData, language: Language) => void;
   onBack: () => void;
 }
 
@@ -27,8 +29,19 @@ const gameColors = {
 
 export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps) => {
   const regionData = regionsData.find(r => r.id === region);
+  const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
   
   if (!regionData) return null;
+
+  // If a game is selected, show language selector
+  if (selectedGame) {
+    return (
+      <LanguageSelector
+        onSelectLanguage={(language) => onSelectGame(selectedGame, language)}
+        onBack={() => setSelectedGame(null)}
+      />
+    );
+  }
 
   return (
     <div 
@@ -73,7 +86,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
                     ? 'hover:shadow-xl hover:scale-105 cursor-pointer card-glossy-hover' 
                     : 'opacity-60 cursor-not-allowed'
                 }`}
-                onClick={() => isAvailable && onSelectGame(game)}
+                onClick={() => isAvailable && setSelectedGame(game)}
               >
                 <CardHeader className="text-center space-y-4">
                   <div className={`mx-auto w-16 h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center`}>
