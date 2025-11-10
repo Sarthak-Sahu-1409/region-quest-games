@@ -33,7 +33,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-primary p-3 sm:p-4 md:p-6 relative overflow-hidden">
+    <div className="min-h-screen p-4 relative overflow-hidden">
       <AnimatedBackground />
       <ThemeToggle />
       <div className="w-full max-w-7xl mx-auto relative z-20">

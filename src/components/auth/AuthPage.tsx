@@ -46,58 +46,58 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         
         <div className="w-full max-w-lg relative z-20">
           {/* Professional Header */}
-          <div className="text-center mb-6 sm:mb-8">
-            <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-card/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 sm:mb-6 border-2 border-border/30">
-              <School className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+          <div className="text-center mb-3">
+            <div className="mx-auto w-12 h-12 bg-card/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-2 border-2 border-border/30">
+              <School className="w-6 h-6 text-primary" />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-heading text-foreground mb-1.5 sm:mb-2">
+            <h1 className="text-xl sm:text-2xl font-heading text-foreground mb-1">
               Educator Portal
             </h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs">
               Secure access for certified educators
             </p>
           </div>
 
           <Card className="shadow-2xl border-2 border-white/20 dark:border-white/10 backdrop-blur-2xl bg-white/50 dark:bg-card/50  relative z-20">
-            <CardHeader className="text-center space-y-4 sm:space-y-6 pb-6 sm:pb-8 p-4 sm:p-6">
-              <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-lg">
-                <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+            <CardHeader className="text-center space-y-2 pb-3 p-3">
+              <div className="mx-auto w-12 h-12 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-lg">
+                <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl sm:text-2xl font-heading text-foreground mb-1.5 sm:mb-2">Welcome Back</CardTitle>
-                <CardDescription className="text-sm sm:text-base">
+                <CardTitle className="text-lg sm:text-xl font-heading text-foreground mb-1">Welcome Back</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
                   Sign in to access your teaching dashboard
                 </CardDescription>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-8 pb-6 sm:pb-8">
-              <div className="space-y-3 sm:space-y-4">
-                <div className="space-y-1.5 sm:space-y-2">
-                  <Label htmlFor="teacherId" className="text-sm font-medium text-foreground">Educator ID</Label>
+            <CardContent className="space-y-3 px-4 sm:px-6 pb-4">
+              <div className="space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="teacherId" className="text-xs font-medium text-foreground">Educator ID</Label>
                   <Input
                     id="teacherId"
                     type="text"
                     placeholder="Enter your educator ID"
                     value={teacherId}
                     onChange={(e) => setTeacherId(e.target.value)}
-                    className="h-10 sm:h-12 text-sm sm:text-base border-2 focus:border-primary/50 transition-all duration-200"
+                    className="h-9 text-sm border-2 focus:border-primary/50 transition-all duration-200"
                   />
                 </div>
-                <div className="space-y-1.5 sm:space-y-2">
-                  <Label htmlFor="password" className="text-sm font-medium text-foreground">Password</Label>
+                <div className="space-y-1">
+                  <Label htmlFor="password" className="text-xs font-medium text-foreground">Password</Label>
                   <Input
                     id="password"
                     type="password"
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="h-10 sm:h-12 text-sm sm:text-base border-2 focus:border-primary/50 transition-all duration-200"
+                    className="h-9 text-sm border-2 focus:border-primary/50 transition-all duration-200"
                   />
                 </div>
               </div>
               
               {error && (
-                <div className="text-destructive text-xs sm:text-sm bg-destructive/10 p-3 sm:p-4 rounded-lg border-2 border-destructive/20 animate-fade-in">
+                <div className="text-destructive text-xs bg-destructive/10 p-2 rounded-lg border-2 border-destructive/20 animate-fade-in">
                   <div className="flex items-center space-x-2">
                     <div className="w-1 h-1 bg-destructive rounded-full"></div>
                     <span>{error}</span>
@@ -105,10 +105,10 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 </div>
               )}
               
-              <div className="space-y-3 sm:space-y-4 pt-2">
+              <div className="space-y-2 pt-1">
                 <Button 
                   onClick={handleTeacherLogin} 
-                  className="w-full h-12 bg-gradient-secondary hover:opacity-90 text-white font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="w-full h-10 bg-gradient-secondary hover:opacity-90 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   Access Dashboard
                 </Button>
@@ -120,7 +120,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                     setTeacherId('');
                     setPassword('');
                   }}
-                  className="w-full h-12 text-muted-foreground hover:text-foreground transition-colors duration-200 text-base"
+                  className="w-full h-10 text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm"
                 >
                   ← Back to Main Portal
                 </Button>
@@ -129,7 +129,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
           </Card>
           
           {/* Professional Footer */}
-          <div className="text-center mt-6 sm:mt-8 text-muted-foreground text-xs sm:text-sm">
+          <div className="text-center mt-3 text-muted-foreground text-xs">
             <p>Secured learning management system</p>
           </div>
         </div>
