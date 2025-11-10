@@ -59,8 +59,8 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
             <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4">
               <div className="space-y-2 mb-3">
                 <div className="p-2 bg-muted/50 rounded-lg text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Example:</div>
-                  <div className="text-sm sm:text-base font-bold">Gaṭa sapṭāhē hāmi ām khālē</div>
+                  <div className="text-xs text-on-light opacity-60 mb-1">Example:</div>
+                  <div className="text-sm sm:text-base font-bold text-on-light">Gaṭa sapṭāhē hāmi ām khālē</div>
                 </div>
               </div>
               <Button 
@@ -88,8 +88,8 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
             <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4">
               <div className="space-y-2 mb-3">
                 <div className="p-2 bg-muted/50 rounded-lg text-center">
-                  <div className="text-xs text-muted-foreground mb-1">উদাহরণ:</div>
-                  <div className="text-sm sm:text-base font-bold">গত সপ্তাহে হামি আম খালে</div>
+                  <div className="text-xs text-on-light opacity-60 mb-1">উদাহরণ:</div>
+                  <div className="text-sm sm:text-base font-bold text-on-light">গত সপ্তাহে হামি আম খালে</div>
                 </div>
               </div>
               <Button 

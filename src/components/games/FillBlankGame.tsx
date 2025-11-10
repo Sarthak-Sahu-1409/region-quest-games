@@ -109,17 +109,17 @@ export const FillBlankGame = ({ game, region, language, onBack, onComplete }: Fi
             <Button 
               variant="outline" 
               onClick={onBack}
-              className="bg-card/80 border-2 border-border hover:bg-accent/20 text-xs px-3 py-1.5"
+              className="text-xs sm:text-sm px-3 sm:px-4 py-2 font-semibold"
             >
               ← Back
             </Button>
-            <Badge variant="outline" className="bg-card/80 border-2 border-border text-xs">
+            <Badge variant="outline" className="bg-white/15 backdrop-blur-sm border-2 border-white/40 text-white text-xs sm:text-sm font-semibold px-3 py-1.5">
               {currentQuestionIndex + 1} of {game.questions.length}
             </Badge>
             <Button 
               variant="outline" 
               onClick={handleRestart}
-              className="bg-card/80 border-2 border-border hover:bg-accent/20 text-xs px-3 py-1.5"
+              className="text-xs sm:text-sm px-3 sm:px-4 py-2 font-semibold"
             >
               <RotateCcw className="w-3 h-3 mr-1" />
               Restart
@@ -166,7 +166,7 @@ isWrong
                         ? 'bg-destructive/20 text-destructive border-2 border-destructive cursor-not-allowed opacity-60' 
                         : isCorrect
                           ? 'bg-success/20 text-success border-2 border-success cursor-not-allowed'
-                          : 'bg-card text-card-foreground border-2 border-border hover:border-primary hover:scale-105 hover:shadow-lg cursor-pointer transform hover:bg-accent/20'
+                          : 'bg-card border-2 border-border hover:border-primary hover:scale-105 hover:shadow-lg cursor-pointer transform hover:bg-accent/20 text-on-light'
                       }
                       ${isWrong ? 'animate-shake' : ''}
                     `}
@@ -183,7 +183,7 @@ isWrong
             <div className="text-center p-3 sm:p-4 bg-card rounded-lg border-2">
               <div className="text-base sm:text-lg md:text-xl leading-relaxed space-x-1 flex flex-wrap justify-center items-center gap-2">
                 {/* First part of sentence */}
-                <span className="font-bold text-foreground">
+                <span className="font-bold text-on-light">
                   {sentence[0]}
                 </span>
                 
@@ -205,13 +205,13 @@ isWrong
                   {/* The blank line */}
                   <div className="w-20 sm:w-28 h-1 bg-primary border-2 border-primary rounded-full"></div>
                   {selectedAnswers.length === 0 && (
-                    <div className="text-muted-foreground text-xs sm:text-sm mt-1">Click an answer above!</div>
+                    <div className="text-on-light opacity-60 text-xs sm:text-sm mt-1">Click an answer above!</div>
                   )}
                 </div>
 
                 {/* Second part of sentence (if exists) */}
                 {sentence[1] && (
-                  <span className="font-bold text-foreground">
+                  <span className="font-bold text-on-light">
                     {sentence[1]}
                   </span>
                 )}

@@ -10,13 +10,13 @@ All colors MUST be HSL.
   :root {
     /* Educational Learning Platform Design System */
     --background: 210 25% 98%;
-    --foreground: 215 35% 12%;
+    --foreground: 0 0% 98%; /* Light text - changed to very light for dark backgrounds */
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 35% 12%;
+    --card: 0 0% 100%; /* White card background */
+    --card-foreground: 215 35% 15%; /* Dark text for light card backgrounds */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 35% 12%;
+    --popover-foreground: 215 35% 15%; /* Dark text for light popover */
 
     /* Educational Primary - Vibrant Learning Blue */
     --primary: 210 95% 50%;
@@ -36,8 +36,8 @@ All colors MUST be HSL.
     --accent-foreground: 0 0% 100%;
 
     /* Muted - Soft Learning Environment */
-    --muted: 210 20% 92%;
-    --muted-foreground: 215 25% 30%;
+    --muted: 210 20% 92%; /* Light gray background */
+    --muted-foreground: 0 0% 90%; /* Light text for dark backgrounds */
 
     /* Error - Gentle Red */
     --destructive: 0 75% 55%;
@@ -48,6 +48,10 @@ All colors MUST be HSL.
     --ring: 210 95% 50%;
 
     --radius: 0.75rem;
+
+    /* Text on dark glass backgrounds - for headers, titles on translucent cards */
+    --text-on-glass: 0 0% 100%; /* Pure white for dark glass backgrounds */
+    --text-on-glass-muted: 210 15% 85%; /* Light gray for secondary text on glass */
 
     /* Regional Theme Colors - Removed Cyan, Better Contrast */
     --region-1: 220 85% 55%; /* Deep Royal Blue */
@@ -387,13 +391,27 @@ All colors MUST be HSL.
       inset 0 -1px 0 0 rgba(0, 0, 0, 0.35);
   }
 
-  /* Enhanced text contrast for light mode */
+  /* Enhanced text contrast for different backgrounds */
   .text-strong {
-    color: hsl(215 35% 12%);
+    color: hsl(0 0% 100%); /* Pure white for glass backgrounds */
     font-weight: 600;
   }
 
   .text-description {
-    color: hsl(215 25% 30%);
+    color: hsl(210 15% 85%); /* Light gray for glass backgrounds */
+  }
+
+  /* Text for light backgrounds (cards, buttons, etc) */
+  .text-on-light {
+    color: hsl(215 35% 15%) !important; /* Dark text */
+  }
+
+  /* Text for dark/glass backgrounds */
+  .text-on-dark {
+    color: hsl(0 0% 100%) !important; /* White text */
+  }
+
+  .text-on-dark-muted {
+    color: hsl(210 15% 85%) !important; /* Light gray text */
   }
 }

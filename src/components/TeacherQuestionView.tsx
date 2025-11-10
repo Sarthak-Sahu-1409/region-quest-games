@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region, Language } from '@/types';
-import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowLeft, GraduationCap, FileText } from 'lucide-react';
 
 interface TeacherQuestionViewProps {
   game: GameData;
@@ -55,51 +55,65 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-4xl relative z-20">
-        {/* Header */}
-        <div className="text-center mb-2 sm:mb-3">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-2 gap-2">
+        {/* Professional Header - Matching Student Portal Theme */}
+        <header className="text-center mb-4 sm:mb-6">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-secondary/10 backdrop-blur-md rounded-xl mb-3 border border-secondary/20 shadow-md">
+            <GraduationCap className="w-6 h-6 text-secondary" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-white mb-2 tracking-tight">
+            {game.name}
+          </h1>
+          <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-3 px-4">
+            Teacher View - Question Review with Answer Keys
+          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary/20 backdrop-blur-sm rounded-full border border-secondary/40 text-xs">
+            <FileText className="w-3 h-3 text-secondary" />
+            <span className="font-medium text-white">Answer Key Mode</span>
+          </div>
+        </header>
+
+        {/* Navigation and Progress */}
+        <div className="mb-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-3 gap-2">
             <Button 
               variant="outline" 
               onClick={onBack}
-              className="bg-card/80 border-2 border-border hover:bg-accent/20 text-xs px-3 py-1.5"
+              className="text-xs sm:text-sm px-3 sm:px-4 py-2 font-semibold"
             >
               <ArrowLeft className="w-3 h-3 mr-1" />
               Back to Games
             </Button>
-            <Badge variant="outline" className="bg-card/80 border-2 border-border text-xs">
+            <Badge variant="outline" className="bg-white/15 backdrop-blur-sm border-2 border-white/40 text-white text-xs sm:text-sm font-semibold px-3 py-1.5">
               {currentQuestionIndex + 1} of {game.questions.length}
             </Badge>
-            <div className="w-[100px]" /> {/* Spacer for symmetry */}
+            <div className="w-[100px] sm:block hidden" /> {/* Spacer for symmetry */}
           </div>
-          <div className="w-full max-w-xs sm:max-w-md mx-auto mb-2 sm:mb-3">
+          <div className="w-full max-w-xs sm:max-w-md mx-auto">
             <Progress 
               value={progress} 
-              className="h-2 bg-muted rounded-full overflow-hidden shadow-lg progress-indicator"
+              className="h-2 bg-white/20 rounded-full overflow-hidden shadow-lg"
             />
-            <div className="flex justify-between text-xs text-muted-foreground mt-1">
+            <div className="flex justify-between text-xs text-white/80 mt-1.5">
               <span>Progress</span>
               <span className="font-semibold">{currentQuestionIndex + 1} of {game.questions.length}</span>
             </div>
           </div>
-          <h1 className="text-lg sm:text-xl md:text-2xl font-heading text-foreground mb-1">
-            {game.name} - Teacher View
-          </h1>
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            Viewing questions with correct answers
-          </p>
         </div>
 
-        {/* Game Card */}
+        {/* Game Card - Matching Student Portal Theme */}
         <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
-          <CardHeader className="pb-2 sm:pb-3">
-            <CardTitle className="text-base sm:text-lg font-heading text-center">
+          <CardHeader className="pb-3 sm:pb-4">
+            <CardTitle className="text-lg sm:text-xl font-heading text-center">
               Question {currentQuestionIndex + 1}
             </CardTitle>
+            <CardDescription className="text-center text-xs sm:text-sm">
+              Review mode - Correct answers are pre-highlighted
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 sm:space-y-4">
             {/* All Available Options - Display Only */}
             <div className="p-3 sm:p-4 bg-muted/50 rounded-lg">
-              <div className="text-xs sm:text-sm font-semibold text-muted-foreground mb-2 text-center">
+              <div className="text-xs sm:text-sm font-semibold text-on-light opacity-70 mb-2 text-center">
                 Available Options:
               </div>
               <div className="flex flex-wrap justify-center gap-2">
@@ -114,7 +128,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                         ${
                           isCorrect
                             ? 'bg-success/20 text-success border-success'
-                            : 'bg-card text-card-foreground border-border'
+                            : 'bg-card border-border text-on-light'
                         }
                       `}
                     >
@@ -130,7 +144,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
             <div className="text-center p-4 sm:p-6 bg-card rounded-lg border-2 border-border">
               <div className="text-base sm:text-lg md:text-xl leading-relaxed flex flex-wrap justify-center items-center gap-2">
                 {/* First part of sentence */}
-                <span className="font-bold text-foreground">
+                <span className="font-bold text-on-light">
                   {sentence[0]}
                 </span>
                 
@@ -148,13 +162,13 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
 
                 {/* Second part of sentence (if exists) */}
                 {sentence[1] && (
-                  <span className="font-bold text-foreground">
+                  <span className="font-bold text-on-light">
                     {sentence[1]}
                   </span>
                 )}
               </div>
               
-              <div className="mt-4 text-xs sm:text-sm text-muted-foreground">
+              <div className="mt-4 text-xs sm:text-sm text-on-light opacity-60">
                 ✨ Correct answers are highlighted in green
               </div>
             </div>
@@ -179,7 +193,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                 </div>
 
                 {/* Question Counter */}
-                <div className="text-sm font-semibold text-muted-foreground">
+                <div className="text-sm font-semibold text-on-dark">
                   {currentQuestionIndex + 1} / {game.questions.length}
                 </div>
 
