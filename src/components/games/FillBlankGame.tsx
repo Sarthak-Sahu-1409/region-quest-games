@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { GameData, Region } from '@/types';
+import { GameData, Region, Language } from '@/types';
 import { CheckCircle, XCircle, RotateCcw, ChevronLeft } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
@@ -11,11 +11,12 @@ import { AnimatedBackground } from '@/components/AnimatedBackground';
 interface FillBlankGameProps {
   game: GameData;
   region: Region;
+  language: Language;
   onBack: () => void;
   onComplete: (score: number) => void;
 }
 
-export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGameProps) => {
+export const FillBlankGame = ({ game, region, language, onBack, onComplete }: FillBlankGameProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -26,6 +27,17 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
 
   const currentQuestion = game.questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / game.questions.length) * 100;
+
+  // Get language-specific content
+  const options = language === 'bengali' && currentQuestion.optionsBengali 
+    ? currentQuestion.optionsBengali 
+    : currentQuestion.options;
+  const sentence = language === 'bengali' && currentQuestion.sentenceBengali 
+    ? currentQuestion.sentenceBengali 
+    : currentQuestion.sentence;
+  const correctAnswers = language === 'bengali' && currentQuestion.blankBengali 
+    ? currentQuestion.blankBengali.correctAnswers 
+    : currentQuestion.blank.correctAnswers;
 
   useEffect(() => {
     // Reset state when question changes
@@ -39,7 +51,7 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
   const handleOptionClick = (option: string) => {
     if (wrongOptions.includes(option) || correctOptions.includes(option)) return;
 
-    const isCorrect = currentQuestion.blank.correctAnswers.includes(option);
+    const isCorrect = correctAnswers.includes(option);
     
     if (isCorrect) {
       setSelectedAnswers(prev => [...prev, option]);
@@ -140,7 +152,7 @@ export const FillBlankGame = ({ game, region, onBack, onComplete }: FillBlankGam
           <CardContent className="space-y-3 sm:space-y-4">
             {/* Options */}
             <div className="flex flex-wrap justify-center gap-2 p-2 sm:p-3 bg-muted rounded-lg">
-              {currentQuestion.options.map((option, index) => {
+              {options.map((option, index) => {
                 const isWrong = wrongOptions.includes(option);
                 const isCorrect = correctOptions.includes(option);
                 
@@ -174,7 +186,7 @@ isWrong
               <div className="text-base sm:text-lg md:text-xl leading-relaxed space-x-1 flex flex-wrap justify-center items-center gap-2">
                 {/* First part of sentence */}
                 <span className="font-bold text-foreground">
-                  {currentQuestion.sentence[0]}
+                  {sentence[0]}
                 </span>
                 
                 {/* Blank space with answers above the line */}
@@ -200,9 +212,9 @@ isWrong
                 </div>
 
                 {/* Second part of sentence (if exists) */}
-                {currentQuestion.sentence[1] && (
+                {sentence[1] && (
                   <span className="font-bold text-foreground">
-                    {currentQuestion.sentence[1]}
+                    {sentence[1]}
                   </span>
                 )}
               </div>

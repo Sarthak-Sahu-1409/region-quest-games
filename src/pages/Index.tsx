@@ -5,7 +5,7 @@ import { GameSelector } from '@/components/GameSelector';
 import { FillBlankGame } from '@/components/games/FillBlankGame';
 import { CompletionScreen } from '@/components/CompletionScreen';
 import { TeacherDashboard } from '@/components/TeacherDashboard';
-import { User, Region, GameData } from '@/types';
+import { User, Region, GameData, Language } from '@/types';
 
 type AppState = 
   | 'auth'
@@ -20,6 +20,7 @@ interface HistoryState {
   user?: User | null;
   selectedRegion?: Region | null;
   selectedGame?: GameData | null;
+  selectedLanguage?: Language | null;
   gameScore?: number;
 }
 
@@ -28,6 +29,7 @@ const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
   const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
   const [gameScore, setGameScore] = useState<number>(0);
 
   // Navigate to a new state and push to history with full context
@@ -37,6 +39,7 @@ const Index = () => {
       user: context?.user !== undefined ? context.user : user,
       selectedRegion: context?.selectedRegion !== undefined ? context.selectedRegion : selectedRegion,
       selectedGame: context?.selectedGame !== undefined ? context.selectedGame : selectedGame,
+      selectedLanguage: context?.selectedLanguage !== undefined ? context.selectedLanguage : selectedLanguage,
       gameScore: context?.gameScore !== undefined ? context.gameScore : gameScore,
     };
     
@@ -54,6 +57,7 @@ const Index = () => {
         setUser(historyState.user || null);
         setSelectedRegion(historyState.selectedRegion || null);
         setSelectedGame(historyState.selectedGame || null);
+        setSelectedLanguage(historyState.selectedLanguage || null);
         setGameScore(historyState.gameScore || 0);
       } else {
         // If no state, reset to auth
@@ -61,6 +65,7 @@ const Index = () => {
         setUser(null);
         setSelectedRegion(null);
         setSelectedGame(null);
+        setSelectedLanguage(null);
         setGameScore(0);
       }
     };
@@ -71,6 +76,7 @@ const Index = () => {
       user: null,
       selectedRegion: null,
       selectedGame: null,
+      selectedLanguage: null,
       gameScore: 0,
     };
     window.history.replaceState(initialState, '');
@@ -93,9 +99,10 @@ const Index = () => {
     navigateTo('game-selection', { selectedRegion: region });
   };
 
-  const handleGameSelect = (game: GameData) => {
+  const handleGameSelect = (game: GameData, language: Language) => {
     setSelectedGame(game);
-    navigateTo('playing-game', { selectedGame: game });
+    setSelectedLanguage(language);
+    navigateTo('playing-game', { selectedGame: game, selectedLanguage: language });
   };
 
   const handleGameComplete = (score: number) => {
@@ -125,8 +132,9 @@ const Index = () => {
     setUser(null);
     setSelectedRegion(null);
     setSelectedGame(null);
+    setSelectedLanguage(null);
     setGameScore(0);
-    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, gameScore: 0 });
+    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, selectedLanguage: null, gameScore: 0 });
   };
 
   const handleLogout = () => {
@@ -134,8 +142,9 @@ const Index = () => {
     setUser(null);
     setSelectedRegion(null);
     setSelectedGame(null);
+    setSelectedLanguage(null);
     setGameScore(0);
-    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, gameScore: 0 });
+    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, selectedLanguage: null, gameScore: 0 });
   };
 
   // Render the appropriate component based on app state
@@ -160,6 +169,7 @@ const Index = () => {
         <FillBlankGame 
           game={selectedGame!} 
           region={selectedRegion!}
+          language={selectedLanguage!}
           onBack={handleBackToGames}
           onComplete={handleGameComplete}
         />
