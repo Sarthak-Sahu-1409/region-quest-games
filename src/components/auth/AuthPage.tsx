@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { BookOpen, GraduationCap, Users, School, Star, Sparkles } from 'lucide-react';
 import { User } from '@/types';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
@@ -42,7 +41,6 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
       >
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-        <ThemeToggle />
         
         <div className="w-full max-w-lg relative z-20">
           {/* Professional Header */}
@@ -149,26 +147,25 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
       
       <div className="w-full max-w-6xl relative z-20">
         {/* Professional Header */}
-        <div className="text-center mb-6">
-          <div className="mx-auto w-16 h-16 bg-card/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-3 border-2 border-border/30">
-            <BookOpen className="w-8 h-8 text-primary" />
+        <header className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
+            <BookOpen className="w-7 h-7 text-primary" />
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading text-foreground mb-2 leading-tight px-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             Learning Hub
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-2 px-4">
-            Transform education with interactive, region-specific learning experiences
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-3 px-4">
+            Interactive region-specific learning experiences
           </p>
-          <div className="flex items-center justify-center space-x-2 text-muted-foreground text-xs">
-            <Star className="w-3 h-3 fill-current" />
-            <span>Trusted by educators nationwide</span>
-            <Star className="w-3 h-3 fill-current" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-card/20 backdrop-blur-sm rounded-full border border-border/40 text-xs">
+            <Star className="w-3 h-3 text-primary fill-primary" />
+            <span className="font-medium text-foreground">Trusted by educators</span>
+            <Star className="w-3 h-3 text-primary fill-primary" />
           </div>
-        </div>
+        </header>
         
         <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {/* Student Card */}

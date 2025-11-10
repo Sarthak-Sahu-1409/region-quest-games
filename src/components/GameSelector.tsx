@@ -4,7 +4,6 @@ import { Badge } from '@/components/ui/badge';
 import { Region, GameData, Language } from '@/types';
 import { regionsData } from '@/data/regions';
 import { FileText, HelpCircle, Shuffle } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { useState } from 'react';
 import { LanguageSelector } from '@/components/LanguageSelector';
@@ -55,23 +54,25 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
       <div className="w-full max-w-5xl relative z-20">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-heading text-foreground mb-4">
+        <header className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
+            <FileText className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             {regionData.displayName} Games
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-4 px-4">
             Choose a game to start your learning adventure
           </p>
           <Button 
             variant="outline" 
             onClick={onBack}
-            className="hover:bg-accent/20 border-2"
+            className="hover:bg-accent/20 border text-sm h-9 shadow-sm hover:shadow transition-all"
           >
             ← Back to Regions
           </Button>
-        </div>
+        </header>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {regionData.games.map((game) => {

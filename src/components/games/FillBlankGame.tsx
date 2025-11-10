@@ -5,7 +5,6 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region, Language } from '@/types';
 import { CheckCircle, XCircle, RotateCcw, ChevronLeft } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface FillBlankGameProps {
@@ -103,7 +102,6 @@ export const FillBlankGame = ({ game, region, language, onBack, onComplete }: Fi
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
       <div className="w-full max-w-4xl relative z-20">
         {/* Header */}
         <div className="text-center mb-2 sm:mb-3">

@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Star, RotateCcw, Home } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface CompletionScreenProps {
@@ -40,20 +39,17 @@ export const CompletionScreen = ({
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
       <div className="w-full max-w-lg relative z-20">
+        <header className="text-center mb-3">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-success/10 backdrop-blur-md rounded-xl mb-2 border border-success/20 shadow-md">
+            <Trophy className="w-6 h-6 text-success" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-heading font-semibold text-foreground mb-1 tracking-tight">
+            Game Complete!
+          </h1>
+        </header>
+        
         <Card className="w-full shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 relative z-20 card-glossy">
-          <CardHeader className="text-center space-y-2 pb-2 p-3">
-            <div className="mx-auto w-12 h-12 bg-gradient-success rounded-full flex items-center justify-center">
-              <Trophy className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <CardTitle className="text-xl sm:text-2xl font-heading mb-1">
-                Game Complete!
-              </CardTitle>
-            </div>
-          </CardHeader>
-          
           <CardContent className="space-y-3 p-3">
             {/* Celebration Display */}
             <div className="text-center space-y-2">

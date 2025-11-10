@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Language } from '@/types';
 import { Languages, Globe } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface LanguageSelectorProps {
   onSelectLanguage: (language: Language) => void;
@@ -12,7 +11,7 @@ interface LanguageSelectorProps {
 export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorProps) => {
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center p-2 sm:p-3 relative overflow-hidden"
       style={{
         backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
         backgroundSize: 'cover',
@@ -22,51 +21,50 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
-      <div className="w-full max-w-4xl relative z-20">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <Globe className="w-16 h-16 text-primary" />
+      <div className="w-full max-w-3xl relative z-20">
+        <header className="text-center mb-4 sm:mb-6">
+          <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-primary/20 shadow-md">
+            <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-heading text-foreground mb-4">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             Choose Language / ভাষা নির্বাচন করুন
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-lg mx-auto mb-3 px-4">
             Select your preferred language for the game
           </p>
           <Button 
             variant="outline" 
             onClick={onBack}
-            className="hover:bg-accent/20 border-2"
+            className="hover:bg-accent/20 border text-xs h-8 shadow-sm hover:shadow transition-all"
           >
             ← Back to Games
           </Button>
-        </div>
+        </header>
         
-        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-3 max-w-2xl mx-auto">
           {/* Roman Script Option */}
           <Card 
             className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy card-glossy-hover"
             onClick={() => onSelectLanguage('roman')}
           >
-            <CardHeader className="text-center space-y-4 p-6">
-              <div className="mx-auto w-20 h-20 bg-gradient-region-1 rounded-full flex items-center justify-center">
-                <Languages className="w-10 h-10 text-white" />
+            <CardHeader className="text-center space-y-2 p-3 sm:p-4">
+              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-gradient-region-1 rounded-full flex items-center justify-center">
+                <Languages className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <CardTitle className="text-3xl font-heading">Roman Script</CardTitle>
-              <CardDescription className="text-base">
-                Learn using Roman alphabet transliteration
+              <CardTitle className="text-xl sm:text-2xl font-heading">Roman Script</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
+                Learn using Roman alphabet
               </CardDescription>
             </CardHeader>
-            <CardContent className="px-6 pb-6">
-              <div className="space-y-3 mb-6">
-                <div className="p-3 bg-muted/50 rounded-lg text-center">
-                  <div className="text-sm text-muted-foreground mb-1">Example:</div>
-                  <div className="text-lg font-bold">Gaṭa sapṭāhē hāmi ām khālē</div>
+            <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4">
+              <div className="space-y-2 mb-3">
+                <div className="p-2 bg-muted/50 rounded-lg text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Example:</div>
+                  <div className="text-sm sm:text-base font-bold">Gaṭa sapṭāhē hāmi ām khālē</div>
                 </div>
               </div>
               <Button 
-                className="w-full h-12 bg-gradient-region-1 hover:opacity-90 text-white font-semibold text-base"
+                className="w-full h-10 bg-gradient-region-1 hover:opacity-90 text-white font-semibold text-sm"
               >
                 Start with Roman
               </Button>
@@ -78,24 +76,24 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
             className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy card-glossy-hover"
             onClick={() => onSelectLanguage('bengali')}
           >
-            <CardHeader className="text-center space-y-4 p-6">
-              <div className="mx-auto w-20 h-20 bg-gradient-region-3 rounded-full flex items-center justify-center">
-                <Languages className="w-10 h-10 text-white" />
+            <CardHeader className="text-center space-y-2 p-3 sm:p-4">
+              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-gradient-region-3 rounded-full flex items-center justify-center">
+                <Languages className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <CardTitle className="text-3xl font-heading">বাংলা লিপি</CardTitle>
-              <CardDescription className="text-base">
+              <CardTitle className="text-xl sm:text-2xl font-heading">বাংলা লিপি</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
                 বাংলা বর্ণমালা ব্যবহার করে শিখুন
               </CardDescription>
             </CardHeader>
-            <CardContent className="px-6 pb-6">
-              <div className="space-y-3 mb-6">
-                <div className="p-3 bg-muted/50 rounded-lg text-center">
-                  <div className="text-sm text-muted-foreground mb-1">উদাহরণ:</div>
-                  <div className="text-lg font-bold">গত সপ্তাহে হামি আম খালে</div>
+            <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4">
+              <div className="space-y-2 mb-3">
+                <div className="p-2 bg-muted/50 rounded-lg text-center">
+                  <div className="text-xs text-muted-foreground mb-1">উদাহরণ:</div>
+                  <div className="text-sm sm:text-base font-bold">গত সপ্তাহে হামি আম খালে</div>
                 </div>
               </div>
               <Button 
-                className="w-full h-12 bg-gradient-region-3 hover:opacity-90 text-white font-semibold text-base"
+                className="w-full h-10 bg-gradient-region-3 hover:opacity-90 text-white font-semibold text-sm"
               >
                 বাংলায় শুরু করুন
               </Button>

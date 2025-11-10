@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Region } from '@/types';
 import { regionsData } from '@/data/regions';
 import { Mountain, Snowflake, Sun, TreePine } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 
 interface RegionSelectorProps {
@@ -38,23 +37,25 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
       <div className="w-full max-w-6xl relative z-20">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-heading text-foreground mb-4">
+        <header className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
+            <Mountain className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             Choose Your Region
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-            Each region has unique learning experiences tailored to local culture and environment
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-4 px-4">
+            Unique learning experiences tailored to local culture
           </p>
           <Button 
             variant="outline" 
             onClick={onBack}
-            className="hover:bg-accent/20 border-2"
+            className="hover:bg-accent/20 border text-sm h-9 shadow-sm hover:shadow transition-all"
           >
             ← Back to Login
           </Button>
-        </div>
+        </header>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {regionsData.map((region) => {

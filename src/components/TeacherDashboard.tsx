@@ -8,11 +8,11 @@ import {
   TreePine,
   FileText,
   HelpCircle,
-  Shuffle
+  Shuffle,
+  GraduationCap
 } from 'lucide-react';
 import { regionsData } from '@/data/regions';
 import { useState } from 'react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { Region, GameData, Language } from '@/types';
 import { TeacherQuestionView } from '@/components/TeacherQuestionView';
 import { LanguageSelector } from '@/components/LanguageSelector';
@@ -80,28 +80,28 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       >
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-        <ThemeToggle />
         <div className="w-full max-w-5xl relative z-20">
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-4">
-              <Button 
-                variant="outline" 
-                onClick={() => setSelectedRegion(null)}
-                className="hover:bg-accent/20 border-2"
-              >
-                ← Back to Regions
-              </Button>
+          <header className="text-center mb-6 sm:mb-8">
+            <Button 
+              variant="outline" 
+              onClick={() => setSelectedRegion(null)}
+              className="hover:bg-accent/20 border text-sm h-9 shadow-sm hover:shadow transition-all mb-3"
+            >
+              ← Back to Regions
+            </Button>
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
+              <FileText className="w-6 h-6 text-primary" />
             </div>
-            <h1 className="text-5xl font-heading text-foreground mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
               {region.displayName}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-2 px-4">
               Select a game to view questions with answers
             </p>
-            <p className="text-sm text-muted-foreground">
-              <span className="font-medium">Locations:</span> ({region.locations.join(', ')})
-            </p>
-          </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-card/20 backdrop-blur-sm rounded-full border border-border/40 text-xs">
+              <span className="font-medium text-foreground">{region.locations.join(', ')}</span>
+            </div>
+          </header>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {region.games.map((game) => {
@@ -196,25 +196,27 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <ThemeToggle />
       <div className="w-full max-w-7xl mx-auto relative z-20">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-4xl sm:text-5xl font-heading text-foreground mb-3 sm:mb-4">
+        <header className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
+            <GraduationCap className="w-7 h-7 text-primary" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             Teacher Dashboard
           </h1>
-          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-            Select a region to view questions with correct answers
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-4 px-4">
+            Select a region to view questions with answers
           </p>
           <Button 
             variant="outline"
             onClick={onLogout}
-            className="hover:bg-accent/20 border-2"
+            className="hover:bg-accent/20 border text-sm h-9 shadow-sm hover:shadow transition-all"
           >
             <LogOut className="w-4 h-4 mr-2" />
             Logout
           </Button>
-        </div>
+        </header>
 
         {/* Region Selection Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">

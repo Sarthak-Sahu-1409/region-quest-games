@@ -1,39 +1,11 @@
-import { Moon, Sun } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export const ThemeToggle = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    // Default to light mode
-    const initialTheme = savedTheme || 'light';
-    
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+    // Set light mode as the only theme
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  };
-
-  return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50 rounded-full shadow-lg border-2 border-border bg-card hover:bg-accent hover:scale-110 transition-all"
-      aria-label="Toggle theme"
-    >
-      {theme === 'light' ? (
-        <Moon className="h-5 w-5 text-foreground" />
-      ) : (
-        <Sun className="h-5 w-5 text-foreground" />
-      )}
-    </Button>
-  );
+  return null;
 };
