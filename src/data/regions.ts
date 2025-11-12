@@ -1,8 +1,25 @@
-import { RegionData } from '@/types';
-import { southWestBengal1Questions } from './questions/south/game1';
-import { southWestBengal2Questions } from './questions/north/game1';
-import { northBengal1Questions } from './questions/east/game1';
-import { northBengal2Questions } from './questions/west/game1';
+import { RegionData, Question } from '@/types';
+import { southBengal1RomanQuestions } from './questions/south-bengal-1/roman';
+import { southBengal1BengaliQuestions } from './questions/south-bengal-1/bengali';
+import { southBengal2RomanQuestions } from './questions/south-bengal-2/roman';
+import { southBengal2BengaliQuestions } from './questions/south-bengal-2/bengali';
+import { northBengal1RomanQuestions } from './questions/north-bengal-1/roman';
+import { northBengal1BengaliQuestions } from './questions/north-bengal-1/bengali';
+import { northBengal2RomanQuestions } from './questions/north-bengal-2/roman';
+import { northBengal2BengaliQuestions } from './questions/north-bengal-2/bengali';
+
+// Helper function to merge Roman and Bengali questions
+function mergeQuestions(romanQuestions: Question[], bengaliQuestions: Question[]): Question[] {
+  return romanQuestions.map((romanQ, index) => {
+    const bengaliQ = bengaliQuestions[index];
+    return {
+      ...romanQ,
+      optionsBengali: bengaliQ.options,
+      sentenceBengali: bengaliQ.sentence,
+      blankBengali: bengaliQ.blank,
+    };
+  });
+}
 
 export const regionsData: RegionData[] = [
   {
@@ -17,7 +34,7 @@ export const regionsData: RegionData[] = [
         name: 'Tense & Aspect Practice',
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
-        questions: southWestBengal1Questions
+        questions: mergeQuestions(southBengal1RomanQuestions, southBengal1BengaliQuestions)
       }
     ]
   },
@@ -33,7 +50,7 @@ export const regionsData: RegionData[] = [
         name: 'Tense & Aspect Practice',
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
-        questions: southWestBengal2Questions
+        questions: mergeQuestions(southBengal2RomanQuestions, southBengal2BengaliQuestions)
       }
     ]
   },
@@ -49,7 +66,7 @@ export const regionsData: RegionData[] = [
         name: 'Tense & Aspect Practice',
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
-        questions: northBengal1Questions
+        questions: mergeQuestions(northBengal1RomanQuestions, northBengal1BengaliQuestions)
       }
     ]
   },
@@ -65,7 +82,7 @@ export const regionsData: RegionData[] = [
         name: 'Tense & Aspect Practice',
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
-        questions: northBengal2Questions
+        questions: mergeQuestions(northBengal2RomanQuestions, northBengal2BengaliQuestions)
       }
     ]
   }
