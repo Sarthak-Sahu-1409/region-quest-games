@@ -3,32 +3,32 @@ import { Question } from '@/types';
 export const northBengal1RomanQuestions: Question[] = [
   {
     id: 'nb1-q1',
-    options: ["khānu", "khāni", "khālung", "khāsung", "khābē", "khā'ibē", "khāshi", "khāsi", "khābār dharaci", "khābār nāgasi", "khā'isha", "khāsha", "khāsit", "khāli", "khā'ila", "khā'ilō", "khālēk"],
-    sentence: ["Mu'i/Āmā du'idina āgōta ām", "."],
-    blank: { correctAnswers: ["khānu", "khāni", "khālung", "khāsung"] }
+    options: ["khanu", "khani", "khalung", "khasung", "khabe", "khaibe", "khashi", "khasi", "khabar dharaci", "khabar nagasi", "khaisha", "khasha", "khasit", "khali", "khaila", "khailo", "khalek"],
+    sentence: ["Mui/Ama duidina agota am", "."],
+    blank: { correctAnswers: ["khanu", "khani", "khalung", "khasung"] }
   },
   {
     id: 'nb1-q2',
-    options: ["khānu", "khāni", "khālung", "khāsung", "khābē", "khā'ibē", "khāshi", "khāsi", "khābār dharaci", "khābār nāgasi", "khā'isha", "khāsha", "khāsit", "khāli", "khā'ila", "khā'ilō", "khālēk"],
-    sentence: ["Kāli cēṅṛāṭā/ sēṅṛāṭā bhāt", "."],
-    blank: { correctAnswers: ["khābē", "khā'ibē"] }
+    options: ["khanu", "khani", "khalung", "khasung", "khabe", "khaibe", "khashi", "khasi", "khabar dharaci", "khabar nagasi", "khaisha", "khasha", "khasit", "khali", "khaila", "khailo", "khalek"],
+    sentence: ["Kali cengrata/ sengrata bhat", "."],
+    blank: { correctAnswers: ["khabe", "khaibe"] }
   },
   {
     id: 'nb1-q3',
-    options: ["khānu", "khāni", "khālung", "khāsung", "khābē", "khā'ibē", "khāshi", "khāsi", "khābār dharaci", "khābār nāgasi", "khā'isha", "khāsha", "khāsit", "khāli", "khā'ila", "khā'ilō", "khālēk"],
-    sentence: ["Æ'lā hāmrā /mōrā biskuṭ", "."],
-    blank: { correctAnswers: ["khāshi", "khāsi", "khābār dharaci", "khābār nāgasi"] }
+    options: ["khanu", "khani", "khalung", "khasung", "khabe", "khaibe", "khashi", "khasi", "khabar dharaci", "khabar nagasi", "khaisha", "khasha", "khasit", "khali", "khaila", "khailo", "khalek"],
+    sentence: ["Aela hamra /mora biskut", "."],
+    blank: { correctAnswers: ["khashi", "khasi", "khabar dharaci", "khabar nagasi"] }
   },
   {
     id: 'nb1-q4',
-    options: ["khānu", "khāni", "khālung", "khāsung", "khābē", "khā'ibē", "khāshi", "khāsi", "khābār dharaci", "khābār nāgasi", "khā'isha", "khāsha", "khāsit", "khāli", "khā'ila", "khā'ilō", "khālēk"],
-    sentence: ["Tui patidina bhāt", "."],
-    blank: { correctAnswers: ["khā'isha", "khāsha", "khāsit", "khāli"] }
+    options: ["khanu", "khani", "khalung", "khasung", "khabe", "khaibe", "khashi", "khasi", "khabar dharaci", "khabar nagasi", "khaisha", "khasha", "khasit", "khali", "khaila", "khailo", "khalek"],
+    sentence: ["Tui patidina bhat", "."],
+    blank: { correctAnswers: ["khaisha", "khasha", "khasit", "khali"] }
   },
   {
     id: 'nb1-q5',
-    options: ["khānu", "khāni", "khālung", "khāsung", "khābē", "khā'ibē", "khāshi", "khāsi", "khābār dharaci", "khābār nāgasi", "khā'isha", "khāsha", "khāsit", "khāli", "khā'ila", "khā'ilō", "khālēk"],
-    sentence: ["Gata bachar akṭōbar māsē urmā/ōmrā/ umrē cɒklēṭ", "."],
-    blank: { correctAnswers: ["khā'ilō", "khālēk"] }
+    options: ["khanu", "khani", "khalung", "khasung", "khabe", "khaibe", "khashi", "khasi", "khabar dharaci", "khabar nagasi", "khaisha", "khasha", "khasit", "khali", "khaila", "khailo", "khalek"],
+    sentence: ["Gata bachar aktobar mase urma/omra/ umre coklet", "."],
+    blank: { correctAnswers: ["khailo", "khalek"] }
   }
 ];
