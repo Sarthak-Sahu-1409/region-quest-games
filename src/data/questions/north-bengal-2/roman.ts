@@ -3,32 +3,32 @@ import { Question } from '@/types';
 export const northBengal2RomanQuestions: Question[] = [
   {
     id: 'nb2-q1',
-    options: ["khā'icu", "khānu", "khālō", "kāhirahō", "khāyāthā", "khābē", "khā'i", "khānca", "khāci", "khā'ōthin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khānaci", "khālāk", "khā'irahān", "khāyō"],
-    sentence: ["Āgēra hapṭā mō'i/ma'i/ mu'i/hām/ mõ'i/hāmi ām", "."],
-    blank: { correctAnswers: ["khā'icu", "khānu", "khālō", "kāhirahō", "khāyāthā"] }
+    options: ["khaicu", "khanu", "khalo", "kahiraho", "khayatha", "khabe", "khai", "khanca", "khaci", "khaothin", "khathin", "khahathin", "khaisa", "khateho", "khaisala", "khanaci", "khalak", "khairahan", "khayo"],
+    sentence: ["Agera hapta moi/mai/ mui/ham/ moi/hami am", "."],
+    blank: { correctAnswers: ["khaicu", "khanu", "khalo", "kahiraho", "khayatha"] }
   },
   {
     id: 'nb2-q2',
-    options: ["khā'icu", "khānu", "khālō", "kāhirahō", "khāyāthā", "khābē", "khā'i", "khānca", "khāci", "khā'ōthin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khānaci", "khālāk", "khā'irahān", "khāyō"],
-    sentence: ["Kāli/kāla.kala u/a/ō.aẏ chōṛāṭu bhāt", "."],
-    blank: { correctAnswers: ["khābē", "khā'i", "khānca"] }
+    options: ["khaicu", "khanu", "khalo", "kahiraho", "khayatha", "khabe", "khai", "khanca", "khaci", "khaothin", "khathin", "khahathin", "khaisa", "khateho", "khaisala", "khanaci", "khalak", "khairahan", "khayo"],
+    sentence: ["Kali/kala.kala u/a/o.ay choratu bhat", "."],
+    blank: { correctAnswers: ["khabe", "khai", "khanca"] }
   },
   {
     id: 'nb2-q3',
-    options: ["khā'icu", "khānu", "khālō", "kāhirahō", "khāyāthā", "khābē", "khā'i", "khānca", "khāci", "khā'ōthin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khānaci", "khālāk", "khā'irahān", "khāyō"],
-    sentence: ["Æ'lā/ Æ'khanē hāmina sabē/hāmā/hāmalōga/ hāmina sabējhāna biskuṭ", "."],
-    blank: { correctAnswers: ["khāci", "khā'ōthin", "khāthin", "khāhāthin"] }
+    options: ["khaicu", "khanu", "khalo", "kahiraho", "khayatha", "khabe", "khai", "khanca", "khaci", "khaothin", "khathin", "khahathin", "khaisa", "khateho", "khaisala", "khanaci", "khalak", "khairahan", "khayo"],
+    sentence: ["Aela/ Aekhane hamina sabe/hama/hamaloga/ hamina sabejhana biskut", "."],
+    blank: { correctAnswers: ["khaci", "khaothin", "khathin", "khahathin"] }
   },
   {
     id: 'nb2-q4',
-    options: ["khā'icu", "khānu", "khālō", "kāhirahō", "khāyāthā", "khābē", "khā'i", "khānca", "khāci", "khā'ōthin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khānaci", "khālāk", "khā'irahān", "khāyō"],
-    sentence: ["Tui/taẏ/timi/tumahā rōjē bhāt", "."],
-    blank: { correctAnswers: ["khā'isa", "khātēhō", "khā'isalā", "khānaci"] }
+    options: ["khaicu", "khanu", "khalo", "kahiraho", "khayatha", "khabe", "khai", "khanca", "khaci", "khaothin", "khathin", "khahathin", "khaisa", "khateho", "khaisala", "khanaci", "khalak", "khairahan", "khayo"],
+    sentence: ["Tui/tay/timi/tumaha roje bhat", "."],
+    blank: { correctAnswers: ["khaisa", "khateho", "khaisala", "khanaci"] }
   },
   {
     id: 'nb2-q5',
-    options: ["khā'icu", "khānu", "khālō", "kāhirahō", "khāyāthā", "khābē", "khā'i", "khānca", "khāci", "khā'ōthin", "khāthin", "khāhāthin", "khā'isa", "khātēhō", "khā'isalā", "khānaci", "khālāk", "khā'irahān", "khāyō"],
-    sentence: ["Āgēra bachar/sāla akṭōbar māsa mē/māsē umā/umina saba/umāna/umarā cɒklēṭ", "."],
-    blank: { correctAnswers: ["khālāk", "khā'irahān", "khāyō", "khāyāthā"] }
+    options: ["khaicu", "khanu", "khalo", "kahiraho", "khayatha", "khabe", "khai", "khanca", "khaci", "khaothin", "khathin", "khahathin", "khaisa", "khateho", "khaisala", "khanaci", "khalak", "khairahan", "khayo"],
+    sentence: ["Agera bachar/sala aktobar masa me/mase uma/umina saba/umana/umara coklet", "."],
+    blank: { correctAnswers: ["khalak", "khairahan", "khayo", "khayatha"] }
   }
 ];

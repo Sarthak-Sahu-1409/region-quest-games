@@ -60,7 +60,7 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
               <div className="space-y-2 mb-3">
                 <div className="p-2 bg-muted/50 rounded-lg text-center">
                   <div className="text-xs text-on-light opacity-60 mb-1">Example:</div>
-                  <div className="text-sm sm:text-base font-bold text-on-light">Gaṭa sapṭāhē hāmi ām khālē</div>
+                  <div className="text-sm sm:text-base font-bold text-on-light">Gata saptahe hami am khale</div>
                 </div>
               </div>
               <Button 
