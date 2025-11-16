@@ -106,7 +106,12 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {region.games.map((game) => {
               const Icon = gameIcons[game.type];
-              const isAvailable = game.questions.length > 0;
+              const isAvailable = game.type === 'matching' 
+                ? (game.matchingQuestions && game.matchingQuestions.length > 0)
+                : game.questions.length > 0;
+              const questionCount = game.type === 'matching'
+                ? (game.matchingQuestions?.length || 0)
+                : game.questions.length;
               
               return (
                 <Card 
@@ -127,7 +132,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                       <div className="flex justify-center">
                         {isAvailable ? (
                           <Badge variant="default" className="bg-success text-success-foreground">
-                            {game.questions.length} Questions
+                            {questionCount} Questions
                           </Badge>
                         ) : (
                           <Badge variant="secondary">
@@ -223,7 +228,12 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           {regionsData.map((region) => {
             const Icon = regionIcons[region.id];
             const gradientClass = regionGradients[region.id];
-            const availableInRegion = region.games.filter(game => game.questions.length > 0).length;
+            const availableInRegion = region.games.filter(game => {
+              if (game.type === 'matching') {
+                return game.matchingQuestions && game.matchingQuestions.length > 0;
+              }
+              return game.questions.length > 0;
+            }).length;
             
             return (
               <Card 

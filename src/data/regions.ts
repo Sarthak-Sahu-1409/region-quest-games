@@ -1,4 +1,4 @@
-import { RegionData, Question } from '@/types';
+import { RegionData, Question, MatchingQuestion } from '@/types';
 import { southBengal1RomanQuestions } from './questions/south-bengal-1/roman';
 import { southBengal1BengaliQuestions } from './questions/south-bengal-1/bengali';
 import { southBengal2RomanQuestions } from './questions/south-bengal-2/roman';
@@ -7,6 +7,8 @@ import { northBengal1RomanQuestions } from './questions/north-bengal-1/roman';
 import { northBengal1BengaliQuestions } from './questions/north-bengal-1/bengali';
 import { northBengal2RomanQuestions } from './questions/north-bengal-2/roman';
 import { northBengal2BengaliQuestions } from './questions/north-bengal-2/bengali';
+import { matchingRomanQuestions } from './questions/matching/roman';
+import { matchingBengaliQuestions } from './questions/matching/bengali';
 
 // Helper function to merge Roman and Bengali questions
 function mergeQuestions(romanQuestions: Question[], bengaliQuestions: Question[]): Question[] {
@@ -17,6 +19,17 @@ function mergeQuestions(romanQuestions: Question[], bengaliQuestions: Question[]
       optionsBengali: bengaliQ.options,
       sentenceBengali: bengaliQ.sentence,
       blankBengali: bengaliQ.blank,
+    };
+  });
+}
+
+// Helper function to merge Roman and Bengali matching questions
+function mergeMatchingQuestions(romanQuestions: MatchingQuestion[], bengaliQuestions: MatchingQuestion[]): MatchingQuestion[] {
+  return romanQuestions.map((romanQ, index) => {
+    const bengaliQ = bengaliQuestions[index];
+    return {
+      ...romanQ,
+      optionsBengali: bengaliQ.options,
     };
   });
 }
@@ -35,6 +48,14 @@ export const regionsData: RegionData[] = [
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
         questions: mergeQuestions(southBengal1RomanQuestions, southBengal1BengaliQuestions)
+      },
+      {
+        id: 'matching-1',
+        name: 'Image Matching',
+        type: 'matching',
+        description: 'Match images with correct regional descriptions',
+        questions: [],
+        matchingQuestions: mergeMatchingQuestions(matchingRomanQuestions, matchingBengaliQuestions)
       }
     ]
   },
@@ -51,6 +72,14 @@ export const regionsData: RegionData[] = [
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
         questions: mergeQuestions(southBengal2RomanQuestions, southBengal2BengaliQuestions)
+      },
+      {
+        id: 'matching-1',
+        name: 'Image Matching',
+        type: 'matching',
+        description: 'Match images with correct regional descriptions',
+        questions: [],
+        matchingQuestions: mergeMatchingQuestions(matchingRomanQuestions, matchingBengaliQuestions)
       }
     ]
   },
@@ -67,6 +96,14 @@ export const regionsData: RegionData[] = [
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
         questions: mergeQuestions(northBengal1RomanQuestions, northBengal1BengaliQuestions)
+      },
+      {
+        id: 'matching-1',
+        name: 'Image Matching',
+        type: 'matching',
+        description: 'Match images with correct regional descriptions',
+        questions: [],
+        matchingQuestions: mergeMatchingQuestions(matchingRomanQuestions, matchingBengaliQuestions)
       }
     ]
   },
@@ -83,6 +120,14 @@ export const regionsData: RegionData[] = [
         type: 'fill-blank',
         description: 'Fill in the blanks with correct verb forms',
         questions: mergeQuestions(northBengal2RomanQuestions, northBengal2BengaliQuestions)
+      },
+      {
+        id: 'matching-1',
+        name: 'Image Matching',
+        type: 'matching',
+        description: 'Match images with correct regional descriptions',
+        questions: [],
+        matchingQuestions: mergeMatchingQuestions(matchingRomanQuestions, matchingBengaliQuestions)
       }
     ]
   }

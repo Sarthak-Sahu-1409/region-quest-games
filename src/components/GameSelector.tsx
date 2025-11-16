@@ -77,7 +77,12 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {regionData.games.map((game) => {
             const Icon = gameIcons[game.type];
-            const isAvailable = game.questions.length > 0;
+            const isAvailable = game.type === 'matching' 
+              ? (game.matchingQuestions && game.matchingQuestions.length > 0)
+              : game.questions.length > 0;
+            const questionCount = game.type === 'matching'
+              ? (game.matchingQuestions?.length || 0)
+              : game.questions.length;
             
             return (
               <Card 
@@ -114,7 +119,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
                 <CardContent className="px-6 pb-6 mt-auto">
                   <div className="flex flex-col">
                     <div className="text-sm text-muted-foreground text-center mb-6">
-                      {isAvailable ? `${game.questions.length} Questions` : 'Under Development'}
+                      {isAvailable ? `${questionCount} Questions` : 'Under Development'}
                     </div>
                     <Button 
                       className={`w-full h-12 font-semibold ${gameColors[game.type]} hover:opacity-90 text-white`}

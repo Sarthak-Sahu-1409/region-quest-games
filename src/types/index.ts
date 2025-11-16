@@ -18,12 +18,27 @@ export interface Question {
   };
 }
 
+export interface MatchingOption {
+  id: string;
+  text: string;
+  region: Region;
+  isCorrect: boolean;
+}
+
+export interface MatchingQuestion {
+  id: string;
+  image: string;
+  options: MatchingOption[];
+  optionsBengali?: MatchingOption[];
+}
+
 export interface GameData {
   id: string;
   name: string;
   type: GameType;
   description: string;
   questions: Question[];
+  matchingQuestions?: MatchingQuestion[];
 }
 
 export interface RegionData {

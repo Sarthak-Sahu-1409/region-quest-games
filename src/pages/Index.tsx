@@ -3,6 +3,7 @@ import { AuthPage } from '@/components/auth/AuthPage';
 import { RegionSelector } from '@/components/RegionSelector';
 import { GameSelector } from '@/components/GameSelector';
 import { FillBlankGame } from '@/components/games/FillBlankGame';
+import { MatchingGame } from '@/components/games/MatchingGame';
 import { CompletionScreen } from '@/components/CompletionScreen';
 import { TeacherDashboard } from '@/components/TeacherDashboard';
 import { User, Region, GameData, Language } from '@/types';
@@ -165,6 +166,17 @@ const Index = () => {
       );
     
     case 'playing-game':
+      if (selectedGame?.type === 'matching') {
+        return (
+          <MatchingGame 
+            game={selectedGame!} 
+            region={selectedRegion!}
+            language={selectedLanguage!}
+            onBack={handleBackToGames}
+            onComplete={handleGameComplete}
+          />
+        );
+      }
       return (
         <FillBlankGame 
           game={selectedGame!} 
