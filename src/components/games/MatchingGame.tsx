@@ -309,10 +309,10 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
             </p>
           </CardHeader>
           <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
-            {/* SVG overlay for connector lines */}
+            {/* SVG overlay for connector lines - Hidden on mobile, visible on md+ */}
             <svg
               ref={svgRef}
-              className="absolute inset-0 w-full h-full pointer-events-none"
+              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
               style={{ zIndex: 10 }}
             >
               {renderConnectionLine()}
@@ -320,6 +320,19 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
 
             {/* Main Layout: Sentence on Left, Options on Right */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 relative" style={{ zIndex: 20 }}>
+              {/* Mobile: Visual indicator when correct answer is selected */}
+              {connection?.status === 'correct' && (
+                <div className="md:hidden order-1 mb-2">
+                  <div className="bg-success/20 border-2 border-success rounded-lg p-3 text-center">
+                    <div className="flex items-center justify-center space-x-2">
+                      <CheckCircle className="w-5 h-5 text-success" />
+                      <p className="text-sm font-bold text-success">Correct Match!</p>
+                      <CheckCircle className="w-5 h-5 text-success" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Left Column: Sentence */}
               <div className="flex flex-col justify-center order-2 md:order-1">
                 <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
@@ -364,7 +377,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
               </div>
 
               {/* Right Column: Options */}
-              <div className="space-y-2 order-1 md:order-2">
+              <div className="space-y-2 order-3 md:order-2">
                 <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
                   Options:
                 </p>
