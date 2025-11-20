@@ -247,11 +247,11 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
         {/* Professional Footer */}
         <div className="text-center mt-6 space-y-2">
-          <div className="flex items-center justify-center space-x-4 text-muted-foreground text-xs">
-            <span>Secure • Reliable • Educational</span>
+          <div className="text-muted-foreground text-xs leading-relaxed max-w-2xl mx-auto px-4">
+            Developed by Sarthak Sahu, Sameer Godara and Sarthak Goel under the guidance of Professor Dripta Piplai (Mondal)
           </div>
           <div className="text-muted-foreground/70 text-xs">
-            © 2024 Learning Hub. Empowering education through technology.
+            Developed with love at IIT Kharagpur ❤️
           </div>
         </div>
       </div>
