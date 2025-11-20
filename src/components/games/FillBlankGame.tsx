@@ -171,7 +171,7 @@ isWrong
                       ${isWrong ? 'animate-shake' : ''}
                     `}
                   >
-                    {option}
+                    <span>{option}</span>
                     {isWrong && <span className="ml-1">❌</span>}
                     {isCorrect && <span className="ml-1">✅</span>}
                   </button>
@@ -197,7 +197,7 @@ isWrong
                           key={idx}
                           className="bg-success/20 border-2 border-success text-success font-bold px-2 py-1 rounded text-xs sm:text-sm animate-bounce-in"
                         >
-                          {answer} ✅
+                          {answer}
                         </div>
                       ))}
                     </div>
@@ -223,7 +223,7 @@ isWrong
               <div className="text-center space-y-2">
                 <div className="flex items-center justify-center space-x-2 text-base sm:text-lg font-bold text-success">
                   <CheckCircle className="w-5 h-5" />
-                  <span>Excellent! 🎉</span>
+                  <span>Excellent!</span>
                 </div>
               </div>
             )}

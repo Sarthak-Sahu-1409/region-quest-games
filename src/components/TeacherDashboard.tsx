@@ -80,30 +80,31 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       >
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-        <div className="w-full max-w-5xl relative z-20">
-          <header className="text-center mb-6 sm:mb-8">
+        <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
+          <header className="text-center mb-4 sm:mb-6 md:mb-8">
             <Button 
               variant="outline" 
               onClick={() => setSelectedRegion(null)}
-              className="hover:bg-accent/20 border text-sm h-9 shadow-sm hover:shadow transition-all mb-3"
+              className="mb-3 sm:mb-4 bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm w-full sm:w-auto"
             >
               ← Back to Regions
             </Button>
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
-              <FileText className="w-6 h-6 text-primary" />
+            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
+              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
               {region.displayName}
             </h1>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-2 px-4">
+            <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
               Select a game to view questions with answers
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-card/20 backdrop-blur-sm rounded-full border border-border/40 text-xs">
-              <span className="font-medium text-foreground">{region.locations.join(', ')}</span>
+            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/30 text-xs">
+              <span className="font-medium text-white text-xs sm:text-sm">{region.locations.join(', ')}</span>
             </div>
           </header>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {region.games.map((game) => {
               const Icon = gameIcons[game.type];
               const isAvailable = game.type === 'matching' 
@@ -123,31 +124,31 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                   }`}
                   onClick={() => isAvailable && setSelectedGame(game)}
                 >
-                  <CardHeader className="text-center space-y-4">
-                    <div className={`mx-auto w-16 h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center`}>
-                      <Icon className="w-8 h-8 text-white" />
+                  <CardHeader className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6">
+                    <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center`}>
+                      <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
                     </div>
                     <div className="space-y-2">
-                      <CardTitle className="text-2xl font-heading">{game.name}</CardTitle>
+                      <CardTitle className="text-lg sm:text-xl font-heading text-white">{game.name}</CardTitle>
                       <div className="flex justify-center">
                         {isAvailable ? (
-                          <Badge variant="default" className="bg-success text-success-foreground">
+                          <Badge variant="default" className="bg-success/80 text-white border-0">
                             {questionCount} Questions
                           </Badge>
                         ) : (
-                          <Badge variant="secondary">
+                          <Badge variant="secondary" className="bg-white/20 text-white border-0">
                             Coming Soon
                           </Badge>
                         )}
                       </div>
                     </div>
-                    <CardDescription className="text-center">
+                    <CardDescription className="text-center text-white/70 text-xs sm:text-sm">
                       {game.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="px-6 pb-6 mt-auto">
+                  <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6 mt-auto">
                     <Button 
-                      className={`w-full h-12 font-semibold ${gameColors[game.type]} hover:opacity-90 text-white`}
+                      className={`w-full h-10 sm:h-12 font-semibold text-sm sm:text-base ${gameColors[game.type]} hover:opacity-90 text-white`}
                       disabled={!isAvailable}
                     >
                       {isAvailable ? 'View Questions' : 'Coming Soon'}
@@ -158,13 +159,13 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
             })}
           </div>
           
+                  
           {/* Logout Button */}
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-6 sm:mt-8">
             <Button 
               variant="outline"
               onClick={onLogout}
-              className="hover:bg-accent/20 border-2"
-            >
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-sm w-full sm:w-auto">
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </Button>
@@ -201,30 +202,29 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      <div className="w-full max-w-7xl mx-auto relative z-20">
+      <div className="w-full max-w-7xl mx-auto relative z-20 px-2 sm:px-0">
         {/* Header */}
-        <header className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
-            <GraduationCap className="w-7 h-7 text-primary" />
+        <header className="text-center mb-4 sm:mb-6 md:mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-primary/20 shadow-md">
+            <GraduationCap className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-foreground mb-1 sm:mb-2 tracking-tight">
             Teacher Dashboard
           </h1>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-4 px-4">
+          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
             Select a region to view questions with answers
           </p>
           <Button 
             variant="outline"
             onClick={onLogout}
-            className="hover:bg-accent/20 border text-sm h-9 shadow-sm hover:shadow transition-all"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
+            className="hover:bg-accent/20 border text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
+            <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
             Logout
           </Button>
         </header>
 
         {/* Region Selection Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
           {regionsData.map((region) => {
             const Icon = regionIcons[region.id];
             const gradientClass = regionGradients[region.id];

@@ -27,7 +27,8 @@ export interface MatchingOption {
 
 export interface MatchingQuestion {
   id: string;
-  image: string;
+  sentence: string;
+  sentenceBengali?: string;
   options: MatchingOption[];
   optionsBengali?: MatchingOption[];
 }

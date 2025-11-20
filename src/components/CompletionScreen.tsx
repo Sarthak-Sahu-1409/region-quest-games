@@ -18,11 +18,11 @@ export const CompletionScreen = ({
   onBackToHome 
 }: CompletionScreenProps) => {
   const celebrationMessages = [
-    "Awesome work! 🎉",
-    "You're a star! ⭐",
-    "Fantastic job! 🌟",
-    "Well done! 👏",
-    "Great effort! 💪"
+    "Awesome work!",
+    "You're a star!",
+    "Fantastic job!",
+    "Well done!",
+    "Great effort!"
   ];
   
   const randomMessage = celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
@@ -53,9 +53,6 @@ export const CompletionScreen = ({
           <CardContent className="space-y-3 p-3">
             {/* Celebration Display */}
             <div className="text-center space-y-2">
-              <div className="text-3xl sm:text-4xl">
-                🎉
-              </div>
               <div className="text-xl sm:text-2xl font-bold text-primary">
                 {randomMessage}
               </div>
