@@ -311,7 +311,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
             </p>
           </CardHeader>
           <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
-            {/* SVG overlay for connector lines - Hidden on mobile, visible on md+ */}
+            {/* SVG overlay for connector lines - Hidden on mobile, visible on desktop */}
             <svg
               ref={svgRef}
               className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
@@ -320,71 +320,157 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
               {renderConnectionLine()}
             </svg>
 
-            {/* Main Layout: Sentence on Left, Options on Right */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 relative" style={{ zIndex: 20 }}>
-              {/* Mobile: Visual indicator when correct answer is selected */}
-              {connection?.status === 'correct' && (
-                <div className="md:hidden order-1 mb-2">
-                  <div className="bg-success/20 border-2 border-success rounded-lg p-3 text-center">
-                    <div className="flex items-center justify-center space-x-2">
-                      <CheckCircle className="w-5 h-5 text-success" />
-                      <p className="text-sm font-bold text-success">Correct Match!</p>
-                      <CheckCircle className="w-5 h-5 text-success" />
+            {/* Mobile Compact Row Layout */}
+            <div className="md:hidden space-y-3">
+              <p className="text-xs text-center text-white/80">
+                Tap an option to match with the sentence
+              </p>
+              
+              {/* Each unique option appears in a row with the sentence */}
+              <div className="space-y-3">
+                {options.filter((option, index, self) => 
+                  index === self.findIndex((o) => o.text === option.text)
+                ).map((option, index) => {
+                  const uniqueRefKey = `q${currentQuestionIndex}-opt${index}`;
+                  const isWrongAttempt = wrongAttempts.includes(option.id);
+                  const isCorrectConnection = connection?.optionId === option.id && connection.status === 'correct';
+                  const isWrongConnection = connection?.optionId === option.id && connection.status === 'wrong';
+                  
+                  return (
+                    <div key={`${currentQuestionIndex}-${option.id}`} className="relative">
+                      {/* Compact Row: Sentence [Line] Option */}
+                      <div className="grid grid-cols-[1.2fr_auto_1fr] gap-2 items-center">
+                        {/* Sentence on Left */}
+                        <div
+                          className={`
+                            p-2.5 rounded-lg border-2 transition-all duration-200
+                            ${isCorrectConnection
+                              ? 'bg-success/20 border-success' 
+                              : 'bg-white/5 border-white/30 border-dashed'
+                            }
+                          `}
+                        >
+                          <p className={`text-xs font-bold text-center leading-snug ${
+                            isCorrectConnection ? 'text-white' : 'text-white/80'
+                          }`}>
+                            {sentence}
+                          </p>
+                        </div>
+
+                        {/* Short Connector Line */}
+                        <div className="flex items-center justify-center">
+                          {isCorrectConnection ? (
+                            <div className="w-8 h-0.5 bg-success rounded-full"></div>
+                          ) : (
+                            <div className="w-8 h-0.5 bg-white/20 rounded-full"></div>
+                          )}
+                        </div>
+
+                        {/* Option on Right */}
+                        <div
+                          ref={(el) => (optionsRef.current[option.id] = el)}
+                          onClick={() => handleOptionClick(option.id)}
+                          className={`
+                            p-2.5 rounded-lg border-2 transition-all duration-200
+                            ${isCorrectConnection
+                              ? 'bg-success/20 border-success shadow-lg cursor-default' 
+                              : isWrongConnection
+                              ? 'bg-destructive/20 border-destructive shadow-lg animate-shake cursor-not-allowed'
+                              : isWrongAttempt
+                              ? 'bg-destructive/10 border-destructive/50 hover:border-destructive cursor-pointer'
+                              : 'bg-white/90 border-white/40 hover:border-primary hover:scale-102 cursor-pointer hover:bg-white'
+                            }
+                            ${connection?.status === 'correct' || isProcessing ? 'pointer-events-none opacity-60' : ''}
+                          `}
+                        >
+                          <p className={`text-xs font-semibold text-center leading-snug ${
+                            isCorrectConnection ? 'text-white' : isWrongConnection ? 'text-white' : isWrongAttempt ? 'text-white' : 'text-gray-800'
+                          }`}>
+                            {option.text}
+                          </p>
+                          {isCorrectConnection && (
+                            <div className="flex justify-center mt-1">
+                              <CheckCircle className="w-4 h-4 text-success" />
+                            </div>
+                          )}
+                          {isWrongConnection && (
+                            <div className="flex justify-center mt-1">
+                              <XCircle className="w-4 h-4 text-destructive" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                  );
+                })}
+              </div>
+
+              {/* Feedback Message */}
+              {connection?.status === 'correct' && (
+                <div className="text-center py-2">
+                  <div className="flex items-center justify-center space-x-2 text-sm font-bold text-success">
+                    <CheckCircle className="w-5 h-5" />
+                    <span>Perfect Match!</span>
                   </div>
                 </div>
               )}
+            </div>
 
-              {/* Left Column: Sentence */}
-              <div className="flex flex-col justify-center order-2 md:order-1">
-                <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
-                  Sentence:
-                </p>
-                <div
-                  ref={sentenceRef}
-                  className={`
-                    p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 transition-all duration-200 min-h-[120px] sm:min-h-[150px] md:min-h-[200px] flex items-center justify-center
-                    ${connection?.status === 'correct'
-                      ? 'bg-success/20 border-success' 
-                      : connection?.status === 'wrong'
-                      ? 'bg-white/5 border-white/30 border-dashed'
-                      : 'bg-white/5 border-white/30 border-dashed'
-                    }
-                  `}
-                >
-                  <div className="text-center space-y-1 sm:space-y-2">
-                    <p className={`text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold leading-relaxed ${
-                      connection?.status === 'correct' ? 'text-white' : 'text-white'
-                    }`}>
-                      {sentence}
-                    </p>
-                    {!connection && (
-                      <p className="text-xs sm:text-sm text-white/70">Click an option to match</p>
-                    )}
-                    {connection?.status === 'wrong' && (
-                      <p className="text-xs sm:text-sm text-white/70">Try another option</p>
-                    )}
-                    {connection?.status === 'correct' && (
-                      <div className="flex justify-center">
-                        <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-success animate-bounce-in" />
-                      </div>
-                    )}
-                    {connection?.status === 'wrong' && (
-                      <div className="flex justify-center">
-                        <XCircle className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-destructive animate-shake" />
-                      </div>
-                    )}
+            {/* Desktop Traditional Layout */}
+            <div className="hidden md:block">
+              <div className="md:grid md:grid-cols-2 md:gap-4 lg:gap-8 xl:gap-12 relative" style={{ zIndex: 20 }}>
+                {/* Sentence */}
+                <div className="md:order-1">
+                  <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
+                    Sentence:
+                  </p>
+                  <div
+                    ref={sentenceRef}
+                    className={`
+                      p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 transition-all duration-200 
+                      min-h-[80px] sm:min-h-[100px] md:min-h-[150px] lg:min-h-[200px] 
+                      flex items-center justify-center
+                      ${connection?.status === 'correct'
+                        ? 'bg-success/20 border-success' 
+                        : connection?.status === 'wrong'
+                        ? 'bg-white/5 border-white/30 border-dashed'
+                        : 'bg-white/5 border-white/30 border-dashed'
+                      }
+                    `}
+                  >
+                    <div className="text-center space-y-1 sm:space-y-2">
+                      <p className={`text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold leading-relaxed ${
+                        connection?.status === 'correct' ? 'text-white' : 'text-white'
+                      }`}>
+                        {sentence}
+                      </p>
+                      {!connection && (
+                        <p className="text-xs sm:text-sm text-white/70">Click an option to match</p>
+                      )}
+                      {connection?.status === 'wrong' && (
+                        <p className="text-xs sm:text-sm text-white/70">Try another option</p>
+                      )}
+                      {connection?.status === 'correct' && (
+                        <div className="flex justify-center">
+                          <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-success animate-bounce-in" />
+                        </div>
+                      )}
+                      {connection?.status === 'wrong' && (
+                        <div className="flex justify-center">
+                          <XCircle className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-destructive animate-shake" />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Right Column: Options */}
-              <div className="space-y-2 order-3 md:order-2">
-                <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
-                  Options:
-                </p>
-                <div className="space-y-2">
-                  {options.map((option, index) => {
+                {/* Options */}
+                <div className="md:order-2">
+                  <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
+                    Options:
+                  </p>
+                  <div className="space-y-2">
+                    {options.map((option, index) => {
                     // Generate unique ref key using question index and option index
                     const uniqueRefKey = `q${currentQuestionIndex}-opt${index}`;
                     const isWrongAttempt = wrongAttempts.includes(option.id);
@@ -416,12 +502,12 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
                         </p>
                         {isCorrectConnection && (
                           <div className="flex justify-center mt-2">
-                            <CheckCircle className="w-5 h-5 text-success animate-bounce-in" />
+                            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-success animate-bounce-in" />
                           </div>
                         )}
                         {isWrongConnection && (
                           <div className="flex justify-center mt-2">
-                            <XCircle className="w-5 h-5 text-destructive" />
+                            <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-destructive" />
                           </div>
                         )}
                         {isWrongAttempt && !isWrongConnection && (
@@ -430,19 +516,20 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
                       </div>
                     );
                   })}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Feedback */}
-            {connection?.status === 'correct' && (
-              <div className="text-center">
-                <div className="flex items-center justify-center space-x-2 text-sm sm:text-base font-bold text-success">
-                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span>Perfect Match!</span>
+              {/* Desktop Feedback */}
+              {connection?.status === 'correct' && (
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-2 text-sm sm:text-base font-bold text-success">
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span>Perfect Match!</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
             {/* Next Button */}
             <div className="text-center">

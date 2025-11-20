@@ -204,51 +204,114 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
-              {/* Layout: Sentence on Left, Options on Right */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 relative" style={{ zIndex: 1 }}>
-                {/* SVG overlay for connector lines - Hidden on mobile, visible on md+ */}
-                <svg
-                  ref={svgRef}
-                  className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-                  style={{ zIndex: 5 }}
-                >
-                  {renderConnectionLine()}
-                </svg>
+              {/* SVG overlay for connector lines - Hidden on mobile, visible on desktop */}
+              <svg
+                ref={svgRef}
+                className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+                style={{ zIndex: 5 }}
+              >
+                {renderConnectionLine()}
+              </svg>
 
-                {/* Mobile: Visual indicator showing correct answer */}
-                <div className="md:hidden order-1 mb-2">
-                  <div className="bg-success/20 border-2 border-success rounded-lg p-3 text-center">
-                    <div className="flex items-center justify-center space-x-2">
-                      <CheckCircle className="w-5 h-5 text-success" />
-                      <p className="text-sm font-bold text-success">Answer Key View</p>
-                      <CheckCircle className="w-5 h-5 text-success" />
+              {/* Mobile Compact Row Layout */}
+              <div className="md:hidden space-y-3">
+                <p className="text-xs text-center text-white/80">
+                  Answer key view - Correct answer highlighted
+                </p>
+                
+                {/* Each unique option appears in a row with the sentence */}
+                <div className="space-y-3">
+                  {options.filter((option, index, self) => 
+                    index === self.findIndex((o) => o.text === option.text)
+                  ).map((option, index) => {
+                    // Check if this option's text matches the correct option's text
+                    const isCorrect = option.text === correctOption?.text;
+                    
+                    return (
+                      <div key={`${currentQuestionIndex}-${option.id}`} className="relative">
+                        {/* Compact Row: Sentence [Line] Option */}
+                        <div className="grid grid-cols-[1.2fr_auto_1fr] gap-2 items-center">
+                          {/* Sentence on Left */}
+                          <div
+                            className={`
+                              p-2.5 rounded-lg border-2 transition-all duration-200
+                              ${isCorrect
+                                ? 'bg-success/20 border-success' 
+                                : 'bg-white/5 border-white/30 border-dashed'
+                              }
+                            `}
+                          >
+                            <p className={`text-xs font-bold text-center leading-snug ${
+                              isCorrect ? 'text-white' : 'text-white/80'
+                            }`}>
+                              {sentence}
+                            </p>
+                          </div>
+
+                          {/* Short Connector Line */}
+                          <div className="flex items-center justify-center">
+                            {isCorrect ? (
+                              <div className="w-8 h-0.5 bg-success rounded-full"></div>
+                            ) : (
+                              <div className="w-8 h-0.5 bg-white/20 rounded-full"></div>
+                            )}
+                          </div>
+
+                          {/* Option on Right */}
+                          <div
+                            ref={(el) => (optionsRef.current[option.id] = el)}
+                            className={`
+                              p-2.5 rounded-lg border-2 transition-all duration-200
+                              ${isCorrect
+                                ? 'bg-success/20 border-success shadow-lg' 
+                                : 'bg-white/90 border-white/40'
+                              }
+                            `}
+                          >
+                            <p className={`text-xs font-semibold text-center leading-snug ${
+                              isCorrect ? 'text-white' : 'text-gray-800'
+                            }`}>
+                              {option.text}
+                            </p>
+                            {isCorrect && (
+                              <div className="flex justify-center mt-1">
+                                <CheckCircle className="w-4 h-4 text-success" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Desktop Traditional Layout */}
+              <div className="hidden md:block">
+                <div className="md:grid md:grid-cols-2 md:gap-4 lg:gap-8 xl:gap-12 relative" style={{ zIndex: 1 }}>
+                  {/* Sentence */}
+                  <div className="md:order-1">
+                    <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
+                      Sentence:
+                    </p>
+                    <div 
+                      ref={sentenceRef}
+                      className="p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 bg-success/10 border-success transition-all duration-200 min-h-[80px] sm:min-h-[100px] md:min-h-[150px] lg:min-h-[200px] flex items-center justify-center"
+                    >
+                      <div className="text-center">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white leading-relaxed">
+                          {sentence}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Left Column: Sentence */}
-                <div className="flex flex-col justify-center order-2 md:order-1">
-                  <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
-                    Sentence:
-                  </p>
-                  <div 
-                    ref={sentenceRef}
-                    className="p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 bg-success/10 border-success transition-all duration-200 min-h-[120px] sm:min-h-[150px] md:min-h-[200px] flex items-center justify-center"
-                  >
-                    <div className="text-center">
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white leading-relaxed">
-                        {sentence}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Column: Options */}
-                <div className="space-y-2 order-3 md:order-2">
-                  <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
-                    Options:
-                  </p>
-                  <div className="space-y-2">
+                  {/* Options */}
+                  <div className="md:order-2">
+                    <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
+                      Options:
+                    </p>
+                    <div className="space-y-2">
                     {options.map((option, index) => (
                       <div
                         key={`${currentQuestionIndex}-${option.id}`}
@@ -276,6 +339,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                   </div>
                 </div>
               </div>
+            </div>
 
               {/* Navigation Buttons */}
               <div className="text-center">
