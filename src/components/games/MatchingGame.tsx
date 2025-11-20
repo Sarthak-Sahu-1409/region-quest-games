@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -45,8 +45,10 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
     ? currentQuestion.optionsBengali 
     : currentQuestion?.options || [];
 
-  // Use all options - each region has its own option even if text is the same
-  const options = allOptions;
+  // Shuffle options randomly for each question
+  const options = useMemo(() => {
+    return [...allOptions].sort(() => Math.random() - 0.5);
+  }, [currentQuestionIndex, language]);
 
   // Find the correct option for the current region
   const correctOption = options.find(opt => opt.region === region && opt.isCorrect);

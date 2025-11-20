@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -40,8 +40,10 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
       ? currentMatchingQuestion.optionsBengali 
       : currentMatchingQuestion?.options || [];
     
-    // Use all options - each region has its own option even if text is the same
-    const options = allOptions;
+    // Shuffle options randomly for each question
+    const options = useMemo(() => {
+      return [...allOptions].sort(() => Math.random() - 0.5);
+    }, [currentQuestionIndex, language]);
     
     const correctOption = options.find(opt => opt.region === region && opt.isCorrect);
 
@@ -204,14 +206,26 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
             <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
               {/* Layout: Sentence on Left, Options on Right */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 relative" style={{ zIndex: 1 }}>
-                {/* SVG overlay for connector lines - Must be inside grid for proper positioning */}
+                {/* SVG overlay for connector lines - Hidden on mobile, visible on md+ */}
                 <svg
                   ref={svgRef}
-                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
                   style={{ zIndex: 5 }}
                 >
                   {renderConnectionLine()}
                 </svg>
+
+                {/* Mobile: Visual indicator showing correct answer */}
+                <div className="md:hidden order-1 mb-2">
+                  <div className="bg-success/20 border-2 border-success rounded-lg p-3 text-center">
+                    <div className="flex items-center justify-center space-x-2">
+                      <CheckCircle className="w-5 h-5 text-success" />
+                      <p className="text-sm font-bold text-success">Answer Key View</p>
+                      <CheckCircle className="w-5 h-5 text-success" />
+                    </div>
+                  </div>
+                </div>
+
                 {/* Left Column: Sentence */}
                 <div className="flex flex-col justify-center order-2 md:order-1">
                   <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
@@ -230,7 +244,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                 </div>
 
                 {/* Right Column: Options */}
-                <div className="space-y-2 order-1 md:order-2">
+                <div className="space-y-2 order-3 md:order-2">
                   <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
                     Options:
                   </p>
