@@ -1,0 +1,41 @@
+Script,Region,ID,Correct Option
+Latin,SWB:1,1,khay
+Latin,SWB:1,2,ghumai gelche/ ghumai/ ghumainche
+Latin,SWB:1,3,bote
+Latin,SWB:1,4,bairai gelo
+Latin,SWB:1,5,uthe
+Latin,SWB 2,1,khasen
+Latin,SWB 2,2,Ghumaishe/ nindaishe/ ningeishe
+Latin,SWB 2,3,ruhinak
+Latin,SWB 2,4,chuni genak
+Latin,SWB 2,5,uthe
+Latin,NB 1,1,khay
+Latin,NB 1,2,Ghumaishe/ nindaishe/ ningeishe
+Latin,NB 1,3,asen
+Latin,NB 1,4,choli gelo
+Latin,NB 1,5,uthe
+Latin,NB 2,1,khasen
+Latin,NB 2,2,ghuman/ nindathe.
+Latin,NB 2,3,hui.
+Latin,NB 2,4,choli gel/ geishe
+Latin,NB 2,5,uthelek
+Bengali,SWB:1,1,খায়
+Bengali,SWB:1,2,ঘুমাই গেলচে/ঘুমাই/ঘুমাইছে
+Bengali,SWB:1,3,বটে
+Bengali,SWB:1,4,বাইরাই গেলো
+Bengali,SWB:1,5,উঠে
+Bengali,SWB 2,1,খায়
+Bengali,SWB 2,2,ঘুমাইসে/ নিন্দাইসে/নিঙ্গেইসে
+Bengali,SWB 2,3,রুহিনাক
+Bengali,SWB 2,4,চুনি গেনাক
+Bengali,SWB 2,5,উঠে
+Bengali,NB 1,1,খায়
+Bengali,NB 1,2,ঘুমাইসে/ নিন্দাইসে/ নিঙ্গেইসে
+Bengali,NB 1,3,আসেন
+Bengali,NB 1,4,চলি গেলো
+Bengali,NB 1,5,উঠে
+Bengali,NB 2,1,খায়
+Bengali,NB 2,2,ঘুমান/ নিন্দাথে।
+Bengali,NB 2,3,হুই।
+Bengali,NB 2,4,চলি গেল/ গেইসে।
+Bengali,NB 2,5,উঠেলেক।
