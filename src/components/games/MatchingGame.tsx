@@ -4,8 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region, Language, MatchingQuestion } from '@/types';
-import { CheckCircle, XCircle, RotateCcw, SkipForward } from 'lucide-react';
-import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 
 interface MatchingGameProps {
   game: GameData;
@@ -22,8 +21,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
-  const [wrongAttempts, setWrongAttempts] = useState<Set<string>>(new Set());
-  const [canSkip, setCanSkip] = useState(false);
+  const [wrongAttempts, setWrongAttempts] = useState<string[]>([]);
 
   const matchingQuestions = game.matchingQuestions || [];
   const currentQuestion = matchingQuestions[currentQuestionIndex];
@@ -38,51 +36,14 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
   const correctOption = options.find(opt => opt.region === region && opt.isCorrect);
 
   useEffect(() => {
-    // Reset state when question changes
     setSelectedAnswer(null);
     setShowFeedback(false);
     setIsCorrect(false);
     setDraggedOption(null);
-    setWrongAttempts(new Set());
-    setCanSkip(false);
+    setWrongAttempts([]);
   }, [currentQuestionIndex]);
 
-  const handleOptionSelect = (optionId: string) => {
-    // Prevent selecting if already correct or if this option was already tried
-    if (isCorrect || (wrongAttempts.has(optionId) && selectedAnswer !== optionId)) {
-      return;
-    }
-
-    // If clicking the same wrong answer again, do nothing
-    if (selectedAnswer === optionId && !isCorrect) {
-      return;
-    }
-
-    if (!correctOption) return;
-
-    setSelectedAnswer(optionId);
-    const correct = optionId === correctOption.id;
-    setIsCorrect(correct);
-    setShowFeedback(true);
-    
-    if (correct) {
-      setScore(prev => prev + 1);
-    } else {
-      // Add to wrong attempts
-      setWrongAttempts(prev => new Set([...prev, optionId]));
-      
-      // Enable skip after 2 wrong attempts
-      if (wrongAttempts.size >= 1) {
-        setCanSkip(true);
-      }
-    }
-  };
-
   const handleDragStart = (optionId: string) => {
-    // Prevent dragging if already correct or if this option was already tried
-    if (isCorrect || wrongAttempts.has(optionId)) {
-      return;
-    }
     setDraggedOption(optionId);
   };
 
@@ -92,8 +53,23 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    if (draggedOption && correctOption && !wrongAttempts.has(draggedOption)) {
-      handleOptionSelect(draggedOption);
+    if (draggedOption && correctOption) {
+      setSelectedAnswer(draggedOption);
+      const correct = draggedOption === correctOption.id;
+      setIsCorrect(correct);
+      setShowFeedback(true);
+      
+      if (correct) {
+        setScore(prev => prev + 1);
+      } else {
+        // Track wrong attempts but allow user to try again
+        setWrongAttempts(prev => [...prev, draggedOption]);
+        // Clear feedback after a short delay to allow retry
+        setTimeout(() => {
+          setShowFeedback(false);
+          setSelectedAnswer(null);
+        }, 1500);
+      }
     }
     setDraggedOption(null);
   };
@@ -106,32 +82,18 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
     }
   };
 
-  const handleSkip = () => {
-    if (canSkip) {
-      handleNext();
-    }
-  };
-
   const handleRestart = () => {
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
     setShowFeedback(false);
     setIsCorrect(false);
     setScore(0);
-    setWrongAttempts(new Set());
-    setCanSkip(false);
-  };
-
-  const handleTryAgain = () => {
-    setSelectedAnswer(null);
-    setShowFeedback(false);
   };
 
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-        <AnimatedBackground />
-        <Card className="p-6 text-center relative z-20 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Card className="p-6 text-center">
           <p className="text-lg">No matching questions available.</p>
           <Button onClick={onBack} className="mt-4">Back</Button>
         </Card>
@@ -140,9 +102,16 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
-      <AnimatedBackground />
-      
+    <div 
+      className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-6xl relative z-20">
         {/* Compact Header for Mobile */}
         <div className="text-center mb-2 sm:mb-4">
@@ -182,17 +151,56 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
         </div>
 
         {/* Game Card - Optimized for Mobile */}
-        <Card className="shadow-large border-2 border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/75 dark:bg-card/75">
+        <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
           <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
             <CardTitle className="text-sm sm:text-base font-heading text-center">
-              {isCorrect 
-                ? "Correct! 🎉" 
-                : showFeedback && !isCorrect
-                ? "Try Again!"
-                : "Match the Image with the Correct Description"}
+              Match the Image with the Correct Description
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6 pb-3 sm:pb-6">
+            {/* Draggable Options at Top - 2 Column Grid */}
+            <div className="space-y-2">
+              <p className="text-xs sm:text-sm text-center text-foreground font-semibold">
+                Drag the correct option:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                {options.map((option) => {
+                  const isWrongAttempt = wrongAttempts.includes(option.id);
+                  const isCurrentSelection = selectedAnswer === option.id;
+                  
+                  return (
+                    <div
+                      key={option.id}
+                      draggable={!isCurrentSelection || !isCorrect}
+                      onDragStart={() => handleDragStart(option.id)}
+                      className={`
+                        p-3 sm:p-4 rounded-lg border-2 transition-all duration-200 text-center touch-manipulation
+                        ${draggedOption === option.id ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}
+                        ${isCurrentSelection && isCorrect
+                          ? 'bg-success/20 border-success cursor-not-allowed' 
+                          : isWrongAttempt
+                          ? 'bg-destructive/10 border-destructive/50 cursor-move hover:border-destructive hover:scale-102'
+                          : 'bg-card/80 border-border cursor-move hover:border-primary hover:scale-102 hover:shadow-lg'
+                        }
+                      `}
+                    >
+                      <p className={`text-sm sm:text-base font-semibold leading-relaxed ${
+                        isCurrentSelection ? 'text-white' : 'text-black'
+                      }`}>
+                        {option.text}
+                      </p>
+                      {isCurrentSelection && isCorrect && (
+                        <span className="text-xl mt-2 block">✅</span>
+                      )}
+                      {isWrongAttempt && !isCurrentSelection && (
+                        <span className="text-xs text-destructive mt-1 block font-medium">Try again</span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Image and Drop Zone Side by Side - Mobile Stacked */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               {/* Image on Left (Top on Mobile) */}
@@ -209,7 +217,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
 
               {/* Drop Zone on Right (Bottom on Mobile) */}
               <div className="flex flex-col items-center gap-2">
-                <p className="text-xs sm:text-sm font-semibold text-muted-foreground">Your Answer:</p>
+                <p className="text-xs sm:text-sm font-semibold text-muted-foreground">Drop Answer Here:</p>
                 <div 
                   className="relative w-full aspect-video bg-muted/20 border-4 border-dashed border-primary rounded-lg flex items-center justify-center min-h-[150px] sm:min-h-[200px] transition-all duration-200 hover:bg-muted/30 touch-manipulation"
                   onDragOver={handleDragOver}
@@ -217,30 +225,20 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
                 >
                   {!selectedAnswer ? (
                     <div className="text-center p-3 sm:p-4">
-                      <div className="text-3xl sm:text-4xl mb-2">👇</div>
-                      <p className="text-xs sm:text-sm text-muted-foreground font-semibold">
-                        Click or drag an option below
-                      </p>
+                      <div className="text-3xl sm:text-4xl mb-2">👆</div>
+                      <p className="text-xs sm:text-sm text-muted-foreground font-semibold">Drag and drop your answer here</p>
                     </div>
                   ) : (
                     <div className="text-center p-3 sm:p-4">
                       {isCorrect ? (
                         <div className="space-y-2">
                           <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-success mx-auto animate-bounce-in" />
-                          <p className="text-sm sm:text-base font-bold text-success">Perfect Match! 🎉</p>
+                          <p className="text-sm sm:text-base font-bold text-success">Correct! 🎉</p>
                         </div>
                       ) : (
                         <div className="space-y-2">
                           <XCircle className="w-16 h-16 sm:w-20 sm:h-20 text-destructive mx-auto animate-shake" />
-                          <p className="text-sm sm:text-base font-bold text-destructive">Not Quite!</p>
-                          <Button 
-                            onClick={handleTryAgain}
-                            size="sm"
-                            variant="outline"
-                            className="mt-2"
-                          >
-                            Try Again
-                          </Button>
+                          <p className="text-sm sm:text-base font-bold text-destructive">Try Again!</p>
                         </div>
                       )}
                     </div>
@@ -249,91 +247,28 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
               </div>
             </div>
 
-            {/* Selectable Options at Bottom - 2 Column Grid */}
-            <div className="space-y-2">
-              <p className="text-xs sm:text-sm text-center text-foreground font-semibold">
-                {isCorrect 
-                  ? "✅ You got it right!" 
-                  : showFeedback && !isCorrect
-                  ? "❌ Pick a different option:"
-                  : "Select the correct description:"}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                {options.map((option) => {
-                  const isWrongAttempt = wrongAttempts.has(option.id);
-                  const isCurrentSelection = selectedAnswer === option.id;
-                  const isDisabled = (isCorrect && !isCurrentSelection) || isWrongAttempt;
-                  
-                  return (
-                    <button
-                      key={option.id}
-                      draggable={!isDisabled && !isCorrect}
-                      onDragStart={() => handleDragStart(option.id)}
-                      onClick={() => !isDisabled && handleOptionSelect(option.id)}
-                      disabled={isDisabled}
-                      className={`
-                        p-3 sm:p-4 rounded-lg border-2 transition-all duration-200 text-center touch-manipulation
-                        ${draggedOption === option.id ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}
-                        ${isCurrentSelection && isCorrect
-                          ? 'bg-success/20 border-success cursor-default shadow-lg' 
-                          : isWrongAttempt
-                          ? 'bg-destructive/10 border-destructive/50 cursor-not-allowed opacity-60'
-                          : isDisabled
-                          ? 'bg-muted/50 border-muted cursor-not-allowed opacity-50'
-                          : 'bg-card/80 border-border cursor-pointer hover:border-primary hover:scale-102 hover:shadow-lg active:scale-98'
-                        }
-                      `}
-                    >
-                      <p className={`text-sm sm:text-base font-semibold leading-relaxed ${
-                        isCurrentSelection && isCorrect ? 'text-success' : 'text-foreground'
-                      }`}>
-                        {option.text}
-                      </p>
-                      {isCurrentSelection && isCorrect && (
-                        <span className="text-xl mt-2 block">✅</span>
-                      )}
-                      {isWrongAttempt && (
-                        <span className="text-xs text-destructive mt-1 block font-medium">Already tried ❌</span>
-                      )}
-                    </button>
-                  );
-                })}
+            {/* Feedback - Mobile Optimized */}
+            {showFeedback && isCorrect && (
+              <div className="text-center">
+                <div className="flex items-center justify-center space-x-2 text-sm sm:text-base font-bold text-success">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span>Perfect Match! 🎉</span>
+                </div>
               </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex items-center justify-center gap-2 sm:gap-3">
-              {canSkip && !isCorrect && (
-                <Button 
-                  onClick={handleSkip}
-                  size="sm"
-                  variant="outline"
-                  className="font-semibold"
-                >
-                  <SkipForward className="w-4 h-4 mr-1" />
-                  Skip
-                </Button>
-              )}
-              
-              {isCorrect && (
-                <Button 
-                  onClick={handleNext}
-                  size="sm"
-                  className="bg-gradient-success hover:opacity-90 text-white font-semibold py-2 px-4 sm:px-6 text-sm"
-                >
-                  {currentQuestionIndex < matchingQuestions.length - 1 ? 'Next Question →' : 'Finish 🎉'}
-                </Button>
-              )}
-            </div>
-
-            {/* Helper Text */}
-            {wrongAttempts.size > 0 && !isCorrect && (
-              <p className="text-xs text-center text-muted-foreground">
-                {wrongAttempts.size === 1 
-                  ? "You've tried 1 option. Keep going!" 
-                  : `You've tried ${wrongAttempts.size} options. ${canSkip ? 'You can skip if needed.' : ''}`}
-              </p>
             )}
+
+            {/* Next Button - Only show when correct */}
+            <div className="text-center">
+              <Button 
+                onClick={handleNext}
+                size="sm"
+                className={`bg-gradient-success hover:opacity-90 text-white font-semibold py-2 px-4 sm:px-6 text-sm transition-opacity ${
+                  showFeedback && isCorrect ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
+              >
+                {currentQuestionIndex < matchingQuestions.length - 1 ? 'Next Question' : 'Finish'}
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
