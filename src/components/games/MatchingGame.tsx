@@ -328,9 +328,22 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
               
               {/* Each unique option appears in a row with the sentence */}
               <div className="space-y-3">
-                {options.filter((option, index, self) => 
-                  index === self.findIndex((o) => o.text === option.text)
-                ).map((option, index) => {
+                {options.filter((option, index, self) => {
+                  // Always keep the correct option for the current region
+                  if (option.id === correctOption?.id) return true;
+                  
+                  // For other options, keep only first occurrence of each unique text
+                  // but exclude if the same text already appears as the correct option
+                  const firstIndex = self.findIndex((o) => o.text === option.text);
+                  if (index !== firstIndex) return false;
+                  
+                  // Don't show duplicate text if correct option has same text
+                  if (correctOption && option.text === correctOption.text && option.id !== correctOption.id) {
+                    return false;
+                  }
+                  
+                  return true;
+                }).map((option, index) => {
                   const uniqueRefKey = `q${currentQuestionIndex}-opt${index}`;
                   const isWrongAttempt = wrongAttempts.includes(option.id);
                   const isCorrectConnection = connection?.optionId === option.id && connection.status === 'correct';
