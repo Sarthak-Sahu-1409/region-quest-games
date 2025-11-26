@@ -40,12 +40,38 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
       ? currentMatchingQuestion.optionsBengali 
       : currentMatchingQuestion?.options || [];
     
-    // Shuffle options randomly for each question
-    const options = useMemo(() => {
-      return [...allOptions].sort(() => Math.random() - 0.5);
-    }, [currentQuestionIndex, language]);
+    // Find the correct option for the current region first
+    const correctOption = allOptions.find(opt => opt.region === region && opt.isCorrect);
     
-    const correctOption = options.find(opt => opt.region === region && opt.isCorrect);
+    // Get unique options - keep only unique text values and always include the correct option
+    const options = useMemo(() => {
+      if (!correctOption) return [];
+      
+      const uniqueOptions = [];
+      const seenTexts = new Set<string>();
+      
+      // Always add the correct option first
+      uniqueOptions.push(correctOption);
+      seenTexts.add(correctOption.text);
+      
+      // Add other unique options (skip duplicates)
+      for (const option of allOptions) {
+        if (!seenTexts.has(option.text) && option.id !== correctOption.id) {
+          uniqueOptions.push(option);
+          seenTexts.add(option.text);
+        }
+      }
+      
+      // Shuffle the unique options so correct answer is not always first
+      // Use a seeded random based on question index for consistency during the same question
+      const shuffled = [...uniqueOptions];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      
+      return shuffled;
+    }, [allOptions, correctOption, currentQuestionIndex, language]);
 
     // Force re-render when refs are populated to ensure SVG line draws
     useEffect(() => {
@@ -221,22 +247,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                 
                 {/* Each unique option appears in a row with the sentence */}
                 <div className="space-y-3">
-                  {options.filter((option, index, self) => {
-                    // Always keep the correct option for the current region
-                    if (option.id === correctOption?.id) return true;
-                    
-                    // For other options, keep only first occurrence of each unique text
-                    // but exclude if the same text already appears as the correct option
-                    const firstIndex = self.findIndex((o) => o.text === option.text);
-                    if (index !== firstIndex) return false;
-                    
-                    // Don't show duplicate text if correct option has same text
-                    if (correctOption && option.text === correctOption.text && option.id !== correctOption.id) {
-                      return false;
-                    }
-                    
-                    return true;
-                  }).map((option, index) => {
+                  {options.map((option, index) => {
                     // Check if this option's text matches the correct option's text
                     const isCorrect = option.text === correctOption?.text;
                     
