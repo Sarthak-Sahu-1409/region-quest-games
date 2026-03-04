@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useLayoutEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region, Language } from '@/types';
 import { ChevronLeft, ChevronRight, ArrowLeft, GraduationCap, FileText, CheckCircle } from 'lucide-react';
+import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface TeacherQuestionViewProps {
   game: GameData;
@@ -15,7 +16,7 @@ interface TeacherQuestionViewProps {
 
 export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQuestionViewProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [forceUpdate, setForceUpdate] = useState(0);
+  const [svgKey, setSvgKey] = useState(0);
   const optionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const sentenceRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -62,23 +63,23 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
         }
       }
       
-      // Shuffle the unique options so correct answer is not always first
-      // Use a seeded random based on question index for consistency during the same question
+      // Seeded shuffle — deterministic for same question index, stable across re-renders
+      const seededRandom = (seed: number) => {
+        const x = Math.sin(seed + 1) * 10000;
+        return x - Math.floor(x);
+      };
       const shuffled = [...uniqueOptions];
       for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(seededRandom(currentQuestionIndex * 100 + i) * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
       
       return shuffled;
     }, [allOptions, correctOption, currentQuestionIndex, language]);
 
-    // Force re-render when refs are populated to ensure SVG line draws
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setForceUpdate(prev => prev + 1);
-      }, 100);
-      return () => clearTimeout(timer);
+    // Force SVG line recalculation after DOM commits new question elements
+    useLayoutEffect(() => {
+      setSvgKey(prev => prev + 1);
     }, [currentQuestionIndex]);
 
     const handleNext = () => {
@@ -168,12 +169,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
     return (
       <div 
         className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
-        style={{
-          backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
+        style={PAGE_BACKGROUND_STYLE}
       >
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
@@ -439,12 +435,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+      style={PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

@@ -7,7 +7,6 @@ import {
   Snowflake,
   TreePine,
   FileText,
-  HelpCircle,
   Shuffle,
   GraduationCap
 } from 'lucide-react';
@@ -16,6 +15,7 @@ import { useState } from 'react';
 import { Region, GameData, Language } from '@/types';
 import { TeacherQuestionView } from '@/components/TeacherQuestionView';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface TeacherDashboardProps {
   onLogout: () => void;
@@ -23,13 +23,11 @@ interface TeacherDashboardProps {
 
 const gameIcons = {
   'fill-blank': FileText,
-  'multiple-choice': HelpCircle,
   'matching': Shuffle,
 };
 
 const gameColors = {
   'fill-blank': 'bg-game-fill-blank',
-  'multiple-choice': 'bg-game-multiple-choice',
   'matching': 'bg-game-matching',
 };
 
@@ -71,12 +69,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
     return (
       <div 
         className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-        style={{
-          backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
+        style={PAGE_BACKGROUND_STYLE}
       >
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
@@ -193,12 +186,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+      style={PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

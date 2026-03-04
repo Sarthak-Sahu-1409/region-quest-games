@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Region, GameData, Language } from '@/types';
 import { regionsData } from '@/data/regions';
-import { FileText, HelpCircle, Shuffle } from 'lucide-react';
-import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { FileText, Shuffle } from 'lucide-react';
 import { useState } from 'react';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface GameSelectorProps {
   region: Region;
@@ -16,13 +16,11 @@ interface GameSelectorProps {
 
 const gameIcons = {
   'fill-blank': FileText,
-  'multiple-choice': HelpCircle,
   'matching': Shuffle,
 };
 
 const gameColors = {
   'fill-blank': 'bg-game-fill-blank',
-  'multiple-choice': 'bg-game-multiple-choice',
   'matching': 'bg-game-matching',
 };
 
@@ -45,12 +43,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+      style={PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

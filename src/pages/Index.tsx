@@ -111,11 +111,6 @@ const Index = () => {
     navigateTo('game-complete', { gameScore: score });
   };
 
-  const handlePlayAgain = () => {
-    setGameScore(0);
-    navigateTo('playing-game', { gameScore: 0 });
-  };
-
   const handleBackToGames = () => {
     // From completion screen or playing game, go back to game selection
     navigateTo('game-selection');
@@ -191,7 +186,6 @@ const Index = () => {
       return (
         <CompletionScreen 
           gameName={selectedGame?.name || ''}
-          onPlayAgain={handlePlayAgain}
           onBackToGames={handleBackToGames}
           onBackToHome={handleBackToHome}
         />

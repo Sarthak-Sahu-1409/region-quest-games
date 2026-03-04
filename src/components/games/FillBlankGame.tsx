@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region, Language } from '@/types';
 import { CheckCircle, XCircle, RotateCcw, ChevronLeft } from 'lucide-react';
-import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface FillBlankGameProps {
   game: GameData;
@@ -93,12 +93,7 @@ export const FillBlankGame = ({ game, region, language, onBack, onComplete }: Fi
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+      style={PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

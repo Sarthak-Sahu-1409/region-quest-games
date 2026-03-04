@@ -1,19 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Star, RotateCcw, Home } from 'lucide-react';
-import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
+import { Trophy, Home } from 'lucide-react';
 
 interface CompletionScreenProps {
   gameName: string;
-  onPlayAgain: () => void;
   onBackToGames: () => void;
   onBackToHome: () => void;
 }
 
 export const CompletionScreen = ({ 
   gameName, 
-  onPlayAgain, 
   onBackToGames, 
   onBackToHome 
 }: CompletionScreenProps) => {
@@ -30,12 +28,7 @@ export const CompletionScreen = ({
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-2 sm:p-3 relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+      style={PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
