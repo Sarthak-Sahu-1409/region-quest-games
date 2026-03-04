@@ -21,7 +21,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsHindi(prev => !prev);
-    }, 5000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
