@@ -145,13 +145,13 @@ export const FillBlankGame = ({ game, region, language, onBack, onComplete }: Fi
           <CardContent className="space-y-3 sm:space-y-4">
             {/* Options */}
             <div className="flex flex-wrap justify-center gap-2 p-2 sm:p-3 bg-muted rounded-lg">
-              {options.map((option, index) => {
+              {options.map((option) => {
                 const isWrong = wrongOptions.includes(option);
                 const isCorrect = correctOptions.includes(option);
                 
                 return (
                   <button
-                    key={index}
+                    key={`${currentQuestionIndex}-${option}`}
                     onClick={() => handleOptionClick(option)}
                     disabled={isWrong || isCorrect}
                     className={`

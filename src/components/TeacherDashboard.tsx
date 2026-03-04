@@ -11,7 +11,7 @@ import {
   GraduationCap
 } from 'lucide-react';
 import { regionsData } from '@/data/regions';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Region, GameData, Language } from '@/types';
 import { TeacherQuestionView } from '@/components/TeacherQuestionView';
 import { LanguageSelector } from '@/components/LanguageSelector';
@@ -37,16 +37,26 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
 
   // If language and game are selected, show sequential question view
+  const handleBackFromQuestions = useCallback(() => {
+    setSelectedGame(null);
+    setSelectedLanguage(null);
+  }, []);
+
+  const handleSelectLanguage = useCallback((language: Language) => {
+    setSelectedLanguage(language);
+  }, []);
+
+  const handleBackFromLanguage = useCallback(() => {
+    setSelectedGame(null);
+  }, []);
+
   if (selectedGame && selectedRegion && selectedLanguage) {
     return (
       <TeacherQuestionView
         game={selectedGame}
         region={selectedRegion}
         language={selectedLanguage}
-        onBack={() => {
-          setSelectedGame(null);
-          setSelectedLanguage(null);
-        }}
+        onBack={handleBackFromQuestions}
       />
     );
   }
@@ -55,8 +65,8 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
   if (selectedGame && selectedRegion) {
     return (
       <LanguageSelector
-        onSelectLanguage={(language) => setSelectedLanguage(language)}
-        onBack={() => setSelectedGame(null)}
+        onSelectLanguage={handleSelectLanguage}
+        onBack={handleBackFromLanguage}
       />
     );
   }

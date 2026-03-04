@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 import { Trophy, Home } from 'lucide-react';
 
@@ -15,15 +15,16 @@ export const CompletionScreen = ({
   onBackToGames, 
   onBackToHome 
 }: CompletionScreenProps) => {
-  const celebrationMessages = [
-    "Awesome work!",
-    "You're a star!",
-    "Fantastic job!",
-    "Well done!",
-    "Great effort!"
-  ];
-  
-  const randomMessage = celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
+  const [randomMessage] = useState(() => {
+    const celebrationMessages = [
+      "Awesome work!",
+      "You're a star!",
+      "Fantastic job!",
+      "Well done!",
+      "Great effort!"
+    ];
+    return celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
+  });
 
   return (
     <div 

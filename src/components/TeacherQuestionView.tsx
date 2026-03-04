@@ -1,345 +1,330 @@
-import { useState, useRef, useLayoutEffect, useMemo } from 'react';
+import { useState, useRef, useLayoutEffect, useMemo, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { GameData, Region, Language } from '@/types';
+import { GameData, Region, Language, MatchingQuestion, MatchingOption } from '@/types';
 import { ChevronLeft, ChevronRight, ArrowLeft, GraduationCap, FileText, CheckCircle } from 'lucide-react';
 import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
-interface TeacherQuestionViewProps {
+// ─── Matching‑question teacher view (extracted so hooks are unconditional) ────
+
+interface MatchingQuestionTeacherViewProps {
   game: GameData;
   region: Region;
   language: Language;
   onBack: () => void;
 }
 
-export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQuestionViewProps) => {
+const MatchingQuestionTeacherView = ({ game, region, language, onBack }: MatchingQuestionTeacherViewProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [svgKey, setSvgKey] = useState(0);
   const optionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const sentenceRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
-  const isMatchingGame = game.type === 'matching';
-  const totalQuestions = isMatchingGame 
-    ? (game.matchingQuestions?.length || 0)
-    : game.questions.length;
-  
+  const matchingQuestions = game.matchingQuestions!;
+  const totalQuestions = matchingQuestions.length;
+  const currentMatchingQuestion = matchingQuestions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
 
-  // For matching questions
-  if (isMatchingGame && game.matchingQuestions) {
-    const currentMatchingQuestion = game.matchingQuestions[currentQuestionIndex];
-    
-    // Get language-specific content
-    const sentence = language === 'bengali' && currentMatchingQuestion?.sentenceBengali 
-      ? currentMatchingQuestion.sentenceBengali 
-      : currentMatchingQuestion?.sentence || '';
-    
-    const allOptions = language === 'bengali' && currentMatchingQuestion?.optionsBengali 
-      ? currentMatchingQuestion.optionsBengali 
-      : currentMatchingQuestion?.options || [];
-    
-    // Find the correct option for the current region first
-    const correctOption = allOptions.find(opt => opt.region === region && opt.isCorrect);
-    
-    // Get unique options - keep only unique text values and always include the correct option
-    const options = useMemo(() => {
-      if (!correctOption) return [];
-      
-      const uniqueOptions = [];
-      const seenTexts = new Set<string>();
-      
-      // Always add the correct option first
-      uniqueOptions.push(correctOption);
-      seenTexts.add(correctOption.text);
-      
-      // Add other unique options (skip duplicates)
-      for (const option of allOptions) {
-        if (!seenTexts.has(option.text) && option.id !== correctOption.id) {
-          uniqueOptions.push(option);
-          seenTexts.add(option.text);
-        }
+  // Get language-specific content
+  const sentence = language === 'bengali' && currentMatchingQuestion?.sentenceBengali
+    ? currentMatchingQuestion.sentenceBengali
+    : currentMatchingQuestion?.sentence || '';
+
+  const allOptions = language === 'bengali' && currentMatchingQuestion?.optionsBengali
+    ? currentMatchingQuestion.optionsBengali
+    : currentMatchingQuestion?.options || [];
+
+  // Find the correct option for the current region
+  const correctOption = allOptions.find(opt => opt.region === region && opt.isCorrect);
+
+  // Get unique options — seeded shuffle for deterministic ordering
+  const options = useMemo(() => {
+    if (!correctOption) return [];
+
+    const uniqueOptions: MatchingOption[] = [];
+    const seenTexts = new Set<string>();
+
+    uniqueOptions.push(correctOption);
+    seenTexts.add(correctOption.text);
+
+    for (const option of allOptions) {
+      if (!seenTexts.has(option.text) && option.id !== correctOption.id) {
+        uniqueOptions.push(option);
+        seenTexts.add(option.text);
       }
-      
-      // Seeded shuffle — deterministic for same question index, stable across re-renders
-      const seededRandom = (seed: number) => {
-        const x = Math.sin(seed + 1) * 10000;
-        return x - Math.floor(x);
-      };
-      const shuffled = [...uniqueOptions];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(seededRandom(currentQuestionIndex * 100 + i) * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      
-      return shuffled;
-    }, [allOptions, correctOption, currentQuestionIndex, language]);
+    }
 
-    // Force SVG line recalculation after DOM commits new question elements
-    useLayoutEffect(() => {
-      setSvgKey(prev => prev + 1);
-    }, [currentQuestionIndex]);
-
-    const handleNext = () => {
-      if (currentQuestionIndex < totalQuestions - 1) {
-        setCurrentQuestionIndex(prev => prev + 1);
-      }
+    const seededRandom = (seed: number) => {
+      const x = Math.sin(seed + 1) * 10000;
+      return x - Math.floor(x);
     };
+    const shuffled = [...uniqueOptions];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom(currentQuestionIndex * 100 + i) * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
 
-    const handlePrevious = () => {
-      if (currentQuestionIndex > 0) {
-        setCurrentQuestionIndex(prev => prev - 1);
-      }
+    return shuffled;
+  }, [allOptions, correctOption, currentQuestionIndex, language]);
+
+  // Force SVG line recalculation after DOM commits new question elements
+  useLayoutEffect(() => {
+    setSvgKey(prev => prev + 1);
+  }, [currentQuestionIndex]);
+
+  const handleNext = useCallback(() => {
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    }
+  }, [currentQuestionIndex, totalQuestions]);
+
+  const handlePrevious = useCallback(() => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1);
+    }
+  }, [currentQuestionIndex]);
+
+  const getElementRightEdge = (element: HTMLDivElement | null) => {
+    if (!element) return { x: 0, y: 0 };
+    const rect = element.getBoundingClientRect();
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    if (!svgRect) return { x: 0, y: 0 };
+
+    return {
+      x: rect.right - svgRect.left,
+      y: rect.top + rect.height / 2 - svgRect.top
     };
+  };
 
-    const getElementRightEdge = (element: HTMLDivElement | null) => {
-      if (!element) return { x: 0, y: 0 };
-      const rect = element.getBoundingClientRect();
-      const svgRect = svgRef.current?.getBoundingClientRect();
-      if (!svgRect) return { x: 0, y: 0 };
-      
-      return {
-        x: rect.right - svgRect.left,
-        y: rect.top + rect.height / 2 - svgRect.top
-      };
+  const getElementLeftEdge = (element: HTMLDivElement | null) => {
+    if (!element) return { x: 0, y: 0 };
+    const rect = element.getBoundingClientRect();
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    if (!svgRect) return { x: 0, y: 0 };
+
+    return {
+      x: rect.left - svgRect.left,
+      y: rect.top + rect.height / 2 - svgRect.top
     };
+  };
 
-    const getElementLeftEdge = (element: HTMLDivElement | null) => {
-      if (!element) return { x: 0, y: 0 };
-      const rect = element.getBoundingClientRect();
-      const svgRect = svgRef.current?.getBoundingClientRect();
-      if (!svgRect) return { x: 0, y: 0 };
-      
-      return {
-        x: rect.left - svgRect.left,
-        y: rect.top + rect.height / 2 - svgRect.top
-      };
-    };
+  const renderConnectionLine = () => {
+    if (!correctOption) return null;
 
-    const renderConnectionLine = () => {
-      if (!correctOption) return null;
+    const sentenceElement = sentenceRef.current;
+    const optionElement = optionsRef.current[correctOption.id];
 
-      const sentenceElement = sentenceRef.current;
-      const optionElement = optionsRef.current[correctOption.id];
+    if (!optionElement || !sentenceElement) return null;
 
-      if (!optionElement || !sentenceElement) return null;
+    const start = getElementRightEdge(sentenceElement);
+    const end = getElementLeftEdge(optionElement);
 
-      const start = getElementRightEdge(sentenceElement);
-      const end = getElementLeftEdge(optionElement);
+    const controlPointOffset = Math.abs(end.x - start.x) * 0.5;
+    const cp1x = start.x + controlPointOffset;
+    const cp1y = start.y;
+    const cp2x = end.x - controlPointOffset;
+    const cp2y = end.y;
 
-      const controlPointOffset = Math.abs(end.x - start.x) * 0.5;
-      const cp1x = start.x + controlPointOffset;
-      const cp1y = start.y;
-      const cp2x = end.x - controlPointOffset;
-      const cp2y = end.y;
-
-      const pathD = `M ${start.x} ${start.y} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${end.x} ${end.y}`;
-
-      return (
-        <g key="connection-line">
-          <path
-            d={pathD}
-            stroke="#22c55e"
-            strokeWidth="6"
-            fill="none"
-            className="transition-all duration-300"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle
-            cx={start.x}
-            cy={start.y}
-            r="10"
-            fill="#22c55e"
-            className="animate-pulse"
-          />
-          <circle
-            cx={end.x}
-            cy={end.y}
-            r="10"
-            fill="#22c55e"
-            className="animate-pulse"
-          />
-        </g>
-      );
-    };
+    const pathD = `M ${start.x} ${start.y} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${end.x} ${end.y}`;
 
     return (
-      <div 
-        className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
-        style={PAGE_BACKGROUND_STYLE}
-      >
-        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-        <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
-          <header className="text-center mb-3 sm:mb-4 md:mb-6">
-            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-secondary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-secondary/20 shadow-md">
-              <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
-            </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
-              {game.name}
-            </h1>
-            <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
-              Teacher View - Matching Question Review with Answer Keys
-            </p>
-            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-secondary/30 backdrop-blur-sm rounded-full border border-secondary/50 text-xs">
-              <FileText className="w-3 h-3 text-white" />
-              <span className="font-medium text-white text-xs sm:text-sm">Answer Key Mode</span>
-            </div>
-          </header>
+      <g key="connection-line">
+        <path
+          d={pathD}
+          stroke="#22c55e"
+          strokeWidth="6"
+          fill="none"
+          className="transition-all duration-300"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle
+          cx={start.x}
+          cy={start.y}
+          r="10"
+          fill="#22c55e"
+          className="animate-pulse"
+        />
+        <circle
+          cx={end.x}
+          cy={end.y}
+          r="10"
+          fill="#22c55e"
+          className="animate-pulse"
+        />
+      </g>
+    );
+  };
 
-          <div className="mb-3 sm:mb-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between mb-2 sm:mb-3 gap-2">
-              <Button 
-                variant="outline" 
-                onClick={onBack}
-                className="text-xs sm:text-sm px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 font-semibold w-full sm:w-auto"
-              >
-                <ArrowLeft className="w-3 h-3 mr-1" />
-                Back to Games
-              </Button>
-              <Badge variant="outline" className="bg-white/15 backdrop-blur-sm border-2 border-white/40 text-white text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 sm:py-1.5">
-                {currentQuestionIndex + 1} of {totalQuestions}
-              </Badge>
-              <div className="w-[100px] sm:block hidden" />
-            </div>
-            <div className="w-full max-w-xs sm:max-w-md mx-auto px-2 sm:px-0">
-              <Progress 
-                value={progress} 
-                className="h-2 bg-white/20 rounded-full overflow-hidden shadow-lg"
-              />
-              <div className="flex justify-between text-xs text-white/80 mt-1 sm:mt-1.5">
-                <span>Progress</span>
-                <span className="font-semibold">{currentQuestionIndex + 1} of {totalQuestions}</span>
-              </div>
+  return (
+    <div
+      className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
+      style={PAGE_BACKGROUND_STYLE}
+    >
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+      <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
+        <header className="text-center mb-3 sm:mb-4 md:mb-6">
+          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-secondary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-secondary/20 shadow-md">
+            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
+          </div>
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
+            {game.name}
+          </h1>
+          <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
+            Teacher View - Matching Question Review with Answer Keys
+          </p>
+          <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-secondary/30 backdrop-blur-sm rounded-full border border-secondary/50 text-xs">
+            <FileText className="w-3 h-3 text-white" />
+            <span className="font-medium text-white text-xs sm:text-sm">Answer Key Mode</span>
+          </div>
+        </header>
+
+        <div className="mb-3 sm:mb-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-2 sm:mb-3 gap-2">
+            <Button
+              variant="outline"
+              onClick={onBack}
+              className="text-xs sm:text-sm px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 font-semibold w-full sm:w-auto"
+            >
+              <ArrowLeft className="w-3 h-3 mr-1" />
+              Back to Games
+            </Button>
+            <Badge variant="outline" className="bg-white/15 backdrop-blur-sm border-2 border-white/40 text-white text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 sm:py-1.5">
+              {currentQuestionIndex + 1} of {totalQuestions}
+            </Badge>
+            <div className="w-[100px] sm:block hidden" />
+          </div>
+          <div className="w-full max-w-xs sm:max-w-md mx-auto px-2 sm:px-0">
+            <Progress
+              value={progress}
+              className="h-2 bg-white/20 rounded-full overflow-hidden shadow-lg"
+            />
+            <div className="flex justify-between text-xs text-white/80 mt-1 sm:mt-1.5">
+              <span>Progress</span>
+              <span className="font-semibold">{currentQuestionIndex + 1} of {totalQuestions}</span>
             </div>
           </div>
+        </div>
 
-          <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
-            <CardHeader className="pb-2 sm:pb-3 md:pb-4 px-3 sm:px-6">
-              <CardTitle className="text-base sm:text-lg md:text-xl font-heading text-center">
-                Matching Question {currentQuestionIndex + 1}
-              </CardTitle>
-              <CardDescription className="text-center text-xs sm:text-sm">
-                Review mode - Correct answer for your region is highlighted
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
-              {/* SVG overlay for connector lines - Hidden on mobile, visible on desktop */}
-              <svg
-                ref={svgRef}
-                className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-                style={{ zIndex: 5 }}
-              >
-                {renderConnectionLine()}
-              </svg>
+        <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
+          <CardHeader className="pb-2 sm:pb-3 md:pb-4 px-3 sm:px-6">
+            <CardTitle className="text-base sm:text-lg md:text-xl font-heading text-center">
+              Matching Question {currentQuestionIndex + 1}
+            </CardTitle>
+            <CardDescription className="text-center text-xs sm:text-sm">
+              Review mode - Correct answer for your region is highlighted
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
+            {/* SVG overlay for connector lines - Hidden on mobile, visible on desktop */}
+            <svg
+              ref={svgRef}
+              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+              style={{ zIndex: 5 }}
+            >
+              {renderConnectionLine()}
+            </svg>
 
-              {/* Mobile Compact Row Layout */}
-              <div className="md:hidden space-y-3">
-                <p className="text-xs text-center text-white/80">
-                  Answer key view - Correct answer highlighted
-                </p>
-                
-                {/* Each unique option appears in a row with the sentence */}
-                <div className="space-y-3">
-                  {options.map((option, index) => {
-                    // Check if this option's text matches the correct option's text
-                    const isCorrect = option.text === correctOption?.text;
-                    
-                    return (
-                      <div key={`${currentQuestionIndex}-${option.id}`} className="relative">
-                        {/* Compact Row: Sentence [Line] Option */}
-                        <div className="grid grid-cols-[1.2fr_auto_1fr] gap-2 items-center">
-                          {/* Sentence on Left */}
-                          <div
-                            className={`
-                              p-2.5 rounded-lg border-2 transition-all duration-200
-                              ${isCorrect
-                                ? 'bg-success/20 border-success' 
-                                : 'bg-white/5 border-white/30 border-dashed'
-                              }
-                            `}
-                          >
-                            <p className={`text-xs font-bold text-center leading-snug ${
-                              isCorrect ? 'text-white' : 'text-white/80'
-                            }`}>
-                              {sentence}
-                            </p>
-                          </div>
+            {/* Mobile Compact Row Layout */}
+            <div className="md:hidden space-y-3">
+              <p className="text-xs text-center text-white/80">
+                Answer key view - Correct answer highlighted
+              </p>
 
-                          {/* Short Connector Line */}
-                          <div className="flex items-center justify-center">
-                            {isCorrect ? (
-                              <div className="w-8 h-0.5 bg-success rounded-full"></div>
-                            ) : (
-                              <div className="w-8 h-0.5 bg-white/20 rounded-full"></div>
-                            )}
-                          </div>
+              <div className="space-y-3">
+                {options.map((option) => {
+                  const isCorrect = option.text === correctOption?.text;
 
-                          {/* Option on Right */}
-                          <div
-                            ref={(el) => (optionsRef.current[option.id] = el)}
-                            className={`
-                              p-2.5 rounded-lg border-2 transition-all duration-200
-                              ${isCorrect
-                                ? 'bg-success/20 border-success shadow-lg' 
-                                : 'bg-white/90 border-white/40'
-                              }
-                            `}
-                          >
-                            <p className={`text-xs font-semibold text-center leading-snug ${
-                              isCorrect ? 'text-white' : 'text-gray-800'
-                            }`}>
-                              {option.text}
-                            </p>
-                            {isCorrect && (
-                              <div className="flex justify-center mt-1">
-                                <CheckCircle className="w-4 h-4 text-success" />
-                              </div>
-                            )}
-                          </div>
+                  return (
+                    <div key={`${currentQuestionIndex}-${option.id}`} className="relative">
+                      <div className="grid grid-cols-[1.2fr_auto_1fr] gap-2 items-center">
+                        <div
+                          className={`
+                            p-2.5 rounded-lg border-2 transition-all duration-200
+                            ${isCorrect
+                              ? 'bg-success/20 border-success'
+                              : 'bg-white/5 border-white/30 border-dashed'
+                            }
+                          `}
+                        >
+                          <p className={`text-xs font-bold text-center leading-snug ${
+                            isCorrect ? 'text-white' : 'text-white/80'
+                          }`}>
+                            {sentence}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center justify-center">
+                          {isCorrect ? (
+                            <div className="w-8 h-0.5 bg-success rounded-full"></div>
+                          ) : (
+                            <div className="w-8 h-0.5 bg-white/20 rounded-full"></div>
+                          )}
+                        </div>
+
+                        <div
+                          ref={(el) => (optionsRef.current[option.id] = el)}
+                          className={`
+                            p-2.5 rounded-lg border-2 transition-all duration-200
+                            ${isCorrect
+                              ? 'bg-success/20 border-success shadow-lg'
+                              : 'bg-white/90 border-white/40'
+                            }
+                          `}
+                        >
+                          <p className={`text-xs font-semibold text-center leading-snug ${
+                            isCorrect ? 'text-white' : 'text-gray-800'
+                          }`}>
+                            {option.text}
+                          </p>
+                          {isCorrect && (
+                            <div className="flex justify-center mt-1">
+                              <CheckCircle className="w-4 h-4 text-success" />
+                            </div>
+                          )}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
+            </div>
 
-              {/* Desktop Traditional Layout */}
-              <div className="hidden md:block">
-                <div className="md:grid md:grid-cols-2 md:gap-4 lg:gap-8 xl:gap-12 relative" style={{ zIndex: 1 }}>
-                  {/* Sentence */}
-                  <div className="md:order-1">
-                    <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
-                      Sentence:
-                    </p>
-                    <div 
-                      ref={sentenceRef}
-                      className="p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 bg-success/10 border-success transition-all duration-200 min-h-[80px] sm:min-h-[100px] md:min-h-[150px] lg:min-h-[200px] flex items-center justify-center"
-                    >
-                      <div className="text-center">
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white leading-relaxed">
-                          {sentence}
-                        </p>
-                      </div>
+            {/* Desktop Traditional Layout */}
+            <div className="hidden md:block">
+              <div className="md:grid md:grid-cols-2 md:gap-4 lg:gap-8 xl:gap-12 relative" style={{ zIndex: 1 }}>
+                <div className="md:order-1">
+                  <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
+                    Sentence:
+                  </p>
+                  <div
+                    ref={sentenceRef}
+                    className="p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 bg-success/10 border-success transition-all duration-200 min-h-[80px] sm:min-h-[100px] md:min-h-[150px] lg:min-h-[200px] flex items-center justify-center"
+                  >
+                    <div className="text-center">
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white leading-relaxed">
+                        {sentence}
+                      </p>
                     </div>
                   </div>
+                </div>
 
-                  {/* Options */}
-                  <div className="md:order-2">
-                    <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
-                      Options:
-                    </p>
-                    <div className="space-y-2">
-                    {options.map((option, index) => (
+                <div className="md:order-2">
+                  <p className="text-xs sm:text-sm font-semibold text-center text-white mb-2">
+                    Options:
+                  </p>
+                  <div className="space-y-2">
+                    {options.map((option) => (
                       <div
                         key={`${currentQuestionIndex}-${option.id}`}
                         ref={(el) => (optionsRef.current[option.id] = el)}
                         className={`
                           p-2 sm:p-3 md:p-4 rounded-lg border-2 transition-all duration-200
                           ${option.id === correctOption?.id
-                            ? 'bg-success/20 border-success shadow-lg' 
+                            ? 'bg-success/20 border-success shadow-lg'
                             : 'bg-white/90 border-white/40'
                           }
                         `}
@@ -361,79 +346,117 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
               </div>
             </div>
 
-              {/* Navigation Buttons */}
-              <div className="text-center">
-                <div className="flex justify-between items-center gap-2 max-w-lg mx-auto min-h-[40px]">
-                  <div className="flex-1 flex justify-start">
-                    <Button 
-                      onClick={handlePrevious}
-                      variant="outline"
-                      size="sm"
-                      disabled={currentQuestionIndex === 0}
-                      className={`font-semibold py-2 px-3 text-xs sm:text-sm ${
-                        currentQuestionIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
-                    >
-                      <ChevronLeft className="w-4 h-4 mr-1" />
-                      Previous
-                    </Button>
-                  </div>
+            {/* Navigation Buttons */}
+            <div className="text-center">
+              <div className="flex justify-between items-center gap-2 max-w-lg mx-auto min-h-[40px]">
+                <div className="flex-1 flex justify-start">
+                  <Button
+                    onClick={handlePrevious}
+                    variant="outline"
+                    size="sm"
+                    disabled={currentQuestionIndex === 0}
+                    className={`font-semibold py-2 px-3 text-xs sm:text-sm ${
+                      currentQuestionIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    <ChevronLeft className="w-4 h-4 mr-1" />
+                    Previous
+                  </Button>
+                </div>
 
-                  <div className="text-sm font-semibold text-white">
-                    {currentQuestionIndex + 1} / {totalQuestions}
-                  </div>
+                <div className="text-sm font-semibold text-white">
+                  {currentQuestionIndex + 1} / {totalQuestions}
+                </div>
 
-                  <div className="flex-1 flex justify-end">
-                    <Button 
-                      onClick={handleNext}
-                      size="sm"
-                      disabled={currentQuestionIndex === totalQuestions - 1}
-                      className={`bg-gradient-success hover:opacity-90 text-white font-semibold py-2 px-3 text-xs sm:text-sm ${
-                        currentQuestionIndex === totalQuestions - 1 ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
-                    >
-                      Next
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  </div>
+                <div className="flex-1 flex justify-end">
+                  <Button
+                    onClick={handleNext}
+                    size="sm"
+                    disabled={currentQuestionIndex === totalQuestions - 1}
+                    className={`bg-gradient-success hover:opacity-90 text-white font-semibold py-2 px-3 text-xs sm:text-sm ${
+                      currentQuestionIndex === totalQuestions - 1 ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    Next
+                    <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
+    </div>
+  );
+};
+
+// ─── Fill-blank teacher view & top-level router ──────────────────────────────
+
+interface TeacherQuestionViewProps {
+  game: GameData;
+  region: Region;
+  language: Language;
+  onBack: () => void;
+}
+
+export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQuestionViewProps) => {
+  // Delegate to the extracted component when it's a matching game
+  if (game.type === 'matching' && game.matchingQuestions) {
+    return (
+      <MatchingQuestionTeacherView
+        game={game}
+        region={region}
+        language={language}
+        onBack={onBack}
+      />
     );
   }
 
-  // For fill-blank questions
+  // For fill-blank questions, render inline (no hooks above the conditional)
+  return (
+    <FillBlankTeacherView game={game} language={language} onBack={onBack} />
+  );
+};
+
+// ─── Fill-blank teacher view (also extracted for clean hook usage) ────────────
+
+interface FillBlankTeacherViewProps {
+  game: GameData;
+  language: Language;
+  onBack: () => void;
+}
+
+const FillBlankTeacherView = ({ game, language, onBack }: FillBlankTeacherViewProps) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
   const currentQuestion = game.questions[currentQuestionIndex];
   const fillBlankProgress = ((currentQuestionIndex + 1) / game.questions.length) * 100;
 
   // Get language-specific content
-  const options = language === 'bengali' && currentQuestion.optionsBengali 
-    ? currentQuestion.optionsBengali 
+  const options = language === 'bengali' && currentQuestion.optionsBengali
+    ? currentQuestion.optionsBengali
     : currentQuestion.options;
-  const sentence = language === 'bengali' && currentQuestion.sentenceBengali 
-    ? currentQuestion.sentenceBengali 
+  const sentence = language === 'bengali' && currentQuestion.sentenceBengali
+    ? currentQuestion.sentenceBengali
     : currentQuestion.sentence;
-  const correctAnswers = language === 'bengali' && currentQuestion.blankBengali 
-    ? currentQuestion.blankBengali.correctAnswers 
+  const correctAnswers = language === 'bengali' && currentQuestion.blankBengali
+    ? currentQuestion.blankBengali.correctAnswers
     : currentQuestion.blank.correctAnswers;
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentQuestionIndex < game.questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     }
-  };
+  }, [currentQuestionIndex, game.questions.length]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(prev => prev - 1);
     }
-  };
+  }, [currentQuestionIndex]);
 
   return (
-    <div 
+    <div
       className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
       style={PAGE_BACKGROUND_STYLE}
     >
@@ -460,8 +483,8 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
         {/* Navigation and Progress */}
         <div className="mb-3 sm:mb-4">
           <div className="flex flex-col sm:flex-row items-center justify-between mb-2 sm:mb-3 gap-2">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={onBack}
               className="text-xs sm:text-sm px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 font-semibold w-full sm:w-auto"
             >
@@ -474,8 +497,8 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
             <div className="w-[100px] sm:block hidden" /> {/* Spacer for symmetry */}
           </div>
           <div className="w-full max-w-xs sm:max-w-md mx-auto px-2 sm:px-0">
-            <Progress 
-              value={fillBlankProgress} 
+            <Progress
+              value={fillBlankProgress}
               className="h-2 bg-white/20 rounded-full overflow-hidden shadow-lg"
             />
             <div className="flex justify-between text-xs text-white/80 mt-1 sm:mt-1.5">
@@ -502,12 +525,12 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                 Available Options:
               </div>
               <div className="flex flex-wrap justify-center gap-2">
-                {options.map((option, index) => {
+                {options.map((option) => {
                   const isCorrect = correctAnswers.includes(option);
-                  
+
                   return (
                     <div
-                      key={index}
+                      key={`${currentQuestionIndex}-${option}`}
                       className={`
                         px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-lg font-bold text-xs sm:text-sm md:text-base border-2 min-w-[60px] sm:min-w-[70px] md:min-w-[90px] text-center
                         ${
@@ -532,11 +555,11 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                 <span className="font-bold text-gray-900">
                   {sentence[0]}
                 </span>
-                
+
                 {/* Correct answers displayed in green box */}
                 <div className="inline-flex flex-wrap gap-1 mx-1 sm:mx-2">
                   {correctAnswers.map((answer, idx) => (
-                    <div 
+                    <div
                       key={idx}
                       className="bg-success/30 border-2 border-success text-success font-bold px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-lg text-xs sm:text-sm md:text-base inline-block"
                     >
@@ -559,7 +582,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
               <div className="flex justify-between items-center gap-2 max-w-lg mx-auto min-h-[40px]">
                 {/* Previous Button */}
                 <div className="flex-1 flex justify-start">
-                  <Button 
+                  <Button
                     onClick={handlePrevious}
                     variant="outline"
                     size="sm"
@@ -580,7 +603,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
 
                 {/* Next Button */}
                 <div className="flex-1 flex justify-end">
-                  <Button 
+                  <Button
                     onClick={handleNext}
                     size="sm"
                     disabled={currentQuestionIndex === game.questions.length - 1}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { AuthPage } from '@/components/auth/AuthPage';
 import { RegionSelector } from '@/components/RegionSelector';
 import { GameSelector } from '@/components/GameSelector';
@@ -33,20 +33,33 @@ const Index = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
   const [gameScore, setGameScore] = useState<number>(0);
 
+  // Refs to always have current state available (avoids stale closures)
+  const userRef = useRef(user);
+  const selectedRegionRef = useRef(selectedRegion);
+  const selectedGameRef = useRef(selectedGame);
+  const selectedLanguageRef = useRef(selectedLanguage);
+  const gameScoreRef = useRef(gameScore);
+
+  userRef.current = user;
+  selectedRegionRef.current = selectedRegion;
+  selectedGameRef.current = selectedGame;
+  selectedLanguageRef.current = selectedLanguage;
+  gameScoreRef.current = gameScore;
+
   // Navigate to a new state and push to history with full context
-  const navigateTo = (newState: AppState, context?: Partial<HistoryState>) => {
+  const navigateTo = useCallback((newState: AppState, context?: Partial<HistoryState>) => {
     const historyState: HistoryState = {
       state: newState,
-      user: context?.user !== undefined ? context.user : user,
-      selectedRegion: context?.selectedRegion !== undefined ? context.selectedRegion : selectedRegion,
-      selectedGame: context?.selectedGame !== undefined ? context.selectedGame : selectedGame,
-      selectedLanguage: context?.selectedLanguage !== undefined ? context.selectedLanguage : selectedLanguage,
-      gameScore: context?.gameScore !== undefined ? context.gameScore : gameScore,
+      user: context?.user !== undefined ? context.user : userRef.current,
+      selectedRegion: context?.selectedRegion !== undefined ? context.selectedRegion : selectedRegionRef.current,
+      selectedGame: context?.selectedGame !== undefined ? context.selectedGame : selectedGameRef.current,
+      selectedLanguage: context?.selectedLanguage !== undefined ? context.selectedLanguage : selectedLanguageRef.current,
+      gameScore: context?.gameScore !== undefined ? context.gameScore : gameScoreRef.current,
     };
     
     setAppState(newState);
     window.history.pushState(historyState, '');
-  };
+  }, []);
 
   // Handle browser back/forward buttons - restore full state
   useEffect(() => {
@@ -86,62 +99,52 @@ const Index = () => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const handleLogin = (loggedInUser: User) => {
+  const handleLogin = useCallback((loggedInUser: User) => {
     setUser(loggedInUser);
     if (loggedInUser.type === 'teacher') {
       navigateTo('teacher-dashboard', { user: loggedInUser });
     } else {
       navigateTo('region-selection', { user: loggedInUser });
     }
-  };
+  }, [navigateTo]);
 
-  const handleRegionSelect = (region: Region) => {
+  const handleRegionSelect = useCallback((region: Region) => {
     setSelectedRegion(region);
     navigateTo('game-selection', { selectedRegion: region });
-  };
+  }, [navigateTo]);
 
-  const handleGameSelect = (game: GameData, language: Language) => {
+  const handleGameSelect = useCallback((game: GameData, language: Language) => {
     setSelectedGame(game);
     setSelectedLanguage(language);
     navigateTo('playing-game', { selectedGame: game, selectedLanguage: language });
-  };
+  }, [navigateTo]);
 
-  const handleGameComplete = (score: number) => {
+  const handleGameComplete = useCallback((score: number) => {
     setGameScore(score);
     navigateTo('game-complete', { gameScore: score });
-  };
+  }, [navigateTo]);
 
-  const handleBackToGames = () => {
-    // From completion screen or playing game, go back to game selection
+  const handleBackToGames = useCallback(() => {
     navigateTo('game-selection');
-  };
+  }, [navigateTo]);
 
-  const handleBackToRegions = () => {
-    // From game selection, go back to region selection
+  const handleBackToRegions = useCallback(() => {
     setSelectedRegion(null);
     setSelectedGame(null);
     navigateTo('region-selection', { selectedRegion: null, selectedGame: null });
-  };
+  }, [navigateTo]);
 
-  const handleBackToHome = () => {
-    // From completion screen, reset everything and go to auth
+  const resetAndGoToAuth = useCallback(() => {
     setUser(null);
     setSelectedRegion(null);
     setSelectedGame(null);
     setSelectedLanguage(null);
     setGameScore(0);
     navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, selectedLanguage: null, gameScore: 0 });
-  };
+  }, [navigateTo]);
 
-  const handleLogout = () => {
-    // From teacher dashboard, reset and go to auth
-    setUser(null);
-    setSelectedRegion(null);
-    setSelectedGame(null);
-    setSelectedLanguage(null);
-    setGameScore(0);
-    navigateTo('auth', { user: null, selectedRegion: null, selectedGame: null, selectedLanguage: null, gameScore: 0 });
-  };
+  const handleBackToHome = resetAndGoToAuth;
+  const handleLogout = resetAndGoToAuth;
 
   // Render the appropriate component based on app state
   switch (appState) {
