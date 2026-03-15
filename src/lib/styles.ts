@@ -5,7 +5,7 @@
  */
 
 export const PAGE_BACKGROUND_STYLE = {
-  backgroundImage: 'url(/gradient-blue-background/backg1.jpg)',
+  backgroundImage: 'url(/gradient-blue-background/backg2.jpg)',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
