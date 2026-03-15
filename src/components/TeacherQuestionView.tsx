@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { GameData, Region, Language } from '@/types';
 import { ChevronLeft, ChevronRight, ArrowLeft, GraduationCap, FileText, CheckCircle } from 'lucide-react';
-import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
+import { INNER_PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface TeacherQuestionViewProps {
   game: GameData;
@@ -169,7 +169,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
     return (
       <div 
         className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
-        style={PAGE_BACKGROUND_STYLE}
+        style={INNER_PAGE_BACKGROUND_STYLE}
       >
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
@@ -435,7 +435,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
-      style={PAGE_BACKGROUND_STYLE}
+      style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

@@ -78,11 +78,21 @@ The application supports:
 - Touch-friendly interactions on mobile devices
 
 ### 🎨 User Experience
-- Beautiful gradient backgrounds
+- Beautiful gradient backgrounds with distinct themes per page context
 - Smooth animations and transitions
 - Clear visual feedback for all interactions
 - Accessible color contrasts
 - Intuitive navigation flow
+
+### 🖼 Background System
+
+Each context in the app uses a distinct full-screen background image for clear visual separation:
+
+| Background | File | Used On |
+|---|---|---|
+| `backg2.jpg` | Auth / Landing page | Student & Teacher login screens |
+| `backg3.jpg` | Inner navigation pages | Region selector, Game selector, Language selector, Teacher Dashboard, Completion screen |
+| `backg4.jpg` | Active gameplay | Fill-in-the-Blanks game, Matching game |
 
 ---
 
@@ -92,9 +102,10 @@ The application supports:
 region-quest-games/
 ├── public/
 │   ├── gradient-blue-background/     # Background images
-│   │   ├── backg1.jpg
-│   │   ├── backg2.jpg
-│   │   └── backg3.jpg
+│   │   ├── backg1.jpg                #   (reserved / unused)
+│   │   ├── backg2.jpg                #   Auth / landing page
+│   │   ├── backg3.jpg                #   Inner navigation pages
+│   │   └── backg4.jpg                #   Active gameplay screens
 │   ├── lovable-uploads/              # Asset uploads
 │   └── placeholder.svg
 │

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Region } from '@/types';
 import { regionsData } from '@/data/regions';
 import { Mountain, Snowflake, Sun, TreePine } from 'lucide-react';
-import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
+import { INNER_PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface RegionSelectorProps {
   onSelectRegion: (region: Region) => void;
@@ -28,7 +28,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={PAGE_BACKGROUND_STYLE}
+      style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

@@ -6,7 +6,7 @@ import { regionsData } from '@/data/regions';
 import { FileText, Shuffle } from 'lucide-react';
 import { useState } from 'react';
 import { LanguageSelector } from '@/components/LanguageSelector';
-import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
+import { INNER_PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface GameSelectorProps {
   region: Region;
@@ -43,7 +43,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={PAGE_BACKGROUND_STYLE}
+      style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

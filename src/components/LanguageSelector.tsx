@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Language } from '@/types';
 import { Languages, Globe } from 'lucide-react';
-import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
+import { INNER_PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface LanguageSelectorProps {
   onSelectLanguage: (language: Language) => void;
@@ -13,7 +13,7 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
   return (
     <div 
       className="min-h-screen flex items-center justify-center p-2 sm:p-3 relative overflow-hidden"
-      style={PAGE_BACKGROUND_STYLE}
+      style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
