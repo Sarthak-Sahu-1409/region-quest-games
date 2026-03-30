@@ -69,10 +69,10 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
                   </div>
                   <CardTitle className="text-2xl font-heading">{region.displayName}</CardTitle>
                   <CardDescription>
-                    <div className="text-sm font-medium mb-2">Locations:</div>
-                    <div className="text-xs">
+                    <span className="block text-sm font-medium mb-2">Locations:</span>
+                    <span className="block text-xs">
                       ({region.locations.join(', ')})
-                    </div>
+                    </span>
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="px-6 pb-6 mt-auto">
