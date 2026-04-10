@@ -66,6 +66,14 @@ export const regionsData: RegionData[] = [
         description: 'Match correct options to sentences',
         questions: [],
         matchingQuestions: mergeMatchingQuestions(swb1MatchingRomanQuestions, swb1MatchingBengaliQuestions)
+      },
+      {
+        id: 'hangman-1',
+        name: 'Hangman Word Drop',
+        type: 'hangman',
+        description: 'Drag the correct regional word to fill the blank — before the hangman is complete!',
+        questions: mergeQuestions(southBengal1RomanQuestions, southBengal1BengaliQuestions),
+        matchingQuestions: []
       }
     ]
   },
@@ -90,6 +98,14 @@ export const regionsData: RegionData[] = [
         description: 'Match correct options to sentences',
         questions: [],
         matchingQuestions: mergeMatchingQuestions(swb2MatchingRomanQuestions, swb2MatchingBengaliQuestions)
+      },
+      {
+        id: 'hangman-1',
+        name: 'Hangman Word Drop',
+        type: 'hangman',
+        description: 'Drag the correct regional word to fill the blank — before the hangman is complete!',
+        questions: mergeQuestions(southBengal2RomanQuestions, southBengal2BengaliQuestions),
+        matchingQuestions: []
       }
     ]
   },
@@ -114,6 +130,14 @@ export const regionsData: RegionData[] = [
         description: 'Match correct options to sentences',
         questions: [],
         matchingQuestions: mergeMatchingQuestions(nb1MatchingRomanQuestions, nb1MatchingBengaliQuestions)
+      },
+      {
+        id: 'hangman-1',
+        name: 'Hangman Word Drop',
+        type: 'hangman',
+        description: 'Drag the correct regional word to fill the blank — before the hangman is complete!',
+        questions: mergeQuestions(northBengal1RomanQuestions, northBengal1BengaliQuestions),
+        matchingQuestions: []
       }
     ]
   },
@@ -138,6 +162,14 @@ export const regionsData: RegionData[] = [
         description: 'Match correct options to sentences',
         questions: [],
         matchingQuestions: mergeMatchingQuestions(nb2MatchingRomanQuestions, nb2MatchingBengaliQuestions)
+      },
+      {
+        id: 'hangman-1',
+        name: 'Hangman Word Drop',
+        type: 'hangman',
+        description: 'Drag the correct regional word to fill the blank — before the hangman is complete!',
+        questions: mergeQuestions(northBengal2RomanQuestions, northBengal2BengaliQuestions),
+        matchingQuestions: []
       }
     ]
   }

@@ -4,6 +4,7 @@ import { RegionSelector } from '@/components/RegionSelector';
 import { GameSelector } from '@/components/GameSelector';
 import { FillBlankGame } from '@/components/games/FillBlankGame';
 import { MatchingGame } from '@/components/games/MatchingGame';
+import { HangmanGame } from '@/components/games/HangmanGame';
 import { CompletionScreen } from '@/components/CompletionScreen';
 import { TeacherDashboard } from '@/components/TeacherDashboard';
 import { User, Region, GameData, Language } from '@/types';
@@ -161,6 +162,17 @@ const Index = () => {
       );
     
     case 'playing-game':
+      if (selectedGame?.type === 'hangman') {
+        return (
+          <HangmanGame 
+            game={selectedGame!} 
+            region={selectedRegion!}
+            language={selectedLanguage!}
+            onBack={handleBackToGames}
+            onComplete={handleGameComplete}
+          />
+        );
+      }
       if (selectedGame?.type === 'matching') {
         return (
           <MatchingGame 

@@ -1,6 +1,6 @@
 export type Region = 'south-west-bengal-1' | 'south-west-bengal-2' | 'north-bengal-1' | 'north-bengal-2';
 
-export type GameType = 'fill-blank' | 'matching';
+export type GameType = 'fill-blank' | 'matching' | 'hangman';
 
 export type Language = 'roman' | 'bengali';
 

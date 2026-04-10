@@ -1,9 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Region, GameData, Language } from '@/types';
 import { regionsData } from '@/data/regions';
-import { FileText, Shuffle } from 'lucide-react';
+import { FileText, Shuffle, Skull } from 'lucide-react';
 import { useState } from 'react';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { INNER_PAGE_BACKGROUND_STYLE } from '@/lib/styles';
@@ -14,14 +13,16 @@ interface GameSelectorProps {
   onBack: () => void;
 }
 
-const gameIcons = {
+const gameIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'fill-blank': FileText,
   'matching': Shuffle,
+  'hangman': Skull,
 };
 
-const gameColors = {
+const gameColors: Record<string, string> = {
   'fill-blank': 'bg-game-fill-blank',
   'matching': 'bg-game-matching',
+  'hangman': 'bg-game-hangman',
 };
 
 export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps) => {
@@ -32,6 +33,12 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
 
   // If a game is selected, show language selector
   if (selectedGame) {
+    // Hangman uses both scripts on one screen — skip language selector
+    if (selectedGame.type === 'hangman') {
+      onSelectGame(selectedGame, 'roman');
+      setSelectedGame(null);
+      return null;
+    }
     return (
       <LanguageSelector
         onSelectLanguage={(language) => onSelectGame(selectedGame, language)}
@@ -93,17 +100,6 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
                   </div>
                   <div className="space-y-2">
                     <CardTitle className="text-2xl font-heading">{game.name}</CardTitle>
-                    <div className="flex justify-center">
-                      {isAvailable ? (
-                        <Badge variant="default" className="bg-success text-success-foreground">
-                          Available
-                        </Badge>
-                      ) : (
-                        <Badge variant="secondary">
-                          Coming Soon
-                        </Badge>
-                      )}
-                    </div>
                   </div>
                   <CardDescription className="text-center">
                     {game.description}

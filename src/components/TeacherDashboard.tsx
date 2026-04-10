@@ -8,6 +8,7 @@ import {
   TreePine,
   FileText,
   Shuffle,
+  Skull,
   GraduationCap
 } from 'lucide-react';
 import { regionsData } from '@/data/regions';
@@ -21,20 +22,106 @@ interface TeacherDashboardProps {
   onLogout: () => void;
 }
 
-const gameIcons = {
+const gameIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'fill-blank': FileText,
   'matching': Shuffle,
+  'hangman': Skull,
 };
 
-const gameColors = {
+const gameColors: Record<string, string> = {
   'fill-blank': 'bg-game-fill-blank',
   'matching': 'bg-game-matching',
+  'hangman': 'bg-game-hangman',
 };
 
 export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
   const [selectedGame, setSelectedGame] = useState<GameData | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
+
+  // Hangman answer key data (same as in HangmanGame component)
+  const HANGMAN_ANSWERS: Record<string, { sentence: string; english: string; correctWords: string[] }[]> = {
+    'north-bengal-1': [
+      { sentence: 'mui ___ bhɑt ___.', english: 'I eat rice every day', correctWords: ['potidin', 'khan'] },
+      { sentence: 'cenrata ___ agot ___ ___.', english: 'The box was opened two days before yesterday', correctWords: ['duidin', 'bakshota', 'khulil'] },
+      { sentence: 'kɑli ___ cenrIta ___ ___.', english: 'Yesterday morning she/he went to the jungle', correctWords: ['sokale', 'jongolot', 'jabe'] },
+      { sentence: 'obhoy kali ___ gan ___.', english: 'Abhoy sang songs yesterday afternoon', correctWords: ['duphure', 'kobe'] },
+    ],
+    'north-bengal-2': [
+      { sentence: '___ dui ___ bhɑt khat ___.', english: "Yesterday I was eating rice at two o'clock", correctWords: ['kɑil', 'baje', 'rahlon'] },
+      { sentence: 'ager ___ uma ___ ___.', english: 'Last week Uma had gone to Siliguri', correctWords: ['shɔptahe', 'shliguri', 'geichil'] },
+      { sentence: 'kail ___ chor ___ ___.', english: 'Yesterday they caught the thief', correctWords: ['ugo', 'dʰair', 'rahlak'] },
+      { sentence: 'mui ___ gaba ___.', english: 'I can sing songs', correctWords: ['gan', 'paru'] },
+    ],
+    'south-west-bengal-1': [
+      { sentence: 'u ___ khanyor ___ kamta ___.', english: 'He/she always works quietly in the middle of eating', correctWords: ['chautuya', 'moddhei', 'nibhryabak'] },
+      { sentence: 'chautuya ___ agui ___ ___.', english: 'The bark of the tree was peeled two days before yesterday', correctWords: ['duidin', 'baskata', 'khosanak'] },
+      { sentence: 'tum ___ razot ___ ___.', english: 'You all stayed awake at night', correctWords: ['sobai', 'kurit', 'ruhinya'] },
+      { sentence: 'kanhiror ___ uga sɔbai pej ___ ___.', english: 'Yesterday afternoon they all were eating gruel', correctWords: ['dupohore', 'khate', 'rɔhnei'] },
+    ],
+    'south-west-bengal-2': [
+      { sentence: 'u kaner ___ kamta ___ ___.', english: 'He/she works in the midst of eating', correctWords: ['moddhe', 'kurit', 'pattek'] },
+      { sentence: 'u ___ sokare ___ ___.', english: 'He/she could not come in the morning yesterday', correctWords: ['kainke', 'asit', 'parbyɛk'] },
+      { sentence: 'ei ___ roje ___ ___.', english: 'These boys go to the market every day', correctWords: ['chelegila', 'hate', 'jay'] },
+      { sentence: 'u kal ___ dostay ___ ___.', english: 'He/she will go hunting with friends tomorrow morning', correctWords: ['sokal', 'sikar', 'korbek'] },
+    ],
+  };
+
+  // If hangman game selected, show answers directly (skip language selector)
+  if (selectedGame?.type === 'hangman' && selectedRegion) {
+    const answers = HANGMAN_ANSWERS[selectedRegion] || [];
+    const regionData = regionsData.find(r => r.id === selectedRegion);
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={INNER_PAGE_BACKGROUND_STYLE}>
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+        <div className="w-full max-w-4xl relative z-20">
+          <header className="text-center mb-4 sm:mb-6">
+            <Button
+              variant="outline"
+              onClick={() => { setSelectedGame(null); setSelectedLanguage(null); }}
+              className="mb-3 bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
+            >
+              ← Back to Games
+            </Button>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-heading text-white mb-1">
+              Hangman Word Drop — Answer Key
+            </h1>
+            <p className="text-white/70 text-sm">{regionData?.displayName}</p>
+          </header>
+          <div className="space-y-4">
+            {answers.map((q, i) => {
+              const parts = q.sentence.split('___');
+              let wordIdx = 0;
+              return (
+                <Card key={i} className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
+                  <CardContent className="p-4 sm:p-5">
+                    <div className="flex items-start gap-3">
+                      <span className="text-white/40 font-mono text-sm mt-0.5">{i + 1}.</span>
+                      <div className="space-y-2 flex-1">
+                        <p className="text-white/60 text-xs">{q.english}</p>
+                        <div className="text-white text-base sm:text-lg font-semibold flex flex-wrap items-center gap-0.5">
+                          {parts.map((part, pi) => (
+                            <span key={pi} className="contents">
+                              {part && <span>{part}</span>}
+                              {pi < parts.length - 1 && (
+                                <span className="inline-flex items-center px-2 py-0.5 mx-1 bg-success/20 border border-success/50 rounded text-success font-bold text-sm">
+                                  {q.correctWords[wordIdx++]}
+                                </span>
+                              )}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // If language and game are selected, show sequential question view
   if (selectedGame && selectedRegion && selectedLanguage) {
