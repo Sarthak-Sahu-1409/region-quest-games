@@ -75,14 +75,16 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={INNER_PAGE_BACKGROUND_STYLE}>
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-4xl relative z-20">
-          <header className="text-center mb-4 sm:mb-6">
+          <div className="mb-4 sm:mb-6 flex justify-start px-4 sm:px-0">
             <Button
               variant="outline"
               onClick={() => { setSelectedGame(null); setSelectedLanguage(null); }}
-              className="mb-3 bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm w-full sm:w-auto"
             >
               ← Back to Games
             </Button>
+          </div>
+          <header className="text-center mb-4 sm:mb-6">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-heading text-white mb-1">
               Hangman Word Drop — Answer Key
             </h1>
@@ -161,14 +163,16 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
-          <header className="text-center mb-4 sm:mb-6 md:mb-8">
+          <div className="mb-4 sm:mb-6 flex justify-start">
             <Button 
               variant="outline" 
               onClick={() => setSelectedRegion(null)}
-              className="mb-3 sm:mb-4 bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm w-full sm:w-auto"
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm w-full sm:w-auto"
             >
               ← Back to Regions
             </Button>
+          </div>
+          <header className="text-center mb-4 sm:mb-6 md:mb-8">
             <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
               <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
@@ -289,13 +293,15 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
             Select a region to view questions with answers
           </p>
-          <Button 
-            variant="outline"
-            onClick={onLogout}
-            className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
-            <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-            Logout
-          </Button>
+          <div className="mt-2 sm:mt-4">
+            <Button 
+              variant="outline"
+              onClick={onLogout}
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
+              <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </header>
 
         {/* Region Selection Grid */}
