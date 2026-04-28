@@ -280,19 +280,19 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       <div className="w-full max-w-7xl mx-auto relative z-20 px-2 sm:px-0">
         {/* Header */}
         <header className="text-center mb-4 sm:mb-6 md:mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-primary/20 shadow-md">
-            <GraduationCap className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
+            <GraduationCap className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-foreground mb-1 sm:mb-2 tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
             Teacher Dashboard
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
+          <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
             Select a region to view questions with answers
           </p>
           <Button 
             variant="outline"
             onClick={onLogout}
-            className="hover:bg-accent/20 border text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
+            className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
             <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
             Logout
           </Button>
@@ -320,9 +320,9 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                   <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gradientClass} rounded-full flex items-center justify-center`}>
                     <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
                   </div>
-                  <CardTitle className="text-lg sm:text-2xl font-heading">{region.displayName}</CardTitle>
-                  <CardDescription>
-                    <div className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Locations:</div>
+                  <CardTitle className="text-lg sm:text-2xl font-heading text-white">{region.displayName}</CardTitle>
+                  <CardDescription className="text-white/70">
+                    <div className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-2 text-white/90">Locations:</div>
                     <div className="text-xs">
                       ({region.locations.join(', ')})
                     </div>
