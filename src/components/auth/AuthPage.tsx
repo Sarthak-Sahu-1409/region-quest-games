@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { BookOpen, GraduationCap, Users, School, Star, Sparkles, Globe } from 'lucide-react';
+import { BookOpen, GraduationCap, Users, School, Star, Sparkles } from 'lucide-react';
 import { User } from '@/types';
 import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
@@ -16,14 +16,6 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
   const [teacherId, setTeacherId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isHindi, setIsHindi] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsHindi(prev => !prev);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleStudentLogin = () => {
     onLogin({ type: 'student' });
@@ -148,21 +140,17 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       
       <div className="w-full max-w-6xl relative z-20">
-        {/* Professional Header */}
+        {/* Header */}
         <header className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-xl rounded-[1.5rem] mb-5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transform hover:scale-105 transition-all duration-300">
-            <Globe className="w-10 h-10 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" strokeWidth={2} />
-          </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight flex items-center justify-center overflow-hidden pb-1 -mb-1 pt-1 -mt-1">
-            <span className="relative inline-flex items-center justify-center">
-              {/* Invisible english spacer retains the block width and height for Both words */}
-              <span className="opacity-0 pointer-events-none select-none">Bhasha Quest</span>
-              <span className={`absolute transition-transform duration-700 ease-in-out whitespace-nowrap ${isHindi ? '-translate-y-[150%]' : 'translate-y-0'}`}>
-                Bhasha Quest
-              </span>
-              <span className={`absolute transition-transform duration-700 ease-in-out whitespace-nowrap ${isHindi ? 'translate-y-0' : 'translate-y-[150%]'}`}>
-                भाषा Quest
-              </span>
+          <h1
+            className="font-heading font-bold tracking-tight flex items-center justify-center gap-3 mb-3"
+            style={{ fontSize: 'clamp(2.1rem, 6vw, 4.8rem)', lineHeight: 1.05 }}
+          >
+            <span className="text-white drop-shadow-lg">भाषा</span>
+            <span
+              style={{ color: 'transparent', WebkitTextStroke: '2px rgba(255,255,255,0.9)' }}
+            >
+              Quest
             </span>
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-3 px-4">
