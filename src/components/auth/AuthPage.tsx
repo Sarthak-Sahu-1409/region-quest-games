@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { BookOpen, GraduationCap, Users, School, Star, Sparkles } from 'lucide-react';
+import { BookOpen, GraduationCap, Users, School, Star, Sparkles, Globe } from 'lucide-react';
 import { User } from '@/types';
 import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
@@ -150,8 +150,8 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
       <div className="w-full max-w-6xl relative z-20">
         {/* Professional Header */}
         <header className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
-            <BookOpen className="w-7 h-7 text-primary" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-xl rounded-[1.5rem] mb-5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transform hover:scale-105 transition-all duration-300">
+            <Globe className="w-10 h-10 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" strokeWidth={2} />
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight flex items-center justify-center overflow-hidden pb-1 -mb-1 pt-1 -mt-1">
             <span className="relative inline-flex items-center justify-center">

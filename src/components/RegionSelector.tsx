@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Region } from '@/types';
 import { regionsData } from '@/data/regions';
-import { Mountain, Snowflake, Sun, TreePine } from 'lucide-react';
+import { Mountain, Compass, MapPin, TreePine } from 'lucide-react';
 import { INNER_PAGE_BACKGROUND_STYLE } from '@/lib/styles';
 
 interface RegionSelectorProps {
@@ -11,9 +11,9 @@ interface RegionSelectorProps {
 }
 
 const regionIcons = {
-  'south-west-bengal-1': Sun,
-  'south-west-bengal-2': Sun,
-  'north-bengal-1': Snowflake,
+  'south-west-bengal-1': Compass,
+  'south-west-bengal-2': MapPin,
+  'north-bengal-1': Mountain,
   'north-bengal-2': TreePine,
 };
 
