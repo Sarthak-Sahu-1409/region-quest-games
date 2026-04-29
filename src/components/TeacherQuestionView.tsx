@@ -174,8 +174,8 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
           <header className="text-center mb-3 sm:mb-4 md:mb-6">
-            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-secondary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-secondary/20 shadow-md">
-              <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
+            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
+              <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
               {game.name}
@@ -183,7 +183,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
             <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
               Teacher View - Matching Question Review with Answer Keys
             </p>
-            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-secondary/30 backdrop-blur-sm rounded-full border border-secondary/50 text-xs">
+            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-white/40 text-xs">
               <FileText className="w-3 h-3 text-white" />
               <span className="font-medium text-white text-xs sm:text-sm">Answer Key Mode</span>
             </div>
@@ -442,8 +442,8 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
       <div className="w-full max-w-4xl relative z-20 px-2 sm:px-0">
         {/* Professional Header - Matching Student Portal Theme */}
         <header className="text-center mb-3 sm:mb-4 md:mb-6">
-          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-secondary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-secondary/20 shadow-md">
-            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
+          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
+            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
             {game.name}
@@ -451,8 +451,8 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
           <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
             Teacher View - Question Review with Answer Keys
           </p>
-          <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-secondary/20 backdrop-blur-sm rounded-full border border-secondary/40 text-xs">
-            <FileText className="w-3 h-3 text-secondary" />
+          <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-white/40 text-xs">
+            <FileText className="w-3 h-3 text-white" />
             <span className="font-medium text-white text-xs sm:text-sm">Answer Key Mode</span>
           </div>
         </header>

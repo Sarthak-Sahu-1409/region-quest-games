@@ -76,17 +76,17 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-4xl relative z-20">
           <header className="text-center mb-4 sm:mb-6">
-            <Button
-              variant="outline"
-              onClick={() => { setSelectedGame(null); setSelectedLanguage(null); }}
-              className="mb-3 bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
-            >
-              ← Back to Games
-            </Button>
             <h1 className="text-xl sm:text-2xl md:text-3xl font-heading text-white mb-1">
               Hangman Word Drop — Answer Key
             </h1>
-            <p className="text-white/70 text-sm">{regionData?.displayName}</p>
+            <p className="text-white/70 text-sm mb-3 sm:mb-4">{regionData?.displayName}</p>
+            <Button
+              variant="outline"
+              onClick={() => { setSelectedGame(null); setSelectedLanguage(null); }}
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
+            >
+              ← Back to Games
+            </Button>
           </header>
           <div className="space-y-4">
             {answers.map((q, i) => {
@@ -162,13 +162,6 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
           <header className="text-center mb-4 sm:mb-6 md:mb-8">
-            <Button 
-              variant="outline" 
-              onClick={() => setSelectedRegion(null)}
-              className="mb-3 sm:mb-4 bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm w-full sm:w-auto"
-            >
-              ← Back to Regions
-            </Button>
             <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
               <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
@@ -178,8 +171,17 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
             <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
               Select a game to view questions with answers
             </p>
-            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/30 text-xs">
+            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/30 text-xs mb-3 sm:mb-4">
               <span className="font-medium text-white text-xs sm:text-sm">{region.locations.join(', ')}</span>
+            </div>
+            <div>
+              <Button 
+                variant="outline" 
+                onClick={() => setSelectedRegion(null)}
+                className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
+              >
+                ← Back to Regions
+              </Button>
             </div>
           </header>
           
@@ -280,22 +282,24 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       <div className="w-full max-w-7xl mx-auto relative z-20 px-2 sm:px-0">
         {/* Header */}
         <header className="text-center mb-4 sm:mb-6 md:mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-primary/20 shadow-md">
-            <GraduationCap className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
+            <GraduationCap className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-foreground mb-1 sm:mb-2 tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
             Teacher Dashboard
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
+          <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
             Select a region to view questions with answers
           </p>
-          <Button 
-            variant="outline"
-            onClick={onLogout}
-            className="hover:bg-accent/20 border text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
-            <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-            Logout
-          </Button>
+          <div className="mt-2 sm:mt-4">
+            <Button 
+              variant="outline"
+              onClick={onLogout}
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
+              <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </header>
 
         {/* Region Selection Grid */}
@@ -320,9 +324,9 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                   <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gradientClass} rounded-full flex items-center justify-center`}>
                     <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
                   </div>
-                  <CardTitle className="text-lg sm:text-2xl font-heading">{region.displayName}</CardTitle>
-                  <CardDescription>
-                    <div className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Locations:</div>
+                  <CardTitle className="text-lg sm:text-2xl font-heading text-white">{region.displayName}</CardTitle>
+                  <CardDescription className="text-white/70">
+                    <div className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-2 text-white/90">Locations:</div>
                     <div className="text-xs">
                       ({region.locations.join(', ')})
                     </div>
