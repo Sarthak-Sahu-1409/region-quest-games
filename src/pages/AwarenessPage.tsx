@@ -180,10 +180,10 @@ export default function AwarenessPage() {
       {/* Back arrow — fixed top-left */}
       <button
         onClick={() => navigate('/')}
-        className="fixed top-4 left-4 z-50 flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-200"
+        className="fixed top-6 left-6 z-[100] flex items-center gap-2 px-4 py-2 bg-black/80 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-black transition-all duration-300 shadow-lg group"
       >
-        <ArrowLeft className="w-5 h-5" />
-        <span className="text-sm tracking-wide">Back</span>
+        <ArrowLeft className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" />
+        <span className="text-sm font-semibold tracking-wide uppercase">Back</span>
       </button>
 
       {/* Scroll animation container — tall enough to drive the full animation */}
