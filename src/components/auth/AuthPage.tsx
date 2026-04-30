@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -6,16 +7,36 @@ import { Label } from '@/components/ui/label';
 import { BookOpen, GraduationCap, Users, School, Star, Sparkles } from 'lucide-react';
 import { User } from '@/types';
 import { PAGE_BACKGROUND_STYLE } from '@/lib/styles';
+import Loader from '@/components/Loader';
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
 }
 
 export const AuthPage = ({ onLogin }: AuthPageProps) => {
+  const navigate = useNavigate();
   const [showTeacherLogin, setShowTeacherLogin] = useState(false);
   const [teacherId, setTeacherId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [pendingAwareness, setPendingAwareness] = useState(false);
+
+  const handleAwarenessClick = () => {
+    // Preload all frames into browser cache during the 1 s loader window
+    for (let i = 1; i <= 112; i++) {
+      const img = new Image();
+      img.src = `/scroll-animation/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+    }
+    setPendingAwareness(true);
+  };
+
+  useEffect(() => {
+    if (!pendingAwareness) return;
+    const t = setTimeout(() => navigate('/awareness'), 1000);
+    return () => clearTimeout(t);
+  }, [pendingAwareness, navigate]);
+
+  if (pendingAwareness) return <Loader />;
 
   const handleStudentLogin = () => {
     onLogin({ type: 'student' });
@@ -242,7 +263,14 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         </div>
 
         {/* Professional Footer */}
-        <div className="text-center mt-6 space-y-2">
+        <div className="text-center mt-6 space-y-3">
+          <Button
+            variant="ghost"
+            onClick={handleAwarenessClick}
+            className="text-white/50 hover:text-white hover:bg-white/10 text-xs tracking-widest uppercase border border-white/10 hover:border-white/30 transition-all duration-300 px-6"
+          >
+            Why Language Matters
+          </Button>
           <div className="text-muted-foreground text-xs leading-relaxed max-w-2xl mx-auto px-4">
             Developed by Sarthak Sahu, Sameer Godara and Sarthak Goel under the guidance of Professor Dripta Piplai (Mondal)
           </div>
