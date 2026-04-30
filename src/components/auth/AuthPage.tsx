@@ -53,7 +53,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
   if (showTeacherLogin) {
     return (
       <div 
-        className="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 relative overflow-hidden"
+        className="h-[100dvh] w-full flex items-center justify-center p-3 sm:p-4 md:p-6 relative overflow-hidden"
         style={PAGE_BACKGROUND_STYLE}
       >
         {/* Overlay to ensure text readability */}
@@ -154,7 +154,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 relative overflow-hidden"
+      className="h-[100dvh] w-full flex items-center justify-center p-3 sm:p-4 md:p-6 relative overflow-hidden"
       style={PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}

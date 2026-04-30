@@ -92,7 +92,7 @@ export const FillBlankGame = ({ game, region, language, onBack, onComplete }: Fi
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
+      className="h-[100dvh] w-full flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
       style={GAME_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}

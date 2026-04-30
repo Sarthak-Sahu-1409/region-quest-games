@@ -72,7 +72,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
     const answers = HANGMAN_ANSWERS[selectedRegion] || [];
     const regionData = regionsData.find(r => r.id === selectedRegion);
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={INNER_PAGE_BACKGROUND_STYLE}>
+      <div className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden" style={INNER_PAGE_BACKGROUND_STYLE}>
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-4xl relative z-20">
           <header className="text-center mb-4 sm:mb-6">
@@ -155,7 +155,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
 
     return (
       <div 
-        className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+        className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden"
         style={INNER_PAGE_BACKGROUND_STYLE}
       >
         {/* Overlay to ensure text readability */}
@@ -274,7 +274,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
   // Region selection view
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden"
       style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}

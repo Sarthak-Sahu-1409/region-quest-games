@@ -368,7 +368,7 @@ export const HangmanGame = ({ region, onBack, onComplete }: HangmanGameProps) =>
   // No questions for this region
   if (!currentQuestion && !isGameOver && !showVictory) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4" style={GAME_BACKGROUND_STYLE}>
+      <div className="h-[100dvh] w-full flex items-center justify-center p-4 overflow-hidden" style={GAME_BACKGROUND_STYLE}>
         <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy p-8 text-center">
           <p className="text-white text-lg">No hangman questions available for this region.</p>
           <Button onClick={onBack} className="mt-4">← Back to Games</Button>
@@ -380,7 +380,7 @@ export const HangmanGame = ({ region, onBack, onComplete }: HangmanGameProps) =>
   // ── Game Over Screen ──────────────────────────────────
   if (isGameOver) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={GAME_BACKGROUND_STYLE}>
+      <div className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden" style={GAME_BACKGROUND_STYLE}>
         <div className="absolute inset-0 bg-black/30 pointer-events-none" />
         <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy w-full max-w-lg relative z-20">
           <CardContent className="p-6 sm:p-8 text-center space-y-6">
@@ -456,7 +456,7 @@ export const HangmanGame = ({ region, onBack, onComplete }: HangmanGameProps) =>
 
   // ── Main Game UI ──────────────────────────────────────
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden" style={GAME_BACKGROUND_STYLE}>
+    <div className="h-[100dvh] w-full flex items-center justify-center p-2 sm:p-4 relative overflow-hidden" style={GAME_BACKGROUND_STYLE}>
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-5xl relative z-20">
         {/* Header */}

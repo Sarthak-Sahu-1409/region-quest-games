@@ -266,7 +266,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
 
   if (!currentQuestion || !correctOption) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="h-[100dvh] w-full flex items-center justify-center p-4 overflow-hidden">
         <Card className="p-6 text-center">
           <p className="text-lg mb-4">
             {!currentQuestion 
@@ -282,7 +282,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
+      className="h-[100dvh] w-full flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
       style={GAME_BACKGROUND_STYLE}
     >
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />

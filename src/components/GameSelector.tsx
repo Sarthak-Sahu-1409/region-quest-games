@@ -49,7 +49,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden"
       style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}

@@ -168,7 +168,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
 
     return (
       <div 
-        className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
+        className="h-[100dvh] w-full flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
         style={INNER_PAGE_BACKGROUND_STYLE}
       >
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
@@ -434,7 +434,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
+      className="h-[100dvh] w-full flex items-center justify-center p-2 sm:p-4 relative overflow-hidden"
       style={INNER_PAGE_BACKGROUND_STYLE}
     >
       {/* Overlay to ensure text readability */}
