@@ -47,17 +47,9 @@ const Index = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
   const [gameScore, setGameScore] = useState<number>(0);
 
-  /** Show the pencil loader for 0.5 s on first load. */
-  const [showInitialLoader, setShowInitialLoader] = useState(true);
-
   /** The state actually being rendered — lags appState during a transition. */
   const [renderedState, setRenderedState] = useState<AppState>('auth');
   const [showTransitionLoader, setShowTransitionLoader] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setShowInitialLoader(false), 2000);
-    return () => clearTimeout(t);
-  }, []);
 
   /** bg-group currently on screen. */
   const currentBgGroupRef = useRef<BgGroup>(getBgGroup('auth'));
@@ -193,8 +185,6 @@ const Index = () => {
   };
 
   // ── Render ───────────────────────────────────────────────────────────────
-
-  if (showInitialLoader) return <Loader />;
 
   // Pencil loader during wallpaper transitions
   if (showTransitionLoader) {

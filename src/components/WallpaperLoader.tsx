@@ -26,16 +26,30 @@ const WallpaperLoader = ({ children }: WallpaperLoaderProps) => {
 
   useEffect(() => {
     let settled = 0;
+    let minTimePassed = false;
+    let imagesDone = false;
 
-    const onSettled = () => {
-      settled += 1;
-      if (settled === WALLPAPERS.length) {
-        // All images loaded (or failed) – reveal the page
+    // Ensure loader stays for at least 1 second
+    const timer = setTimeout(() => {
+      minTimePassed = true;
+      checkReady();
+    }, 1000);
+
+    const checkReady = () => {
+      if (minTimePassed && imagesDone) {
         setReady(true);
         // Tiny delay so the fade-in class is applied after the element mounts
         requestAnimationFrame(() => {
           requestAnimationFrame(() => setVisible(true));
         });
+      }
+    };
+
+    const onSettled = () => {
+      settled += 1;
+      if (settled === WALLPAPERS.length) {
+        imagesDone = true;
+        checkReady();
       }
     };
 
@@ -48,6 +62,7 @@ const WallpaperLoader = ({ children }: WallpaperLoaderProps) => {
     });
 
     return () => {
+      clearTimeout(timer);
       // Clean up handlers to avoid state updates after unmount
       imgs.forEach((img) => {
         img.onload = null;
