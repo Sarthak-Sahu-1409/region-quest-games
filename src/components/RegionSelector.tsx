@@ -34,8 +34,8 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-6xl relative z-20">
         <header className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
-            <Mountain className="w-6 h-6 text-primary" />
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl mb-3 border border-white/20 shadow-md shadow-inner">
+            <Mountain className="w-6 h-6 text-white drop-shadow-md" />
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             Choose Your Region
@@ -64,8 +64,8 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
                 onClick={() => onSelectRegion(region.id)}
               >
                 <CardHeader className="text-center space-y-4">
-                  <div className={`mx-auto w-16 h-16 ${gradientClass} rounded-full flex items-center justify-center`}>
-                    <Icon className="w-8 h-8 text-white" />
+                  <div className={`mx-auto w-16 h-16 ${gradientClass} rounded-full flex items-center justify-center shadow-inner`}>
+                    <Icon className="w-8 h-8 text-white drop-shadow-md" />
                   </div>
                   <CardTitle className="text-2xl font-heading">{region.displayName}</CardTitle>
                   <CardDescription>
@@ -81,7 +81,7 @@ export const RegionSelector = ({ onSelectRegion, onBack }: RegionSelectorProps) 
                       Available Games: {region.games.length}
                     </div>
                     <Button 
-                      className={`w-full h-12 ${gradientClass} hover:opacity-90 text-white font-semibold`}
+                      className={`w-full h-12 ${gradientClass} hover:opacity-90 text-white font-semibold drop-shadow-sm`}
                     >
                       Explore {region.displayName}
                     </Button>

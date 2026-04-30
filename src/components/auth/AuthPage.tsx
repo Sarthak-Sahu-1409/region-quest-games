@@ -41,8 +41,8 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         <div className="w-full max-w-lg relative z-20">
           {/* Professional Header */}
           <div className="text-center mb-3">
-            <div className="mx-auto w-12 h-12 bg-card/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-2 border-2 border-border/30">
-              <School className="w-6 h-6 text-primary" />
+            <div className="mx-auto w-12 h-12 bg-card/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-2 border-2 border-border/30 shadow-inner">
+              <School className="w-6 h-6 text-white drop-shadow-md" />
             </div>
             <h1 className="text-xl sm:text-2xl font-heading text-foreground mb-1">
               Educator Portal
@@ -74,7 +74,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                     placeholder="Enter your educator ID"
                     value={teacherId}
                     onChange={(e) => setTeacherId(e.target.value)}
-                    className="h-9 text-sm border-2 focus:border-primary/50 transition-all duration-200"
+                    className="h-9 text-sm border-2 focus:border-primary/50 transition-all duration-200 bg-white text-gray-900 placeholder:text-gray-500"
                   />
                 </div>
                 <div className="space-y-1">
@@ -85,7 +85,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="h-9 text-sm border-2 focus:border-primary/50 transition-all duration-200"
+                    className="h-9 text-sm border-2 focus:border-primary/50 transition-all duration-200 bg-white text-gray-900 placeholder:text-gray-500"
                   />
                 </div>
               </div>
@@ -157,9 +157,9 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             Interactive region-specific learning experiences
           </p>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-card/20 backdrop-blur-sm rounded-full border border-border/40 text-xs">
-            <Star className="w-3 h-3 text-primary fill-primary" />
-            <span className="font-medium text-foreground">Trusted by educators</span>
-            <Star className="w-3 h-3 text-primary fill-primary" />
+            <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 drop-shadow-md" />
+            <span className="font-medium text-white drop-shadow-sm">Trusted by educators</span>
+            <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 drop-shadow-md" />
           </div>
         </header>
         

@@ -56,8 +56,8 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-5xl relative z-20">
         <header className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-3 border border-primary/20 shadow-md">
-            <FileText className="w-6 h-6 text-primary" />
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl mb-3 border border-white/20 shadow-md shadow-inner">
+            <FileText className="w-6 h-6 text-white drop-shadow-md" />
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             {regionData.displayName} Games
@@ -95,8 +95,8 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
                 onClick={() => isAvailable && setSelectedGame(game)}
               >
                 <CardHeader className="text-center space-y-4">
-                  <div className={`mx-auto w-16 h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center`}>
-                    <Icon className="w-8 h-8 text-white" />
+                  <div className={`mx-auto w-16 h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center shadow-inner`}>
+                    <Icon className={`w-8 h-8 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`} />
                   </div>
                   <div className="space-y-2">
                     <CardTitle className="text-2xl font-heading">{game.name}</CardTitle>
@@ -111,7 +111,7 @@ export const GameSelector = ({ region, onSelectGame, onBack }: GameSelectorProps
                       {isAvailable ? `${questionCount} Questions` : 'Under Development'}
                     </div>
                     <Button 
-                      className={`w-full h-12 font-semibold ${gameColors[game.type]} hover:opacity-90 text-white`}
+                      className={`w-full h-12 font-semibold ${gameColors[game.type]} hover:opacity-90 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`}
                       disabled={!isAvailable}
                     >
                       {isAvailable ? 'Start Game' : 'Coming Soon'}

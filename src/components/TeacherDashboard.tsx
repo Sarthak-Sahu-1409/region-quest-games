@@ -207,8 +207,8 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                   onClick={() => isAvailable && setSelectedGame(game)}
                 >
                   <CardHeader className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6">
-                    <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center`}>
-                      <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+                    <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center shadow-inner`}>
+                      <Icon className={`w-7 h-7 sm:w-8 sm:h-8 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`} />
                     </div>
                     <div className="space-y-2">
                       <CardTitle className="text-lg sm:text-xl font-heading text-white">{game.name}</CardTitle>
@@ -230,7 +230,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                   </CardHeader>
                   <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6 mt-auto">
                     <Button 
-                      className={`w-full h-10 sm:h-12 font-semibold text-sm sm:text-base ${gameColors[game.type]} hover:opacity-90 text-white`}
+                      className={`w-full h-10 sm:h-12 font-semibold text-sm sm:text-base ${gameColors[game.type]} hover:opacity-90 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`}
                       disabled={!isAvailable}
                     >
                       {isAvailable ? 'View Questions' : 'Coming Soon'}
@@ -321,8 +321,8 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                 onClick={() => setSelectedRegion(region.id)}
               >
                 <CardHeader className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6">
-                  <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gradientClass} rounded-full flex items-center justify-center`}>
-                    <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+                  <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gradientClass} rounded-full flex items-center justify-center shadow-inner`}>
+                    <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-md" />
                   </div>
                   <CardTitle className="text-lg sm:text-2xl font-heading text-white">{region.displayName}</CardTitle>
                   <CardDescription className="text-white/70">
@@ -343,7 +343,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                       </Badge>
                     </div>
                     <Button 
-                      className={`w-full h-10 sm:h-12 ${gradientClass} hover:opacity-90 text-white font-semibold text-sm sm:text-base`}
+                      className={`w-full h-10 sm:h-12 ${gradientClass} hover:opacity-90 text-white font-semibold text-sm sm:text-base drop-shadow-md`}
                     >
                       View Questions
                     </Button>
