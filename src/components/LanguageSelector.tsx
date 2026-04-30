@@ -19,8 +19,8 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-3xl relative z-20">
         <header className="text-center mb-4 sm:mb-6">
-          <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 bg-primary/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-primary/20 shadow-md">
-            <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+          <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md shadow-inner">
+            <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-md" />
           </div>
           <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-semibold text-foreground mb-2 tracking-tight">
             Choose Language / ভাষা নির্বাচন করুন
@@ -44,8 +44,8 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
             onClick={() => onSelectLanguage('roman')}
           >
             <CardHeader className="text-center space-y-2 p-3 sm:p-4">
-              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-gradient-region-1 rounded-full flex items-center justify-center">
-                <Languages className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-gradient-region-1 rounded-full flex items-center justify-center shadow-inner">
+                <Languages className="w-6 h-6 sm:w-7 sm:h-7 text-white drop-shadow-md" />
               </div>
               <CardTitle className="text-xl sm:text-2xl font-heading">Roman Script</CardTitle>
               <CardDescription className="text-xs sm:text-sm">
@@ -60,7 +60,7 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
                 </div>
               </div>
               <Button 
-                className="w-full h-10 bg-gradient-region-1 hover:opacity-90 text-white font-semibold text-sm"
+                className="w-full h-10 bg-gradient-region-1 hover:opacity-90 text-white font-semibold text-sm drop-shadow-sm"
               >
                 Start with Roman
               </Button>
@@ -73,8 +73,8 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
             onClick={() => onSelectLanguage('bengali')}
           >
             <CardHeader className="text-center space-y-2 p-3 sm:p-4">
-              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-gradient-region-3 rounded-full flex items-center justify-center">
-                <Languages className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-gradient-region-3 rounded-full flex items-center justify-center shadow-inner">
+                <Languages className="w-6 h-6 sm:w-7 sm:h-7 text-white drop-shadow-md" />
               </div>
               <CardTitle className="text-xl sm:text-2xl font-heading">বাংলা লিপি</CardTitle>
               <CardDescription className="text-xs sm:text-sm">
@@ -89,7 +89,7 @@ export const LanguageSelector = ({ onSelectLanguage, onBack }: LanguageSelectorP
                 </div>
               </div>
               <Button 
-                className="w-full h-10 bg-gradient-region-3 hover:opacity-90 text-white font-semibold text-sm"
+                className="w-full h-10 bg-gradient-region-3 hover:opacity-90 text-white font-semibold text-sm drop-shadow-sm"
               >
                 বাংলায় শুরু করুন
               </Button>
