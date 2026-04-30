@@ -383,7 +383,7 @@ export const HangmanGame = ({ region, onBack, onComplete }: HangmanGameProps) =>
       <div className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden" style={GAME_BACKGROUND_STYLE}>
         <div className="absolute inset-0 bg-black/30 pointer-events-none" />
         <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy w-full max-w-lg relative z-20">
-          <CardContent className="p-6 sm:p-8 text-center space-y-6">
+          <CardContent className="p-3 sm:p-4 text-center space-y-6">
             <div className="mx-auto w-32 h-40">
               <HangmanDrawing wrongCount={6} />
             </div>
@@ -495,7 +495,7 @@ export const HangmanGame = ({ region, onBack, onComplete }: HangmanGameProps) =>
 
         {/* Game Card — Desktop: side by side, Mobile: stacked */}
         <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
-          <CardContent className="p-4 sm:p-6">
+          <CardContent className="p-2 sm:p-3">
             <div className="flex flex-col md:flex-row gap-6">
               {/* Left: question content */}
               <div className="flex-1 space-y-5">

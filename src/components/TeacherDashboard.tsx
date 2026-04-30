@@ -75,20 +75,20 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       <div className="h-[100dvh] w-full flex items-center justify-center p-4 relative overflow-hidden" style={INNER_PAGE_BACKGROUND_STYLE}>
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-4xl relative z-20">
-          <header className="text-center mb-4 sm:mb-6">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-heading text-white mb-1">
+          <header className="text-center mb-2 sm:mb-4">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-heading text-white mb-1">
               Hangman Word Drop — Answer Key
             </h1>
-            <p className="text-white/70 text-sm mb-3 sm:mb-4">{regionData?.displayName}</p>
+            <p className="text-white/70 text-xs mb-2 sm:mb-3">{regionData?.displayName}</p>
             <Button
               variant="outline"
               onClick={() => { setSelectedGame(null); setSelectedLanguage(null); }}
-              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm h-8"
             >
               ← Back to Games
             </Button>
           </header>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {answers.map((q, i) => {
               const parts = q.sentence.split('___');
               let wordIdx = 0;
@@ -161,24 +161,24 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
-          <header className="text-center mb-4 sm:mb-6 md:mb-8">
-            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
-              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <header className="text-center mb-3 sm:mb-4">
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-md rounded-xl mb-1 sm:mb-2 border border-white/20 shadow-md">
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-heading font-semibold text-white mb-1 tracking-tight">
               {region.displayName}
             </h1>
             <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
               Select a game to view questions with answers
             </p>
-            <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/30 text-xs mb-3 sm:mb-4">
-              <span className="font-medium text-white text-xs sm:text-sm">{region.locations.join(', ')}</span>
+            <div className="inline-flex items-center gap-2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-full border border-white/30 text-xs mb-2 sm:mb-3">
+              <span className="font-medium text-white text-xs">{region.locations.join(', ')}</span>
             </div>
             <div>
               <Button 
                 variant="outline" 
                 onClick={() => setSelectedRegion(null)}
-                className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm"
+                className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs h-8"
               >
                 ← Back to Regions
               </Button>
@@ -186,7 +186,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           </header>
           
                   
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {region.games.map((game) => {
               const Icon = gameIcons[game.type];
               const isAvailable = game.type === 'matching' 
@@ -206,12 +206,12 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                   }`}
                   onClick={() => isAvailable && setSelectedGame(game)}
                 >
-                  <CardHeader className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6">
-                    <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gameColors[game.type]} rounded-full flex items-center justify-center shadow-inner`}>
-                      <Icon className={`w-7 h-7 sm:w-8 sm:h-8 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`} />
+                  <CardHeader className="text-center space-y-2 p-3 sm:p-4">
+                    <div className={`mx-auto w-12 h-12 ${gameColors[game.type]} rounded-full flex items-center justify-center shadow-inner`}>
+                      <Icon className={`w-6 h-6 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`} />
                     </div>
-                    <div className="space-y-2">
-                      <CardTitle className="text-lg sm:text-xl font-heading text-white">{game.name}</CardTitle>
+                    <div className="space-y-1">
+                      <CardTitle className="text-base sm:text-lg font-heading text-white">{game.name}</CardTitle>
                       <div className="flex justify-center">
                         {isAvailable ? (
                           <Badge variant="default" className="bg-success/80 text-white border-0">
@@ -224,13 +224,13 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                         )}
                       </div>
                     </div>
-                    <CardDescription className="text-center text-white/70 text-xs sm:text-sm">
+                    <CardDescription className="text-center text-white/70 text-[10px] sm:text-xs">
                       {game.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6 mt-auto">
+                  <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4 mt-auto">
                     <Button 
-                      className={`w-full h-10 sm:h-12 font-semibold text-sm sm:text-base ${gameColors[game.type]} hover:opacity-90 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`}
+                      className={`w-full h-8 sm:h-10 font-semibold text-xs sm:text-sm ${gameColors[game.type]} hover:opacity-90 ${game.type === 'matching' ? 'text-gray-900' : 'text-white drop-shadow-md'}`}
                       disabled={!isAvailable}
                     >
                       {isAvailable ? 'View Questions' : 'Coming Soon'}
@@ -243,11 +243,11 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
           
                   
           {/* Logout Button */}
-          <div className="flex justify-center mt-6 sm:mt-8">
+          <div className="flex justify-center mt-4 sm:mt-6">
             <Button 
               variant="outline"
               onClick={onLogout}
-              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-sm w-full sm:w-auto">
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs h-8 w-full sm:w-auto">
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </Button>
@@ -281,29 +281,29 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-7xl mx-auto relative z-20 px-2 sm:px-0">
         {/* Header */}
-        <header className="text-center mb-4 sm:mb-6 md:mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
-            <GraduationCap className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+        <header className="text-center mb-3 sm:mb-4">
+          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-1 sm:mb-2 border border-white/20 shadow-md">
+            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-heading font-semibold text-white mb-1 tracking-tight">
             Teacher Dashboard
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto mb-3 sm:mb-4 px-2 sm:px-4">
+          <p className="text-xs sm:text-sm text-white/80 max-w-xl mx-auto mb-2 sm:mb-3 px-2">
             Select a region to view questions with answers
           </p>
-          <div className="mt-2 sm:mt-4">
+          <div className="mt-1 sm:mt-2">
             <Button 
               variant="outline"
               onClick={onLogout}
-              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs sm:text-sm h-8 sm:h-9 shadow-sm hover:shadow transition-all w-full sm:w-auto">
-              <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+              className="bg-white/10 hover:bg-white/20 border-white/30 text-white text-xs h-8 shadow-sm hover:shadow transition-all w-full sm:w-auto">
+              <LogOut className="w-3 h-3 mr-2" />
               Logout
             </Button>
           </div>
         </header>
 
         {/* Region Selection Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-2 sm:mb-4">
           {regionsData.map((region) => {
             const Icon = regionIcons[region.id];
             const gradientClass = regionGradients[region.id];
@@ -320,21 +320,21 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                 className="shadow-large hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy card-glossy-hover flex flex-col"
                 onClick={() => setSelectedRegion(region.id)}
               >
-                <CardHeader className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6">
-                  <div className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 ${gradientClass} rounded-full flex items-center justify-center shadow-inner`}>
-                    <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-md" />
+                <CardHeader className="text-center space-y-2 p-3 sm:p-4">
+                  <div className={`mx-auto w-10 h-10 sm:w-12 sm:h-12 ${gradientClass} rounded-full flex items-center justify-center shadow-inner`}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-md" />
                   </div>
-                  <CardTitle className="text-lg sm:text-2xl font-heading text-white">{region.displayName}</CardTitle>
+                  <CardTitle className="text-base sm:text-lg font-heading text-white">{region.displayName}</CardTitle>
                   <CardDescription className="text-white/70">
-                    <div className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-2 text-white/90">Locations:</div>
-                    <div className="text-xs">
+                    <div className="text-[10px] sm:text-xs font-medium mb-1 text-white/90">Locations:</div>
+                    <div className="text-[10px]">
                       ({region.locations.join(', ')})
                     </div>
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6 mt-auto">
-                  <div className="flex flex-col gap-3 sm:gap-4">
-                    <div className="text-xs sm:text-sm text-center">
+                <CardContent className="px-3 sm:px-4 pb-3 sm:pb-4 mt-auto">
+                  <div className="flex flex-col gap-2 sm:gap-3">
+                    <div className="text-[10px] sm:text-xs text-center">
                       <Badge 
                         variant={availableInRegion > 0 ? "default" : "secondary"}
                         className={availableInRegion > 0 ? "bg-success" : ""}
@@ -343,7 +343,7 @@ export const TeacherDashboard = ({ onLogout }: TeacherDashboardProps) => {
                       </Badge>
                     </div>
                     <Button 
-                      className={`w-full h-10 sm:h-12 ${gradientClass} hover:opacity-90 text-white font-semibold text-sm sm:text-base drop-shadow-md`}
+                      className={`w-full h-8 sm:h-10 ${gradientClass} hover:opacity-90 text-white font-semibold text-xs sm:text-sm drop-shadow-md`}
                     >
                       View Questions
                     </Button>

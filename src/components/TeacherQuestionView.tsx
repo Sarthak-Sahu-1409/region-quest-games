@@ -173,14 +173,14 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
       >
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
         <div className="w-full max-w-5xl relative z-20 px-2 sm:px-0">
-          <header className="text-center mb-3 sm:mb-4 md:mb-6">
-            <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
-              <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <header className="text-center mb-2 sm:mb-3">
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-md rounded-xl mb-1 sm:mb-2 border border-white/20 shadow-md">
+              <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-heading font-semibold text-white mb-1 tracking-tight">
               {game.name}
             </h1>
-            <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
+            <p className="text-[10px] sm:text-xs text-white/70 max-w-xl mx-auto mb-1 sm:mb-2 px-2">
               Teacher View - Matching Question Review with Answer Keys
             </p>
             <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-white/40 text-xs">
@@ -189,12 +189,12 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
             </div>
           </header>
 
-          <div className="mb-3 sm:mb-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between mb-2 sm:mb-3 gap-2">
+          <div className="mb-2 sm:mb-3">
+            <div className="flex flex-col sm:flex-row items-center justify-between mb-1 sm:mb-2 gap-1">
               <Button 
                 variant="outline" 
                 onClick={onBack}
-                className="text-xs sm:text-sm px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 font-semibold w-full sm:w-auto"
+                className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 font-semibold w-full sm:w-auto h-7 sm:h-8"
               >
                 <ArrowLeft className="w-3 h-3 mr-1" />
                 Back to Games
@@ -217,15 +217,15 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
           </div>
 
           <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
-            <CardHeader className="pb-2 sm:pb-3 md:pb-4 px-3 sm:px-6">
-              <CardTitle className="text-base sm:text-lg md:text-xl font-heading text-center">
+            <CardHeader className="pb-1 sm:pb-2 px-3 sm:px-4">
+              <CardTitle className="text-sm sm:text-base font-heading text-center">
                 Matching Question {currentQuestionIndex + 1}
               </CardTitle>
-              <CardDescription className="text-center text-xs sm:text-sm">
+              <CardDescription className="text-center text-[10px] sm:text-xs">
                 Review mode - Correct answer for your region is highlighted
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
+            <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-4 pb-3 sm:pb-4 relative">
               {/* SVG overlay for connector lines - Hidden on mobile, visible on desktop */}
               <svg
                 ref={svgRef}
@@ -316,7 +316,7 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
                     </p>
                     <div 
                       ref={sentenceRef}
-                      className="p-3 sm:p-4 md:p-6 lg:p-8 rounded-lg border-4 bg-success/10 border-success transition-all duration-200 min-h-[80px] sm:min-h-[100px] md:min-h-[150px] lg:min-h-[200px] flex items-center justify-center"
+                      className="p-3 sm:p-4 rounded-lg border-4 bg-success/10 border-success transition-all duration-200 min-h-[80px] sm:min-h-[100px] flex items-center justify-center"
                     >
                       <div className="text-center">
                         <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white leading-relaxed">
@@ -441,14 +441,14 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       <div className="w-full max-w-4xl relative z-20 px-2 sm:px-0">
         {/* Professional Header - Matching Student Portal Theme */}
-        <header className="text-center mb-3 sm:mb-4 md:mb-6">
-          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-xl mb-2 sm:mb-3 border border-white/20 shadow-md">
-            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        <header className="text-center mb-2 sm:mb-3">
+          <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-md rounded-xl mb-1 sm:mb-2 border border-white/20 shadow-md">
+            <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold text-white mb-1 sm:mb-2 tracking-tight">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-heading font-semibold text-white mb-1 tracking-tight">
             {game.name}
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-xl mx-auto mb-2 sm:mb-3 px-2 sm:px-4">
+          <p className="text-[10px] sm:text-xs text-white/70 max-w-xl mx-auto mb-1 sm:mb-2 px-2">
             Teacher View - Question Review with Answer Keys
           </p>
           <div className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-white/40 text-xs">
@@ -458,12 +458,12 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
         </header>
 
         {/* Navigation and Progress */}
-        <div className="mb-3 sm:mb-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-2 sm:mb-3 gap-2">
+        <div className="mb-2 sm:mb-3">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-1 sm:mb-2 gap-1">
             <Button 
               variant="outline" 
               onClick={onBack}
-              className="text-xs sm:text-sm px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 font-semibold w-full sm:w-auto"
+              className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 font-semibold w-full sm:w-auto h-7 sm:h-8"
             >
               <ArrowLeft className="w-3 h-3 mr-1" />
               Back to Games
@@ -487,17 +487,17 @@ export const TeacherQuestionView = ({ game, region, language, onBack }: TeacherQ
 
         {/* Game Card - Matching Student Portal Theme */}
         <Card className="shadow-large border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 card-glossy">
-          <CardHeader className="pb-2 sm:pb-3 md:pb-4 px-3 sm:px-6">
-            <CardTitle className="text-base sm:text-lg md:text-xl font-heading text-center">
+          <CardHeader className="pb-1 sm:pb-2 px-3 sm:px-4">
+            <CardTitle className="text-sm sm:text-base font-heading text-center">
               Question {currentQuestionIndex + 1}
             </CardTitle>
-            <CardDescription className="text-center text-xs sm:text-sm">
+            <CardDescription className="text-center text-[10px] sm:text-xs">
               Review mode - Correct answers are pre-highlighted
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3 sm:space-y-4">
+          <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-4 pb-3 sm:pb-4">
             {/* All Available Options - Display Only */}
-            <div className="p-2 sm:p-3 md:p-4 bg-white/10 rounded-lg border border-white/20">
+            <div className="p-2 sm:p-3 bg-white/10 rounded-lg border border-white/20">
               <div className="text-xs sm:text-sm font-semibold text-white mb-2 text-center">
                 Available Options:
               </div>

@@ -334,7 +334,7 @@ export const MatchingGame = ({ game, region, language, onBack, onComplete }: Mat
               Click an option to connect it to the sentence
             </p>
           </CardHeader>
-          <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6 relative">
+          <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-6 pb-3 sm:pb-6 relative">
             {/* SVG overlay for connector lines - Hidden on mobile, visible on desktop */}
             <svg
               ref={svgRef}
