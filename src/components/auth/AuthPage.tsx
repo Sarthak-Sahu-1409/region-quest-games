@@ -162,10 +162,10 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
       
       <div className="w-full max-w-6xl relative z-20">
         {/* Header */}
-        <header className="text-center mb-6 sm:mb-8">
+        <header className="text-center mb-3 sm:mb-5">
           <h1
-            className="font-heading font-bold tracking-tight flex items-center justify-center gap-3 mb-3"
-            style={{ fontSize: 'clamp(2.1rem, 6vw, 4.8rem)', lineHeight: 1.05 }}
+            className="font-heading font-bold tracking-tight flex items-center justify-center gap-2 mb-2"
+            style={{ fontSize: 'clamp(1.8rem, 5vw, 4rem)', lineHeight: 1.05 }}
           >
             <span className="text-white drop-shadow-lg">भाषा</span>
             <span
@@ -174,7 +174,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               Quest
             </span>
           </h1>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto mb-3 px-4">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-xl mx-auto mb-2 px-4">
             Interactive region-specific learning experiences
           </p>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-card/20 backdrop-blur-sm rounded-full border border-border/40 text-xs">
@@ -184,10 +184,10 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
           </div>
         </header>
         
-        <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-3 max-w-4xl mx-auto">
           {/* Student Card */}
           <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 group card-glossy card-glossy-hover">
-            <CardHeader className="text-center space-y-3 pb-4 p-4">
+            <CardHeader className="text-center space-y-2 pb-3 p-3">
               <div className="mx-auto w-14 h-14 bg-gradient-success rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <Users className="w-7 h-7 text-white" />
               </div>
@@ -199,8 +199,8 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 </CardDescription>
               </div>
             </CardHeader>
-            <CardContent className="px-6 pb-6">
-              <div className="space-y-2 mb-4">
+            <CardContent className="px-4 pb-4">
+              <div className="space-y-1 mb-3">
                 <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                   <div className="w-1.5 h-1.5 bg-success rounded-full flex-shrink-0"></div>
                   <span>Interactive learning games</span>
@@ -216,7 +216,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </div>
               <Button 
                 onClick={handleStudentLogin}
-                className="w-full h-12 bg-gradient-success hover:opacity-90 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="w-full h-10 sm:h-12 bg-gradient-success hover:opacity-90 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Start Learning Journey
               </Button>
@@ -225,7 +225,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
 
           {/* Teacher Card */}
           <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border-2 border-white/20 backdrop-blur-3xl bg-gray-900/30 group card-glossy card-glossy-hover">
-            <CardHeader className="text-center space-y-3 pb-4 p-4">
+            <CardHeader className="text-center space-y-2 pb-3 p-3">
               <div className="mx-auto w-14 h-14 bg-gradient-secondary rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <GraduationCap className="w-7 h-7 text-white" />
               </div>
@@ -237,8 +237,8 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
                 </CardDescription>
               </div>
             </CardHeader>
-            <CardContent className="px-6 pb-6">
-              <div className="space-y-2 mb-4">
+            <CardContent className="px-4 pb-4">
+              <div className="space-y-1 mb-3">
                 <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                   <div className="w-1.5 h-1.5 bg-secondary rounded-full flex-shrink-0"></div>
                   <span>Question review dashboard</span>
@@ -254,7 +254,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
               </div>
               <Button 
                 onClick={() => setShowTeacherLogin(true)}
-                className="w-full h-12 bg-gradient-secondary hover:opacity-90 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="w-full h-10 sm:h-12 bg-gradient-secondary hover:opacity-90 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Access Dashboard
               </Button>
@@ -263,7 +263,7 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
         </div>
 
         {/* Professional Footer */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-3 sm:mt-5">
           {/* SVG filters for hand-drawn effect — hidden, rendered once */}
           <svg height="0" width="0" style={{ position: 'absolute' }}>
             <filter id="handDrawnNoise">
@@ -305,10 +305,10 @@ export const AuthPage = ({ onLogin }: AuthPageProps) => {
             </svg>
             Why Language Matters
           </button>
-          <div className="text-muted-foreground text-xs leading-relaxed max-w-2xl mx-auto px-4 mt-6">
+          <div className="text-muted-foreground text-[10px] leading-relaxed max-w-2xl mx-auto px-4 mt-3">
             Developed by Sarthak Sahu, Sameer Godara and Sarthak Goel under the guidance of Professor Dripta Piplai (Mondal)
           </div>
-          <div className="text-muted-foreground/70 text-xs mt-2">
+          <div className="text-muted-foreground/70 text-[10px] mt-1">
             Developed with love at IIT Kharagpur ❤️
           </div>
         </div>
