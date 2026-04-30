@@ -195,6 +195,29 @@ export default function AwarenessPage() {
         >
           <canvas ref={canvasRef} className="absolute inset-0" />
 
+          {/* "Why Language Matters" — top-right, fades out on scroll */}
+          <div
+            className="absolute top-6 right-8 pointer-events-none"
+            style={{
+              opacity: Math.max(0, 1 - scrollPct / 8),
+              transition: 'opacity 0.08s linear',
+            }}
+          >
+            <p
+              style={{
+                color: '#ce1717ff',
+                fontWeight: 900,
+                fontSize: 'clamp(3rem, 5vw, 5rem)',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.1,
+                textShadow: '1px 1px 0px rgba(0,0,0,0.45), 0px 3px 14px rgba(0,0,0,0.75)',
+                textAlign: 'center',
+              }}
+            >
+              Why<br />Language<br />Matters
+            </p>
+          </div>
+
           {OVERLAYS.map(({ range, text, flex, pad, align, maxW }, i) => {
             const { opacity, y } = overlayStyle(scrollPct, range);
             return (
