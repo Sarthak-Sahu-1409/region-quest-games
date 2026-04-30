@@ -52,7 +52,7 @@ const OVERLAYS: Overlay[] = [
   },
   {
     range: [80, 100],
-    text: 'Bhasha Quest is preserving these voices — one game at a time',
+    text: 'A child who learns in their mother tongue doesnt just learn a subject — they learn who they are',
     flex: 'items-center justify-center',
     pad: 'px-10',
     align: 'center',
